@@ -4,7 +4,9 @@
   "description": "Tool that transforms Angular codebase to JSON representation",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node index.ts"
+    "start": "ts-node src/index.ts",
+    "format:test": "prettier --list-different \"src/**/*.ts\"",
+    "format:write": "prettier --write \"src/**/*.ts\""
   },
   "repository": {
     "type": "git",
