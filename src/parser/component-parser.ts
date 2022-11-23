@@ -3,7 +3,7 @@ import {readFileSync} from "fs";
 import * as ts from "typescript";
 import {tsquery} from "@phenomnomnominal/tsquery";
 
-import {MitchellAngularComponent} from "../model/component.model";
+import {MitchellAngularComponent, MitchellAngularFieldDecorator} from "../model/component.model";
 
 // TODO test all of those properties
 export interface MitchellAngularComponentDecorators {
@@ -84,8 +84,8 @@ function getAngularComponentDecorators(
 }
 
 function parseInputsAndOutputs(ast: ts.SourceFile): {
-    inputs: string[],
-    outputs: string[],
+    inputs: MitchellAngularFieldDecorator[],
+    outputs: MitchellAngularFieldDecorator[],
 } {
     /*
        This is afaik the only way to get the Decorator name
@@ -100,30 +100,27 @@ function parseInputsAndOutputs(ast: ts.SourceFile): {
     ];
 
     let inputsAndOutputs = {
-        inputs: [] as string[],
-        outputs: [] as string[],
+        inputs: [] as MitchellAngularFieldDecorator[],
+        outputs: [] as MitchellAngularFieldDecorator[],
     };
 
     for (let i = 0; i < decoratorPropertyDecorator.length; i++) {
         const decorator = decoratorPropertyDecorator[i].getText();
+        const name = (decoratorPropertyDeclaration[i] as any).name?.getText();
+        const type = (decoratorPropertyDeclaration[i] as any).type?.getText();
+        const initializer = (decoratorPropertyDeclaration[i] as any).initializer?.getText();
+        const field = `${decorator} ${name}${type ? ': ' + type : ' = ' + initializer}`;
 
-        const field = `${decoratorPropertyDecorator[i].getText()} ${(
-            decoratorPropertyDeclaration[i] as any
-        ).name.getText()}: ${(
-            decoratorPropertyDeclaration[i] as any
-        ).type?.getText()
-        ||
-        (
-            decoratorPropertyDeclaration[i] as any
-        ).initializer?.getText()
-        }`;
+        const componentDecorator = {
+            decorator, name, type, initializer, field
+        }
 
         if (decorator.startsWith('@Inp')) {
-            inputsAndOutputs.inputs.push(field);
+            inputsAndOutputs.inputs.push(componentDecorator);
         }
 
         if (decorator.startsWith('@Out')) {
-            inputsAndOutputs.outputs.push(field);
+            inputsAndOutputs.outputs.push(componentDecorator);
         }
     }
     return inputsAndOutputs;
