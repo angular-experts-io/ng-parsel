@@ -3,21 +3,9 @@ import {readFileSync} from "fs";
 import * as ts from "typescript";
 import {tsquery} from "@phenomnomnominal/tsquery";
 
-import {NgParselComponent, NgParselFieldDecorator} from "../model/component.model";
-import {NgParselBuildingBlockType} from "../model/types.model";
+import {NgParselBuildingBlockType} from "../../model/types.model";
 
-// TODO test all of those properties
-export interface MitchellAngularComponentDecorators {
-    selector: string;
-    standalone: boolean;
-    template?: string;
-    templateUrl?: string;
-    styles?: string;
-    styleUrls?: string[];
-    animations?: any[];
-    encapsulation?: string;
-    changeDetection?: string;
-}
+import {NgParselComponent, NgParselComponentDecorators, NgParselFieldDecorator} from "./component.model";
 
 export function parseComponent(
     ast: ts.SourceFile,
@@ -58,7 +46,7 @@ export function parseComponent(
 
 function getAngularComponentDecorators(
     ast: ts.SourceFile
-): MitchellAngularComponentDecorators {
+): NgParselComponentDecorators {
     const decoratorQuery =
         "Decorator > CallExpression > ObjectLiteralExpression > PropertyAssignment";
     const componentDecorators = tsquery(ast, decoratorQuery);

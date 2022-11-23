@@ -3,7 +3,7 @@ import { readFileSync } from "fs";
 
 import { NgParselBuildingBlockType } from "../model/types.model";
 
-import { parseComponent } from "./component-parser";
+import { parseComponent } from "./component/component-parser";
 import { investigateType } from "./investigator";
 
 export function parse(filePath: string) {
