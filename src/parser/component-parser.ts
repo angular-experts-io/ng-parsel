@@ -4,6 +4,7 @@ import * as ts from "typescript";
 import {tsquery} from "@phenomnomnominal/tsquery";
 
 import {MitchellAngularComponent, MitchellAngularFieldDecorator} from "../model/component.model";
+import {MitchelAngularBuildingBlockType} from "../model/types.model";
 
 // TODO test all of those properties
 export interface MitchellAngularComponentDecorators {
@@ -43,7 +44,8 @@ export function parseComponent(
     const inputsAndOutputs = parseInputsAndOutputs(ast);
 
     return {
-        name: "",
+        type: MitchelAngularBuildingBlockType.COMPONENT,
+        className: parseClassName(ast),
         selector: componentDecorators.selector,
         standalone: componentDecorators.standalone || false,
         template: template,
@@ -132,4 +134,8 @@ function fetchFileContent(filePath: string, componentFilePath: string): string {
     const componentDirectory = filePathFragements.join("/");
     const templatePath = path.join(componentDirectory, filePath);
     return readFileSync(templatePath, "utf8").toString();
+}
+
+function parseClassName(ast: ts.SourceFile): string {
+    return [...tsquery(ast, 'ClassDeclaration > Identifier')][0].getText();
 }

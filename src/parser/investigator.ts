@@ -1,26 +1,26 @@
 import * as ts from "typescript";
 import { tsquery } from "@phenomnomnominal/tsquery";
 
-import { AngularType } from "../model/types.model";
+import { MitchelAngularBuildingBlockType } from "../model/types.model";
 
-export function investigateType(ast: ts.SourceFile): AngularType {
+export function investigateType(ast: ts.SourceFile): MitchelAngularBuildingBlockType {
   if (isComponent(ast)) {
-    return AngularType.COMPONENT;
+    return MitchelAngularBuildingBlockType.COMPONENT;
   }
 
   if (isModule(ast)) {
-    return AngularType.MODULE;
+    return MitchelAngularBuildingBlockType.MODULE;
   }
 
   if (isDirective(ast)) {
-    return AngularType.DIRECTIVE;
+    return MitchelAngularBuildingBlockType.DIRECTIVE;
   }
 
   if (isPipe(ast)) {
-    return AngularType.PIPE;
+    return MitchelAngularBuildingBlockType.PIPE;
   }
 
-  return AngularType.UNKNOWN;
+  return MitchelAngularBuildingBlockType.UNKNOWN;
 }
 
 function isPipe(ast: ts.SourceFile): boolean {

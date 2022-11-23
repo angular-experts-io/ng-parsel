@@ -1,3 +1,5 @@
+import {MitchelAngularBuildingBlock} from "./types.model";
+
 export interface MitchellAngularFieldDecorator {
   decorator: string;
   name: string;
@@ -6,8 +8,8 @@ export interface MitchellAngularFieldDecorator {
   field: string;
 }
 
-export interface MitchellAngularComponent {
-  name: string;
+export interface MitchellAngularComponent extends MitchelAngularBuildingBlock{
+  className: string;
   selector: string;
   standalone: boolean;
   inputs: MitchellAngularFieldDecorator[];
