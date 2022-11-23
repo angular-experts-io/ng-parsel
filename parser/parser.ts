@@ -1,16 +1,18 @@
 import {tsquery} from '@phenomnomnominal/tsquery';
+import {readFileSync} from 'fs';
 
 import {AngularType} from "../model/types.model";
 
 import {parseComponent} from "./component-parser";
 import {investigateType} from "./investigator";
 
-export function parse(source: string) {
+export function parse(filePath: string) {
+    const source = readFileSync(filePath, 'utf8');
     const ast = createAST(source);
     const componentType = investigateType(ast);
 
     if(componentType === AngularType.COMPONENT) {
-        parseComponent(ast);
+        console.log(parseComponent(ast, filePath));
     }
 
 

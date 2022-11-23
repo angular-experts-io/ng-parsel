@@ -1,5 +1,5 @@
 
-export interface AngularComponent {
+export interface MitchellAngularComponent {
     name: string;
     selector: string;
     standalone: boolean;
@@ -7,5 +7,5 @@ export interface AngularComponent {
     outputs: any[];
     implementation: string;
     template: string;
-    styles: string;
+    styles: string | string[];
 }
