@@ -1,15 +1,12 @@
-import * as ts from "typescript";
-import {tsquery} from '@phenomnomnominal/tsquery';
 import path from "path";
 import {readFileSync} from "fs";
+import * as ts from "typescript";
+import {tsquery} from '@phenomnomnominal/tsquery';
 
 import {MitchellAngularComponent} from "../model/component.model";
 
 export function parseComponent(ast: ts.SourceFile, componentFilePath: string): MitchellAngularComponent {
     const componentDecorators = getAngularComponentDecorators(ast);
-
-    console.log('Decorators', componentDecorators);
-
     const template =
         componentDecorators.template ? componentDecorators.template :
             fetchFileContent(componentDecorators.templateUrl as string, componentFilePath);
@@ -38,11 +35,12 @@ function getAngularComponentDecorators(ast: ts.SourceFile): { [key: string]: str
     const componentDecorators = tsquery(ast, decoratorQuery);
 
     return componentDecorators.reduce((decorators: { [key: string]: string | string[] | boolean }, propertyAssignment: any) => {
-
         const propertyName = propertyAssignment.name.escapedText;
 
         if (propertyName === 'styleUrls' || propertyName === 'styles') {
-            // TODO: extend decorator query to get the array of strings
+            const styleTokens = tsquery(ast, `${decoratorQuery} > ArrayLiteralExpression > StringLiteral`);
+            decorators[propertyName] = styleTokens.map(token => token.getText().replace(/'/g, ''));
+            return decorators;
         }
 
         decorators[propertyName] = propertyAssignment.initializer.text;
