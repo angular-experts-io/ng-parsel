@@ -6,6 +6,7 @@ import { NgParselBuildingBlockType } from "../model/types.model";
 import { parseComponent } from "./component/component.parser";
 import { investigateType } from "./investigator";
 import {parseSpec} from "./spec/spec.parser";
+import {parseModule} from "./module/module.parser";
 
 export function parse(filePath: string) {
   const source = readFileSync(filePath, "utf8");
@@ -13,11 +14,15 @@ export function parse(filePath: string) {
   const componentType = investigateType(ast, filePath);
 
   if (componentType === NgParselBuildingBlockType.COMPONENT) {
-    console.log(parseComponent(ast, filePath));
+    // console.log(parseComponent(ast, filePath));
   }
 
   if (componentType === NgParselBuildingBlockType.SPEC) {
-    console.log(parseSpec(ast, filePath));
+    // console.log(parseSpec(ast, filePath));
+  }
+
+   if (componentType === NgParselBuildingBlockType.MODULE) {
+     console.log(parseModule(ast));
   }
 }
 

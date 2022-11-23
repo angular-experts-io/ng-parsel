@@ -7,10 +7,16 @@ import { AppComponent } from './app.component';
   declarations: [
     AppComponent
   ],
+  exports: [
+    AppComponent
+  ],
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [
+    SomeService,
+    {provide: 'test', useValue: 'test' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
