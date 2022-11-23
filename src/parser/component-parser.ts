@@ -3,8 +3,8 @@ import {readFileSync} from "fs";
 import * as ts from "typescript";
 import {tsquery} from "@phenomnomnominal/tsquery";
 
-import {MitchellAngularComponent, MitchellAngularFieldDecorator} from "../model/component.model";
-import {MitchelAngularBuildingBlockType} from "../model/types.model";
+import {NgParselComponent, NgParselFieldDecorator} from "../model/component.model";
+import {NgParselBuildingBlockType} from "../model/types.model";
 
 // TODO test all of those properties
 export interface MitchellAngularComponentDecorators {
@@ -22,7 +22,7 @@ export interface MitchellAngularComponentDecorators {
 export function parseComponent(
     ast: ts.SourceFile,
     componentFilePath: string
-): MitchellAngularComponent {
+): NgParselComponent {
     const componentDecorators = getAngularComponentDecorators(ast);
     const template = componentDecorators.template
         ? componentDecorators.template
@@ -44,7 +44,7 @@ export function parseComponent(
     const inputsAndOutputs = parseInputsAndOutputs(ast);
 
     return {
-        type: MitchelAngularBuildingBlockType.COMPONENT,
+        type: NgParselBuildingBlockType.COMPONENT,
         className: parseClassName(ast),
         selector: componentDecorators.selector,
         standalone: componentDecorators.standalone || false,
@@ -86,8 +86,8 @@ function getAngularComponentDecorators(
 }
 
 function parseInputsAndOutputs(ast: ts.SourceFile): {
-    inputs: MitchellAngularFieldDecorator[],
-    outputs: MitchellAngularFieldDecorator[],
+    inputs: NgParselFieldDecorator[],
+    outputs: NgParselFieldDecorator[],
 } {
     /*
        This is afaik the only way to get the Decorator name
@@ -102,8 +102,8 @@ function parseInputsAndOutputs(ast: ts.SourceFile): {
     ];
 
     let inputsAndOutputs = {
-        inputs: [] as MitchellAngularFieldDecorator[],
-        outputs: [] as MitchellAngularFieldDecorator[],
+        inputs: [] as NgParselFieldDecorator[],
+        outputs: [] as NgParselFieldDecorator[],
     };
 
     for (let i = 0; i < decoratorPropertyDecorator.length; i++) {

@@ -1,7 +1,7 @@
 import { tsquery } from "@phenomnomnominal/tsquery";
 import { readFileSync } from "fs";
 
-import { MitchelAngularBuildingBlockType } from "../model/types.model";
+import { NgParselBuildingBlockType } from "../model/types.model";
 
 import { parseComponent } from "./component-parser";
 import { investigateType } from "./investigator";
@@ -11,7 +11,7 @@ export function parse(filePath: string) {
   const ast = createAST(source);
   const componentType = investigateType(ast);
 
-  if (componentType === MitchelAngularBuildingBlockType.COMPONENT) {
+  if (componentType === NgParselBuildingBlockType.COMPONENT) {
     console.log(parseComponent(ast, filePath));
   }
 }

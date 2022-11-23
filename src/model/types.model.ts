@@ -1,4 +1,4 @@
-export enum MitchelAngularBuildingBlockType {
+export enum NgParselBuildingBlockType {
   COMPONENT = "Component",
   DIRECTIVE = "Directive",
   MODULE = "Module",
@@ -6,6 +6,6 @@ export enum MitchelAngularBuildingBlockType {
   UNKNOWN = "Unknown",
 }
 
-export interface MitchelAngularBuildingBlock {
-  type: MitchelAngularBuildingBlockType;
+export interface NgParselBuildingBlock {
+  type: NgParselBuildingBlockType;
 }

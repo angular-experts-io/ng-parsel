@@ -1,6 +1,6 @@
-import {MitchelAngularBuildingBlock} from "./types.model";
+import {NgParselBuildingBlock} from "./types.model";
 
-export interface MitchellAngularFieldDecorator {
+export interface NgParselFieldDecorator {
   decorator: string;
   name: string;
   type?: string;
@@ -8,12 +8,12 @@ export interface MitchellAngularFieldDecorator {
   field: string;
 }
 
-export interface MitchellAngularComponent extends MitchelAngularBuildingBlock{
+export interface NgParselComponent extends NgParselBuildingBlock{
   className: string;
   selector: string;
   standalone: boolean;
-  inputs: MitchellAngularFieldDecorator[];
-  outputs: MitchellAngularFieldDecorator[];
+  inputs: NgParselFieldDecorator[];
+  outputs: NgParselFieldDecorator[];
   implementation: string;
   template: string;
   styles: string | string[];
