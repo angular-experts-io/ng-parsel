@@ -38,7 +38,7 @@ export function parseComponent(ast: ts.SourceFile, componentFilePath: string): M
         template: template,
         styles: styles,
         implementation: componentImplementation,
-        inputs: [],
+        inputs: parseInputs(ast),
         outputs: []
     }
 }
@@ -59,6 +59,29 @@ function getAngularComponentDecorators(ast: ts.SourceFile): MitchellAngularCompo
         decorators[propertyName] = propertyAssignment.initializer.text;
         return decorators;
     }, {});
+}
+
+// TODO return structure not just string
+function parseInputs(ast: ts.SourceFile): string[] {
+    /*
+     This is afaik the only way to get the Decorator name
+     - getDecorators() returns nothing
+     - canHaveDecorators() returns false
+    */
+    const decoratorPropertyDecorator = [...tsquery(ast, 'PropertyDeclaration:has(Decorator) > Decorator')];
+    const decoratorPropertyDeclaration = [...tsquery(ast, 'PropertyDeclaration:has(Decorator)')];
+
+    let inputs = [];
+
+    for(let i = 0; i < decoratorPropertyDecorator.length; i++) {
+        console.log(decoratorPropertyDecorator[i].getText());
+        console.log((decoratorPropertyDeclaration[i] as any).name.getText());
+        console.log((decoratorPropertyDeclaration[i] as any).type.getText());
+        inputs.push(
+            `${decoratorPropertyDecorator[i].getText()} ${(decoratorPropertyDeclaration[i] as any).name.getText()}: ${(decoratorPropertyDeclaration[i] as any).type.getText()}`
+        )
+    }
+    return inputs;
 }
 
 function fetchFileContent(filePath: string, componentFilePath: string): string {

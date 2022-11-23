@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
 
 @Component({
   selector: 'foo',
@@ -6,4 +6,6 @@ import {Component} from "@angular/core";
   styleUrls: ['./foo.styles.scss']
 })
 export class FooComponent {
+  @Input() test: string | undefined;
+  foo: string | undefined;
 }
