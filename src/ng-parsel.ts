@@ -15,37 +15,63 @@ import { NgParselModule } from './parser/module/module.model';
 import { NgParselDirective } from './parser/directive/directive.model';
 import { NgParselSpec } from './parser/spec/spec.model';
 import { NgParselPipe } from './parser/pipe/pipe.model';
+import { generateSpinner } from './utils/spinner.util';
 
 export function parse(configuration: NgParselConfig): void {
   const directoryGlob = `${configuration.src}/**/*.{ts,html,scss,css,less}`;
-  glob.sync(directoryGlob).forEach((filePath) => {
-    const source = readFileSync(filePath, 'utf8');
-    const ast = tsquery.ast(source);
-    const componentType = investigateType(ast, filePath);
 
-    let ngParselComponent, ngParselSpec, ngParselPipe, ngParselModule, ngParselDirective;
+  let ngParselComponent: NgParselComponent | undefined,
+    ngParselSpec: NgParselSpec | undefined,
+    ngParselPipe: NgParselPipe | undefined,
+    ngParselModule: NgParselModule | undefined,
+    ngParselDirective: NgParselDirective | undefined;
 
-    if (configuration.parseComponents && componentType === NgParselBuildingBlockType.COMPONENT) {
-      ngParselComponent = parseComponent(ast, filePath);
-    }
+  const parseSpinner = generateSpinner('Parsing files');
+  try {
+    parseSpinner.start();
 
-    if (configuration.parseSpecs && componentType === NgParselBuildingBlockType.SPEC) {
-      ngParselSpec = parseSpec(ast, filePath);
-    }
+    glob.sync(directoryGlob).forEach((filePath) => {
+      const source = readFileSync(filePath, 'utf8');
+      const ast = tsquery.ast(source);
+      const componentType = investigateType(ast, filePath);
 
-    if (configuration.parseModules && componentType === NgParselBuildingBlockType.MODULE) {
-      ngParselModule = parseModule(ast);
-    }
+      if (configuration.parseComponents && componentType === NgParselBuildingBlockType.COMPONENT) {
+        const parseComponentSpinner = generateSpinner('Parsing component');
+        ngParselComponent = parseComponent(ast, filePath);
+      }
 
-    if (configuration.parseDirectives && componentType === NgParselBuildingBlockType.DIRECTIVE) {
-      ngParselDirective = parseDirective(ast, filePath);
-    }
+      if (configuration.parseSpecs && componentType === NgParselBuildingBlockType.SPEC) {
+        ngParselSpec = parseSpec(ast, filePath);
+      }
 
-    if (configuration.parsePipes && componentType === NgParselBuildingBlockType.PIPE) {
-      ngParselPipe = parsePipe(ast, filePath);
-    }
+      if (configuration.parseModules && componentType === NgParselBuildingBlockType.MODULE) {
+        ngParselModule = parseModule(ast);
+      }
+
+      if (configuration.parseDirectives && componentType === NgParselBuildingBlockType.DIRECTIVE) {
+        ngParselDirective = parseDirective(ast, filePath);
+      }
+
+      if (configuration.parsePipes && componentType === NgParselBuildingBlockType.PIPE) {
+        ngParselPipe = parsePipe(ast, filePath);
+      }
+
+      parseSpinner.succeed('Files successfully parsed');
+    });
+  } catch (e) {
+    parseSpinner.fail(`Failed to parse files: ${e}`);
+  }
+
+  const writeOutputSpinner = generateSpinner('Write output files');
+  try {
+    writeOutputSpinner.start();
+
     writeOutputFiles(configuration, ngParselComponent, ngParselDirective, ngParselModule, ngParselSpec, ngParselPipe);
-  });
+
+    writeOutputSpinner.succeed(`Files successfully written to ${configuration.out}`);
+  } catch (e) {
+    writeOutputSpinner.fail(`Failed to write output files: ${e}`);
+  }
 }
 
 function writeOutputFiles(

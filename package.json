@@ -32,7 +32,8 @@
   "dependencies": {
     "chalk": "^5.1.2",
     "commander": "^9.4.1",
-    "cosmiconfig": "^8.0.0"
+    "cosmiconfig": "^8.0.0",
+    "ora": "^6.1.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
