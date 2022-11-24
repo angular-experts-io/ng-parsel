@@ -9,6 +9,7 @@ export function parseModule(
     ast: ts.SourceFile
 ): NgParselModule {
     return {
+        className: parseClassName(ast),
         type: NgParselBuildingBlockType.MODULE,
         imports: getImports(ast),
         exports: getExports(ast),
@@ -55,5 +56,8 @@ function normalizeDecoratorObject(decoratorObject: string): any {
     return JSON.parse(`${decoratorObject.replace(/(['"])?([a-zA-Z0-9]+)(['"])?:/g, '"$2":').replace(/'/g, '"')}`);
 }
 
+function parseClassName(ast: ts.SourceFile): string {
+    return [...tsquery(ast, 'ClassDeclaration > Identifier')][0].getText();
+}
 
 

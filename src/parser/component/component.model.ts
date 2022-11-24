@@ -1,4 +1,5 @@
 import {NgParselBuildingBlock} from "../../model/types.model";
+import {NgParselFieldDecorator} from "../shared/model/decorator.model";
 
 // TODO test all of those properties
 export interface NgParselComponentDecorators {
@@ -11,14 +12,6 @@ export interface NgParselComponentDecorators {
     animations?: any[];
     encapsulation?: string;
     changeDetection?: string;
-}
-
-export interface NgParselFieldDecorator {
-  decorator: string;
-  name: string;
-  type?: string;
-  initializer ?: string;
-  field: string;
 }
 
 export interface NgParselComponent extends NgParselBuildingBlock{

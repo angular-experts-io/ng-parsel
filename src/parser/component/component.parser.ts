@@ -4,14 +4,15 @@ import * as ts from "typescript";
 import {tsquery} from "@phenomnomnominal/tsquery";
 
 import {NgParselBuildingBlockType} from "../../model/types.model";
+import {parseInputsAndOutputs} from "../shared/parser/field-decorator.parser";
 
-import {NgParselComponent, NgParselComponentDecorators, NgParselFieldDecorator} from "./component.model";
+import {NgParselComponent, NgParselComponentDecorators} from "./component.model";
 
 export function parseComponent(
     ast: ts.SourceFile,
     componentFilePath: string
 ): NgParselComponent {
-    const componentDecorators = getAngularComponentDecorators(ast);
+    const componentDecorators = getComponentDecorators(ast);
     const template = componentDecorators.template
         ? componentDecorators.template
         : fetchFileContent(
@@ -44,7 +45,7 @@ export function parseComponent(
     };
 }
 
-function getAngularComponentDecorators(
+function getComponentDecorators(
     ast: ts.SourceFile
 ): NgParselComponentDecorators {
     const decoratorQuery =
@@ -71,49 +72,6 @@ function getAngularComponentDecorators(
         },
         {}
     );
-}
-
-function parseInputsAndOutputs(ast: ts.SourceFile): {
-    inputs: NgParselFieldDecorator[],
-    outputs: NgParselFieldDecorator[],
-} {
-    /*
-       This is afaik the only way to get the Decorator name
-       - getDecorators() returns nothing
-       - canHaveDecorators() returns false
-      */
-    const decoratorPropertyDecorator = [
-        ...tsquery(ast, "PropertyDeclaration:has(Decorator) > Decorator"),
-    ];
-    const decoratorPropertyDeclaration = [
-        ...tsquery(ast, "PropertyDeclaration:has(Decorator)"),
-    ];
-
-    let inputsAndOutputs = {
-        inputs: [] as NgParselFieldDecorator[],
-        outputs: [] as NgParselFieldDecorator[],
-    };
-
-    for (let i = 0; i < decoratorPropertyDecorator.length; i++) {
-        const decorator = decoratorPropertyDecorator[i].getText();
-        const name = (decoratorPropertyDeclaration[i] as any).name?.getText();
-        const type = (decoratorPropertyDeclaration[i] as any).type?.getText();
-        const initializer = (decoratorPropertyDeclaration[i] as any).initializer?.getText();
-        const field = `${decorator} ${name}${type ? ': ' + type : ' = ' + initializer}`;
-
-        const componentDecorator = {
-            decorator, name, type, initializer, field
-        }
-
-        if (decorator.startsWith('@Inp')) {
-            inputsAndOutputs.inputs.push(componentDecorator);
-        }
-
-        if (decorator.startsWith('@Out')) {
-            inputsAndOutputs.outputs.push(componentDecorator);
-        }
-    }
-    return inputsAndOutputs;
 }
 
 function fetchFileContent(filePath: string, componentFilePath: string): string {
