@@ -1,13 +1,17 @@
 {
-  "name": "mitchell",
+  "name": "ng-parsel",
   "version": "1.0.0",
   "description": "Tool that transforms Angular codebase to JSON representation",
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
+    "build": "tsc",
     "format:test": "prettier --list-different \"src/**/*.ts\"",
     "format:write": "prettier --write \"src/**/*.ts\"",
     "prepare": "husky install"
+  },
+  "bin": {
+    "ng-parsel": "./src/bin/ng-parsel.bin.js"
   },
   "repository": {
     "type": "git",
@@ -44,5 +48,8 @@
   },
   "lint-staged": {
     "*.{ts,js,html,css,scss,less,md}": "prettier --write"
+  },
+  "dependencies": {
+    "commander": "^9.4.1"
   }
 }
