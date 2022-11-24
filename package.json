@@ -7,8 +7,7 @@
     "start": "ts-node src/index.ts",
     "build": "tsc",
     "format:test": "prettier --list-different \"src/**/*.ts\"",
-    "format:write": "prettier --write \"src/**/*.ts\"",
-    "prepare": "husky install"
+    "format:write": "prettier --write \"src/**/*.ts\""
   },
   "bin": {
     "ng-parsel": "./src/bin/ng-parsel.bin.js"

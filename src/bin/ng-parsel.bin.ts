@@ -1,12 +1,26 @@
 #!/usr/bin/env node
-import commander from "commander";
+import { Command } from "commander";
+
 import * as packageJson from "../../package.json";
+import { parse } from "../ng-parsel";
 
-(commander as any)
-  .version(packageJson.version)
+const program = new Command();
+
+program.version(packageJson.version);
+
+program
+  .command("parse")
   .argument("<string>", "Glob pattern to search for files")
-  .option("init", "Initialize a new ng-parsel configuration file")
-  .option("--out", "Output directory for generated files")
-  .parse(process.argv);
+  .option("--out <string>", "Output directory for generated files")
+  .option("--singleFile", "Output in a single file")
+  .action((srcGlob, options) => {
+    const { out, singleFile } = options;
+    parse(out);
+  });
 
-console.log("provided options", commander);
+program.command("init").action(() => {
+  // TODO implement init
+  console.log("init called");
+});
+
+program.parse();
