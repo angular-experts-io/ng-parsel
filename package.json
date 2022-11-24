@@ -6,7 +6,8 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "format:test": "prettier --list-different \"src/**/*.ts\"",
-    "format:write": "prettier --write \"src/**/*.ts\""
+    "format:write": "prettier --write \"src/**/*.ts\"",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
