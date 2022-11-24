@@ -3,9 +3,12 @@ import { tsquery } from "@phenomnomnominal/tsquery";
 
 import { NgParselBuildingBlockType } from "./parser/shared/model/types.model";
 
-export function investigateType(ast: ts.SourceFile, filePath:string): NgParselBuildingBlockType {
+export function investigateType(
+  ast: ts.SourceFile,
+  filePath: string
+): NgParselBuildingBlockType {
   const filePathFragment = filePath.split("/");
-  if(filePathFragment[filePathFragment.length - 1].endsWith("spec.ts")) {
+  if (filePathFragment[filePathFragment.length - 1].endsWith("spec.ts")) {
     return NgParselBuildingBlockType.SPEC;
   }
 
