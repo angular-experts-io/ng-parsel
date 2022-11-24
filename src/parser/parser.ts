@@ -8,6 +8,7 @@ import {investigateType} from "./investigator";
 import {parseSpec} from "./spec/spec.parser";
 import {parseModule} from "./module/module.parser";
 import {parseDirective} from "./directive/directive.parser";
+import {parsePipe} from "./pipe/pipe.parser";
 
 export function parse(filePath: string) {
     const source = readFileSync(filePath, "utf8");
@@ -27,7 +28,11 @@ export function parse(filePath: string) {
     }
 
     if (componentType === NgParselBuildingBlockType.DIRECTIVE) {
-        console.log(parseDirective(ast, filePath));
+        // console.log(parseDirective(ast, filePath));
+    }
+
+    if (componentType === NgParselBuildingBlockType.PIPE) {
+        console.log(parsePipe(ast, filePath));
     }
 }
 

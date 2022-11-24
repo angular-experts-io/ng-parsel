@@ -3,10 +3,12 @@ import {readFileSync} from "fs";
 import * as ts from "typescript";
 import {tsquery} from "@phenomnomnominal/tsquery";
 
+import {parseClassName} from "../shared/parser/class.parser";
 import {NgParselBuildingBlockType} from "../../model/types.model";
 import {parseInputsAndOutputs} from "../shared/parser/field-decorator.parser";
 
-import {NgParselComponent, NgParselComponentDecorators} from "./component.model";
+import {NgParselComponent} from "./component.model";
+import {NgParselDecoratorProperties} from "../shared/model/decorator.model";
 
 export function parseComponent(
     ast: ts.SourceFile,
@@ -35,7 +37,7 @@ export function parseComponent(
     return {
         type: NgParselBuildingBlockType.COMPONENT,
         className: parseClassName(ast),
-        selector: componentDecorators.selector,
+        selector: componentDecorators.selector as string,
         standalone: componentDecorators.standalone || false,
         template: template,
         styles: styles,
@@ -47,7 +49,7 @@ export function parseComponent(
 
 function getComponentDecorators(
     ast: ts.SourceFile
-): NgParselComponentDecorators {
+): NgParselDecoratorProperties {
     const decoratorQuery =
         "Decorator > CallExpression > ObjectLiteralExpression > PropertyAssignment";
     const componentDecorators = tsquery(ast, decoratorQuery);
@@ -80,8 +82,4 @@ function fetchFileContent(filePath: string, componentFilePath: string): string {
     const componentDirectory = filePathFragements.join("/");
     const templatePath = path.join(componentDirectory, filePath);
     return readFileSync(templatePath, "utf8").toString();
-}
-
-function parseClassName(ast: ts.SourceFile): string {
-    return [...tsquery(ast, 'ClassDeclaration > Identifier')][0].getText();
 }
