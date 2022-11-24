@@ -28,6 +28,11 @@
     "url": "https://github.com/kreuzerk/mitchell/issues"
   },
   "homepage": "https://github.com/kreuzerk/mitchell#readme",
+  "dependencies": {
+    "chalk": "^5.1.2",
+    "commander": "^9.4.1",
+    "cosmiconfig": "^8.0.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
@@ -47,8 +52,5 @@
   },
   "lint-staged": {
     "*.{ts,js,html,css,scss,less,md}": "prettier --write"
-  },
-  "dependencies": {
-    "commander": "^9.4.1"
   }
 }
