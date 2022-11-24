@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { writeFileSync } from "fs";
 import { Command } from "commander";
 import { cosmiconfigSync } from "cosmiconfig";
 import chalk from "chalk";
@@ -53,8 +54,27 @@ program
   });
 
 program.command("init").action(() => {
-  // TODO implement init
-  console.log("init called");
+  console.log(chalk.cyan(`ng-parsel: creating configuration file`));
+
+  writeFileSync(
+    "ng-parselrc.json",
+    JSON.stringify({
+      src: "src",
+      out: "dist",
+      parseComponents: true,
+      parsePipes: true,
+      parseDirectives: true,
+      parseModules: true,
+      parseSpecs: true,
+      singleFile: true,
+    })
+  );
+
+  console.log(
+    chalk.green(
+      `ng-parsel: configuration successfully written to: ng-parselrc.json`
+    )
+  );
 });
 
 program.parse();
