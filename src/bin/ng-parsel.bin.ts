@@ -1,9 +1,11 @@
 #!/usr/bin/env node
+import chalk from 'chalk';
 import { writeFileSync } from 'fs';
 import { Command } from 'commander';
 import { cosmiconfigSync } from 'cosmiconfig';
-import chalk from 'chalk';
 
+import { mergeOptionalConfigWithDefaults } from '../config/config.helper';
+import { CONFIG_DEFAULT_VALUES } from '../config/config.model';
 import * as packageJson from '../../package.json';
 import { parse } from '../ng-parsel';
 
@@ -14,13 +16,13 @@ program.version(packageJson.version);
 
 program
   .command('parse')
-  .argument('<string>', 'Glob pattern to search for files')
-  .option('-c', 'Parse Components', true)
-  .option('-p', 'Parse Pipes', true)
-  .option('-m', 'Parse Modules', true)
-  .option('-d', 'Parse Directives', true)
-  .option('-s', 'Parse Specs', true)
-  .option('--out <string>', 'Output directory for generated files')
+  .option('-s, --src', 'Glob pattern to search for files')
+  .option('--components', 'Parse Components', true)
+  .option('--pipes', 'Parse Pipes', true)
+  .option('--modules', 'Parse Modules', true)
+  .option('--directives', 'Parse Directives', true)
+  .option('--specs', 'Parse Specs', true)
+  .option('-o, --out <string>', 'Output directory for generated files')
   .option('--singleFile', 'Output in a single file')
   .action((srcGlob, options) => {
     const configObject = explorer.search();
@@ -32,35 +34,17 @@ program
                 Configuraton from config file will be used.`
         )
       );
-
-      if (!configObject.config.src) {
-        console.log(chalk.red(`ng-parsel: required src property is missing in config file.`));
-        process.exit(1);
-      }
-      parse(configObject.config.src);
+      parse(mergeOptionalConfigWithDefaults(configObject.config));
     } else {
       console.log(chalk.cyan(`ng-parsel: no configuration found. CLI arguments will be used.`));
-      const { out } = options;
-      parse(out);
+      parse(mergeOptionalConfigWithDefaults(options));
     }
   });
 
 program.command('init').action(() => {
   console.log(chalk.cyan(`ng-parsel: creating configuration file`));
 
-  writeFileSync(
-    '.ng-parselrc',
-    JSON.stringify({
-      src: 'src',
-      out: 'dist',
-      parseComponents: true,
-      parsePipes: true,
-      parseDirectives: true,
-      parseModules: true,
-      parseSpecs: true,
-      singleFile: true,
-    })
-  );
+  writeFileSync('.ng-parselrc', JSON.stringify(CONFIG_DEFAULT_VALUES));
 
   console.log(chalk.green(`ng-parsel: configuration successfully written to: .ng-parselrc`));
 });
