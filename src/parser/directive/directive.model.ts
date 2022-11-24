@@ -1,5 +1,5 @@
-import { NgParselBuildingBlock } from "../shared/model/types.model";
-import { NgParselFieldDecorator } from "../shared/model/decorator.model";
+import { NgParselBuildingBlock } from '../shared/model/types.model';
+import { NgParselFieldDecorator } from '../shared/model/decorator.model';
 
 export interface NgParselDirective extends NgParselBuildingBlock {
   className: string;

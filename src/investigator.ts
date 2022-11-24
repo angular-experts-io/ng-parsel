@@ -1,14 +1,11 @@
-import * as ts from "typescript";
-import { tsquery } from "@phenomnomnominal/tsquery";
+import * as ts from 'typescript';
+import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { NgParselBuildingBlockType } from "./parser/shared/model/types.model";
+import { NgParselBuildingBlockType } from './parser/shared/model/types.model';
 
-export function investigateType(
-  ast: ts.SourceFile,
-  filePath: string
-): NgParselBuildingBlockType {
-  const filePathFragment = filePath.split("/");
-  if (filePathFragment[filePathFragment.length - 1].endsWith("spec.ts")) {
+export function investigateType(ast: ts.SourceFile, filePath: string): NgParselBuildingBlockType {
+  const filePathFragment = filePath.split('/');
+  if (filePathFragment[filePathFragment.length - 1].endsWith('spec.ts')) {
     return NgParselBuildingBlockType.SPEC;
   }
 
@@ -32,26 +29,21 @@ export function investigateType(
 }
 
 function isPipe(ast: ts.SourceFile): boolean {
-  return isType(ast, "Pipe");
+  return isType(ast, 'Pipe');
 }
 
 function isDirective(ast: ts.SourceFile): boolean {
-  return isType(ast, "Directive");
+  return isType(ast, 'Directive');
 }
 
 function isModule(ast: ts.SourceFile): boolean {
-  return isType(ast, "NgModule");
+  return isType(ast, 'NgModule');
 }
 
 function isComponent(ast: ts.SourceFile): boolean {
-  return isType(ast, "Component");
+  return isType(ast, 'Component');
 }
 
 function isType(ast: ts.SourceFile, type: string): boolean {
-  return (
-    tsquery(
-      ast,
-      `Decorator > CallExpression > Identifier[escapedText="${type}"]`
-    ).length > 0
-  );
+  return tsquery(ast, `Decorator > CallExpression > Identifier[escapedText="${type}"]`).length > 0;
 }

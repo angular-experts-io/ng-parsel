@@ -1,10 +1,10 @@
-import * as ts from "typescript";
-import { tsquery } from "@phenomnomnominal/tsquery";
+import * as ts from 'typescript';
+import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { parseClassName } from "../shared/parser/class.parser";
-import { NgParselBuildingBlockType } from "../shared/model/types.model";
+import { parseClassName } from '../shared/parser/class.parser';
+import { NgParselBuildingBlockType } from '../shared/model/types.model';
 
-import { NgParselModule } from "./module.model";
+import { NgParselModule } from './module.model';
 
 export function parseModule(ast: ts.SourceFile): NgParselModule {
   return {
@@ -19,32 +19,26 @@ export function parseModule(ast: ts.SourceFile): NgParselModule {
 }
 
 function getImports(ast: ts.SourceFile): string[] {
-  return getDecoratorPropertyValue(ast, "imports");
+  return getDecoratorPropertyValue(ast, 'imports');
 }
 
 function getDeclarations(ast: ts.SourceFile): string[] {
-  return getDecoratorPropertyValue(ast, "declarations");
+  return getDecoratorPropertyValue(ast, 'declarations');
 }
 
 function getExports(ast: ts.SourceFile): string[] {
-  return getDecoratorPropertyValue(ast, "exports");
+  return getDecoratorPropertyValue(ast, 'exports');
 }
 
 function getProviders(ast: ts.SourceFile): string[] {
-  return [
-    ...getDecoratorPropertyValue(ast, "providers"),
-    ...getDecoratorPropertyObject(ast, "providers"),
-  ];
+  return [...getDecoratorPropertyValue(ast, 'providers'), ...getDecoratorPropertyObject(ast, 'providers')];
 }
 
 function getBootstrap(ast: ts.SourceFile): string[] {
-  return getDecoratorPropertyValue(ast, "bootstrap");
+  return getDecoratorPropertyValue(ast, 'bootstrap');
 }
 
-function getDecoratorPropertyValue(
-  ast: ts.SourceFile,
-  identifier: string
-): string[] {
+function getDecoratorPropertyValue(ast: ts.SourceFile, identifier: string): string[] {
   return [
     ...tsquery(
       ast,
@@ -53,10 +47,7 @@ function getDecoratorPropertyValue(
   ].map((identifier: any) => identifier.getText());
 }
 
-function getDecoratorPropertyObject(
-  ast: ts.SourceFile,
-  identifier: string
-): string[] {
+function getDecoratorPropertyObject(ast: ts.SourceFile, identifier: string): string[] {
   return [
     ...tsquery(
       ast,
@@ -66,9 +57,5 @@ function getDecoratorPropertyObject(
 }
 
 function normalizeDecoratorObject(decoratorObject: string): any {
-  return JSON.parse(
-    `${decoratorObject
-      .replace(/(['"])?([a-zA-Z0-9]+)(['"])?:/g, '"$2":')
-      .replace(/'/g, '"')}`
-  );
+  return JSON.parse(`${decoratorObject.replace(/(['"])?([a-zA-Z0-9]+)(['"])?:/g, '"$2":').replace(/'/g, '"')}`);
 }

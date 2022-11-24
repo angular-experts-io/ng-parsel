@@ -1,7 +1,7 @@
-import * as ts from "typescript";
-import { tsquery } from "@phenomnomnominal/tsquery";
+import * as ts from 'typescript';
+import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { NgParselFieldDecorator } from "../model/decorator.model";
+import { NgParselFieldDecorator } from '../model/decorator.model';
 
 export function parseInputsAndOutputs(ast: ts.SourceFile): {
   inputs: NgParselFieldDecorator[];
@@ -12,12 +12,8 @@ export function parseInputsAndOutputs(ast: ts.SourceFile): {
        - getDecorators() returns nothing
        - canHaveDecorators() returns false
       */
-  const decoratorPropertyDecorator = [
-    ...tsquery(ast, "PropertyDeclaration:has(Decorator) > Decorator"),
-  ];
-  const decoratorPropertyDeclaration = [
-    ...tsquery(ast, "PropertyDeclaration:has(Decorator)"),
-  ];
+  const decoratorPropertyDecorator = [...tsquery(ast, 'PropertyDeclaration:has(Decorator) > Decorator')];
+  const decoratorPropertyDeclaration = [...tsquery(ast, 'PropertyDeclaration:has(Decorator)')];
 
   let inputsAndOutputs = {
     inputs: [] as NgParselFieldDecorator[],
@@ -28,12 +24,8 @@ export function parseInputsAndOutputs(ast: ts.SourceFile): {
     const decorator = decoratorPropertyDecorator[i].getText();
     const name = (decoratorPropertyDeclaration[i] as any).name?.getText();
     const type = (decoratorPropertyDeclaration[i] as any).type?.getText();
-    const initializer = (
-      decoratorPropertyDeclaration[i] as any
-    ).initializer?.getText();
-    const field = `${decorator} ${name}${
-      type ? ": " + type : " = " + initializer
-    }`;
+    const initializer = (decoratorPropertyDeclaration[i] as any).initializer?.getText();
+    const field = `${decorator} ${name}${type ? ': ' + type : ' = ' + initializer}`;
 
     const componentDecorator = {
       decorator,
@@ -43,11 +35,11 @@ export function parseInputsAndOutputs(ast: ts.SourceFile): {
       field,
     };
 
-    if (decorator.startsWith("@Inp")) {
+    if (decorator.startsWith('@Inp')) {
       inputsAndOutputs.inputs.push(componentDecorator);
     }
 
-    if (decorator.startsWith("@Out")) {
+    if (decorator.startsWith('@Out')) {
       inputsAndOutputs.outputs.push(componentDecorator);
     }
   }

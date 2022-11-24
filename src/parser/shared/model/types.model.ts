@@ -1,10 +1,10 @@
 export enum NgParselBuildingBlockType {
-  COMPONENT = "Component",
-  SPEC = "Spec",
-  DIRECTIVE = "Directive",
-  MODULE = "Module",
-  PIPE = "Pipe",
-  UNKNOWN = "Unknown",
+  COMPONENT = 'Component',
+  SPEC = 'Spec',
+  DIRECTIVE = 'Directive',
+  MODULE = 'Module',
+  PIPE = 'Pipe',
+  UNKNOWN = 'Unknown',
 }
 
 export interface NgParselBuildingBlock {
