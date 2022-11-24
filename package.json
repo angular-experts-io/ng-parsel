@@ -6,6 +6,7 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "build": "tsc",
+    "lint": "eslint src/**/*.ts",
     "format:test": "prettier --list-different \"src/**/*.ts\"",
     "format:write": "prettier --write \"src/**/*.ts\""
   },
@@ -39,6 +40,9 @@
     "@phenomnomnominal/tsquery": "^5.0.0",
     "@types/glob": "^8.0.0",
     "@types/node": "^18.11.9",
+    "@typescript-eslint/eslint-plugin": "^5.44.0",
+    "@typescript-eslint/parser": "^5.44.0",
+    "eslint": "^8.28.0",
     "glob": "^8.0.3",
     "husky": "^8.0.2",
     "lint-staged": "^13.0.3",
