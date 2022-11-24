@@ -2,7 +2,7 @@ import * as ts from "typescript";
 import {tsquery} from "@phenomnomnominal/tsquery";
 
 import {parseClassName} from "../shared/parser/class.parser";
-import {NgParselBuildingBlockType} from "../../model/types.model";
+import {NgParselBuildingBlockType} from "../shared/model/types.model";
 
 import {NgParselModule} from "./module.model";
 

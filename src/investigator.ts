@@ -1,7 +1,7 @@
 import * as ts from "typescript";
 import { tsquery } from "@phenomnomnominal/tsquery";
 
-import { NgParselBuildingBlockType } from "../model/types.model";
+import { NgParselBuildingBlockType } from "./parser/shared/model/types.model";
 
 export function investigateType(ast: ts.SourceFile, filePath:string): NgParselBuildingBlockType {
   const filePathFragment = filePath.split("/");

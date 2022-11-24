@@ -1,7 +1,7 @@
 import * as ts from "typescript";
 
 import {getDecoratorProperties} from "../shared/parser/decorator.parser";
-import {NgParselBuildingBlockType} from "../../model/types.model";
+import {NgParselBuildingBlockType} from "../shared/model/types.model";
 import {parseClassName} from "../shared/parser/class.parser";
 
 import {NgParselPipe} from "./pipe.model";

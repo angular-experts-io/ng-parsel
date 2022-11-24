@@ -1,4 +1,4 @@
-import {NgParselBuildingBlock} from "../../model/types.model";
+import {NgParselBuildingBlock} from "../shared/model/types.model";
 
 export interface NgParselPipe extends NgParselBuildingBlock {
     className: string;

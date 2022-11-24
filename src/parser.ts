@@ -1,18 +1,19 @@
 import {tsquery} from "@phenomnomnominal/tsquery";
 import {readFileSync} from "fs";
 
-import {NgParselBuildingBlockType} from "../model/types.model";
+import {NgParselBuildingBlockType} from "./parser/shared/model/types.model";
 
-import {parseComponent} from "./component/component.parser";
+import {parseComponent} from "./parser/component/component.parser";
 import {investigateType} from "./investigator";
-import {parseSpec} from "./spec/spec.parser";
-import {parseModule} from "./module/module.parser";
-import {parseDirective} from "./directive/directive.parser";
-import {parsePipe} from "./pipe/pipe.parser";
+import {parseSpec} from "./parser/spec/spec.parser";
+import {parseModule} from "./parser/module/module.parser";
+import {parseDirective} from "./parser/directive/directive.parser";
+import {parsePipe} from "./parser/pipe/pipe.parser";
 
+// TODO - this should be renamed or moved into index.ts
 export function parse(filePath: string) {
     const source = readFileSync(filePath, "utf8");
-    const ast = createAST(source);
+    const ast = tsquery.ast(source);
     const componentType = investigateType(ast, filePath);
 
     if (componentType === NgParselBuildingBlockType.COMPONENT) {
@@ -34,8 +35,4 @@ export function parse(filePath: string) {
     if (componentType === NgParselBuildingBlockType.PIPE) {
         console.log(parsePipe(ast, filePath));
     }
-}
-
-function createAST(source: string) {
-    return tsquery.ast(source);
 }

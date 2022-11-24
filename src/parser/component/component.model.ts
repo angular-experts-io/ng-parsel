@@ -1,4 +1,4 @@
-import {NgParselBuildingBlock} from "../../model/types.model";
+import {NgParselBuildingBlock} from "../shared/model/types.model";
 import {NgParselFieldDecorator} from "../shared/model/decorator.model";
 
 export interface NgParselComponent extends NgParselBuildingBlock{

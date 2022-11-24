@@ -2,7 +2,7 @@ import {readFileSync} from "fs";
 import * as ts from "typescript";
 
 import {parseClassName} from "../shared/parser/class.parser";
-import {NgParselBuildingBlockType} from "../../model/types.model";
+import {NgParselBuildingBlockType} from "../shared/model/types.model";
 import {getDecoratorProperties} from "../shared/parser/decorator.parser";
 import {parseInputsAndOutputs} from "../shared/parser/field-decorator.parser";
 

@@ -1,4 +1,4 @@
-import { parse } from "./parser/parser";
+import { parse } from "./parser";
 import * as glob from "glob";
 
 const TEMP_DIRECTORY = "./test-spa/src/app/**";
