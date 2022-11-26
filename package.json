@@ -30,15 +30,15 @@
   },
   "homepage": "https://github.com/kreuzerk/mitchell#readme",
   "dependencies": {
-    "chalk": "^5.1.2",
+    "chalk": "^3.0.0",
     "commander": "^9.4.1",
     "cosmiconfig": "^8.0.0",
-    "ora": "^6.1.2"
+    "ora": "^5.4.1",
+    "@phenomnomnominal/tsquery": "^5.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
-    "@phenomnomnominal/tsquery": "^5.0.0",
     "@types/glob": "^8.0.0",
     "@types/node": "^18.11.9",
     "@typescript-eslint/eslint-plugin": "^5.44.0",
