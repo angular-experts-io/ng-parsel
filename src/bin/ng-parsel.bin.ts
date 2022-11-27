@@ -7,6 +7,7 @@ import { cosmiconfigSync } from 'cosmiconfig';
 import { mergeOptionalConfigWithDefaults } from '../config/config.helper';
 import { CONFIG_DEFAULT_VALUES } from '../config/config.model';
 import * as packageJson from '../../package.json';
+import { writeJson } from '../utils/write.util';
 import { parse } from '../ng-parsel';
 
 const program = new Command();
@@ -44,7 +45,8 @@ program
 program.command('init').action(() => {
   console.log(chalk.cyan(`ng-parsel: creating configuration file`));
 
-  writeFileSync('.ng-parselrc.json', JSON.stringify(CONFIG_DEFAULT_VALUES));
+  // EXTRACT TO UTILS
+  writeJson('.ng-parselrc.json', CONFIG_DEFAULT_VALUES);
 
   console.log(chalk.green(`ng-parsel: configuration successfully written to: .ng-parselrc`));
 });
