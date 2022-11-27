@@ -94,12 +94,13 @@ function writeOutputFiles(
 
     writeFileSync(
       `${config.out}/ng-parsel.json`,
-      JSON.stringify({
+      JSON.stringify([
         ...ngParselComponents,
         ...ngParselModules,
         ...ngParselDirectives,
-        ...ngParselDirectives,
-      })
+        ...ngParselSpecs,
+        ...ngParselPipes,
+      ])
     );
   } else {
     if (ngParselComponents.length > 0) {
