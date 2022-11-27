@@ -4,7 +4,7 @@ import * as ts from 'typescript';
 import { tsquery } from '@phenomnomnominal/tsquery';
 
 import { parseClassName } from '../shared/parser/class.parser';
-import { NgParselBuildingBlockType } from '../shared/model/types.model';
+import { NgParselOutputType } from '../shared/model/types.model';
 import { parseInputsAndOutputs } from '../shared/parser/field-decorator.parser';
 
 import { NgParselComponent } from './component.model';
@@ -24,7 +24,7 @@ export function parseComponent(ast: ts.SourceFile, componentFilePath: string): N
   const inputsAndOutputs = parseInputsAndOutputs(ast);
 
   return {
-    type: NgParselBuildingBlockType.COMPONENT,
+    type: NgParselOutputType.COMPONENT,
     className: parseClassName(ast),
     selector: componentDecorators.selector as string,
     standalone: componentDecorators.standalone || false,

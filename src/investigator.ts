@@ -1,31 +1,31 @@
 import * as ts from 'typescript';
 import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { NgParselBuildingBlockType } from './parser/shared/model/types.model';
+import { NgParselOutputType } from './parser/shared/model/types.model';
 
-export function investigateType(ast: ts.SourceFile, filePath: string): NgParselBuildingBlockType {
+export function investigateType(ast: ts.SourceFile, filePath: string): NgParselOutputType {
   const filePathFragment = filePath.split('/');
   if (filePathFragment[filePathFragment.length - 1].endsWith('spec.ts')) {
-    return NgParselBuildingBlockType.SPEC;
+    return NgParselOutputType.SPEC;
   }
 
   if (isComponent(ast)) {
-    return NgParselBuildingBlockType.COMPONENT;
+    return NgParselOutputType.COMPONENT;
   }
 
   if (isModule(ast)) {
-    return NgParselBuildingBlockType.MODULE;
+    return NgParselOutputType.MODULE;
   }
 
   if (isDirective(ast)) {
-    return NgParselBuildingBlockType.DIRECTIVE;
+    return NgParselOutputType.DIRECTIVE;
   }
 
   if (isPipe(ast)) {
-    return NgParselBuildingBlockType.PIPE;
+    return NgParselOutputType.PIPE;
   }
 
-  return NgParselBuildingBlockType.UNKNOWN;
+  return NgParselOutputType.UNKNOWN;
 }
 
 function isPipe(ast: ts.SourceFile): boolean {

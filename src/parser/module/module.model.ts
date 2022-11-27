@@ -1,6 +1,6 @@
-import { NgParselBuildingBlock } from '../shared/model/types.model';
+import { NgParselOutput } from '../shared/model/types.model';
 
-export interface NgParselModule extends NgParselBuildingBlock {
+export interface NgParselModule extends NgParselOutput {
   className: string;
   imports: string[];
   exports: string[];

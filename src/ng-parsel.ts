@@ -8,7 +8,7 @@ import { parsePipe } from './parser/pipe/pipe.parser';
 import { parseModule } from './parser/module/module.parser';
 import { parseDirective } from './parser/directive/directive.parser';
 import { parseComponent } from './parser/component/component.parser';
-import { NgParselBuildingBlockType } from './parser/shared/model/types.model';
+import { NgParselOutputType } from './parser/shared/model/types.model';
 import { NgParselConfig } from './config/config.model';
 import { NgParselComponent } from './parser/component/component.model';
 import { NgParselModule } from './parser/module/module.model';
@@ -36,23 +36,23 @@ export function parse(configuration: NgParselConfig): void {
       const ast = tsquery.ast(source);
       const componentType = investigateType(ast, filePath);
 
-      if (configuration.parseComponents && componentType === NgParselBuildingBlockType.COMPONENT) {
+      if (configuration.parseComponents && componentType === NgParselOutputType.COMPONENT) {
         ngParselComponents.push(parseComponent(ast, filePath));
       }
 
-      if (configuration.parseSpecs && componentType === NgParselBuildingBlockType.SPEC) {
+      if (configuration.parseSpecs && componentType === NgParselOutputType.SPEC) {
         ngParselSpecs.push(parseSpec(ast, filePath));
       }
 
-      if (configuration.parseModules && componentType === NgParselBuildingBlockType.MODULE) {
+      if (configuration.parseModules && componentType === NgParselOutputType.MODULE) {
         ngParselModules.push(parseModule(ast));
       }
 
-      if (configuration.parseDirectives && componentType === NgParselBuildingBlockType.DIRECTIVE) {
+      if (configuration.parseDirectives && componentType === NgParselOutputType.DIRECTIVE) {
         ngParselDirectives.push(parseDirective(ast, filePath));
       }
 
-      if (configuration.parsePipes && componentType === NgParselBuildingBlockType.PIPE) {
+      if (configuration.parsePipes && componentType === NgParselOutputType.PIPE) {
         ngParselPipes.push(parsePipe(ast, filePath));
       }
     });

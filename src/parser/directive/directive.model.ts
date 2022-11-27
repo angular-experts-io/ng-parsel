@@ -1,7 +1,7 @@
-import { NgParselBuildingBlock } from '../shared/model/types.model';
+import { NgParselOutput } from '../shared/model/types.model';
 import { NgParselFieldDecorator } from '../shared/model/decorator.model';
 
-export interface NgParselDirective extends NgParselBuildingBlock {
+export interface NgParselDirective extends NgParselOutput {
   className: string;
   selector: string;
   standalone: boolean;

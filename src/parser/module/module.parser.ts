@@ -2,14 +2,14 @@ import * as ts from 'typescript';
 import { tsquery } from '@phenomnomnominal/tsquery';
 
 import { parseClassName } from '../shared/parser/class.parser';
-import { NgParselBuildingBlockType } from '../shared/model/types.model';
+import { NgParselOutputType } from '../shared/model/types.model';
 
 import { NgParselModule } from './module.model';
 
 export function parseModule(ast: ts.SourceFile): NgParselModule {
   return {
     className: parseClassName(ast),
-    type: NgParselBuildingBlockType.MODULE,
+    type: NgParselOutputType.MODULE,
     imports: getImports(ast),
     exports: getExports(ast),
     declarations: getDeclarations(ast),

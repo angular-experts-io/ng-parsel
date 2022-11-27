@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 import * as ts from 'typescript';
 
 import { parseClassName } from '../shared/parser/class.parser';
-import { NgParselBuildingBlockType } from '../shared/model/types.model';
+import { NgParselOutputType } from '../shared/model/types.model';
 import { getDecoratorProperties } from '../shared/parser/decorator.parser';
 import { parseInputsAndOutputs } from '../shared/parser/field-decorator.parser';
 
@@ -16,7 +16,7 @@ export function parseDirective(ast: ts.SourceFile, componentFilePath: string): N
   const inputsAndOutputs = parseInputsAndOutputs(ast);
 
   return {
-    type: NgParselBuildingBlockType.DIRECTIVE,
+    type: NgParselOutputType.DIRECTIVE,
     className: parseClassName(ast),
     selector: directiveDecorators.selector as string,
     standalone: directiveDecorators.standalone || false,

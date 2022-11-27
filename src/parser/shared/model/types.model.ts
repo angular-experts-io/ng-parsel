@@ -1,4 +1,4 @@
-export enum NgParselBuildingBlockType {
+export enum NgParselOutputType {
   COMPONENT = 'Component',
   SPEC = 'Spec',
   DIRECTIVE = 'Directive',
@@ -7,6 +7,6 @@ export enum NgParselBuildingBlockType {
   UNKNOWN = 'Unknown',
 }
 
-export interface NgParselBuildingBlock {
-  type: NgParselBuildingBlockType;
+export interface NgParselOutput {
+  type: NgParselOutputType;
 }

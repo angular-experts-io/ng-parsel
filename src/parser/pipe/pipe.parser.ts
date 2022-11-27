@@ -1,7 +1,7 @@
 import * as ts from 'typescript';
 
 import { getDecoratorProperties } from '../shared/parser/decorator.parser';
-import { NgParselBuildingBlockType } from '../shared/model/types.model';
+import { NgParselOutputType } from '../shared/model/types.model';
 import { parseClassName } from '../shared/parser/class.parser';
 
 import { NgParselPipe } from './pipe.model';
@@ -12,7 +12,7 @@ export function parsePipe(ast: ts.SourceFile, componentFilePath: string): NgPars
   const pipeImplementation = readFileSync(componentFilePath, 'utf8').toString();
 
   return {
-    type: NgParselBuildingBlockType.PIPE,
+    type: NgParselOutputType.PIPE,
     className: parseClassName(ast),
     name: pipeDecorators.name as string,
     pure: pipeDecorators.pure || true,
