@@ -64,7 +64,14 @@ export function parse(configuration: NgParselConfig): void {
   try {
     writeOutputSpinner.start();
 
-    writeOutputFiles(configuration, ngParselComponent, ngParselDirective, ngParselModule, ngParselSpec, ngParselPipe);
+    writeOutputFiles(
+      configuration,
+      ngParselComponents,
+      ngParselDirectives,
+      ngParselModules,
+      ngParselSpecs,
+      ngParselPipes
+    );
 
     writeOutputSpinner.succeed(`Files successfully written to ${configuration.out}`);
   } catch (e) {
@@ -74,11 +81,11 @@ export function parse(configuration: NgParselConfig): void {
 
 function writeOutputFiles(
   config: NgParselConfig,
-  ngParselComponent: NgParselComponent | undefined,
-  ngParselDirective: NgParselDirective | undefined,
-  ngParselModule: NgParselModule | undefined,
-  ngParselSpec: NgParselSpec | undefined,
-  ngParselPipe: NgParselPipe | undefined
+  ngParselComponents: NgParselComponent[],
+  ngParselDirectives: NgParselDirective[],
+  ngParselModules: NgParselModule[],
+  ngParselSpecs: NgParselSpec[],
+  ngParselPipes: NgParselPipe[]
 ): void {
   if (config.singleFile) {
     if (!existsSync(config.out as string)) {
@@ -88,31 +95,31 @@ function writeOutputFiles(
     writeFileSync(
       `${config.out}/ng-parsel.json`,
       JSON.stringify({
-        ...ngParselComponent,
-        ...ngParselModule,
-        ...ngParselDirective,
-        ...ngParselDirective,
+        ...ngParselComponents,
+        ...ngParselModules,
+        ...ngParselDirectives,
+        ...ngParselDirectives,
       })
     );
   } else {
-    if (ngParselComponent) {
-      writeFileSync(`${config.out}/ng-parsel-component.json`, JSON.stringify(ngParselComponent));
+    if (ngParselComponents.length > 0) {
+      writeFileSync(`${config.out}/ng-parsel-component.json`, JSON.stringify(ngParselComponents));
     }
 
-    if (ngParselModule) {
-      writeFileSync(`${config.out}/ng-parsel-module.json`, JSON.stringify(ngParselModule));
+    if (ngParselModules.length > 0) {
+      writeFileSync(`${config.out}/ng-parsel-module.json`, JSON.stringify(ngParselModules));
     }
 
-    if (ngParselDirective) {
-      writeFileSync(`${config.out}/ng-parsel-directive.json`, JSON.stringify(ngParselDirective));
+    if (ngParselDirectives.length > 0) {
+      writeFileSync(`${config.out}/ng-parsel-directive.json`, JSON.stringify(ngParselDirectives));
     }
 
-    if (ngParselPipe) {
-      writeFileSync(`${config.out}/ng-parsel-pipe.json`, JSON.stringify(ngParselPipe));
+    if (ngParselPipes.length > 0) {
+      writeFileSync(`${config.out}/ng-parsel-pipe.json`, JSON.stringify(ngParselPipes));
     }
 
-    if (ngParselSpec) {
-      writeFileSync(`${config.out}/ng-parsel-spec.json`, JSON.stringify(ngParselSpec));
+    if (ngParselSpecs.length > 0) {
+      writeFileSync(`${config.out}/ng-parsel-spec.json`, JSON.stringify(ngParselSpecs));
     }
   }
 }
