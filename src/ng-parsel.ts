@@ -1,5 +1,5 @@
 import { tsquery } from '@phenomnomnominal/tsquery';
-import { readFileSync, writeFileSync } from 'fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import * as glob from 'glob';
 
 import { investigateType } from './investigator';
@@ -20,11 +20,11 @@ import { generateSpinner } from './utils/spinner.util';
 export function parse(configuration: NgParselConfig): void {
   const directoryGlob = `${configuration.src}/**/*.{ts,html,scss,css,less}`;
 
-  let ngParselComponent: NgParselComponent | undefined,
-    ngParselSpec: NgParselSpec | undefined,
-    ngParselPipe: NgParselPipe | undefined,
-    ngParselModule: NgParselModule | undefined,
-    ngParselDirective: NgParselDirective | undefined;
+  let ngParselComponents: NgParselComponent[] = [],
+    ngParselSpecs: NgParselSpec[] = [],
+    ngParselPipes: NgParselPipe[] = [],
+    ngParselModules: NgParselModule[] = [],
+    ngParselDirectives: NgParselDirective[] = [];
 
   const parseSpinner = generateSpinner('Parsing files');
   try {
@@ -36,28 +36,26 @@ export function parse(configuration: NgParselConfig): void {
       const componentType = investigateType(ast, filePath);
 
       if (configuration.parseComponents && componentType === NgParselBuildingBlockType.COMPONENT) {
-        const parseComponentSpinner = generateSpinner('Parsing component');
-        ngParselComponent = parseComponent(ast, filePath);
+        ngParselComponents.push(parseComponent(ast, filePath));
       }
 
       if (configuration.parseSpecs && componentType === NgParselBuildingBlockType.SPEC) {
-        ngParselSpec = parseSpec(ast, filePath);
+        ngParselSpecs.push(parseSpec(ast, filePath));
       }
 
       if (configuration.parseModules && componentType === NgParselBuildingBlockType.MODULE) {
-        ngParselModule = parseModule(ast);
+        ngParselModules.push(parseModule(ast));
       }
 
       if (configuration.parseDirectives && componentType === NgParselBuildingBlockType.DIRECTIVE) {
-        ngParselDirective = parseDirective(ast, filePath);
+        ngParselDirectives.push(parseDirective(ast, filePath));
       }
 
       if (configuration.parsePipes && componentType === NgParselBuildingBlockType.PIPE) {
-        ngParselPipe = parsePipe(ast, filePath);
+        ngParselPipes.push(parsePipe(ast, filePath));
       }
-
-      parseSpinner.succeed('Files successfully parsed');
     });
+    parseSpinner.succeed('Files successfully parsed');
   } catch (e) {
     parseSpinner.fail(`Failed to parse files: ${e}`);
   }
@@ -83,6 +81,10 @@ function writeOutputFiles(
   ngParselPipe: NgParselPipe | undefined
 ): void {
   if (config.singleFile) {
+    if (!existsSync(config.out as string)) {
+      mkdirSync(config.out as string, { recursive: true });
+    }
+
     writeFileSync(
       `${config.out}/ng-parsel.json`,
       JSON.stringify({

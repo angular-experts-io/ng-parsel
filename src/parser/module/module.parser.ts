@@ -53,9 +53,14 @@ function getDecoratorPropertyObject(ast: ts.SourceFile, identifier: string): str
       ast,
       `Decorator > CallExpression > ObjectLiteralExpression > PropertyAssignment:has(Identifier[escapedText="${identifier}"]) > ArrayLiteralExpression > ObjectLiteralExpression`
     ),
-  ].map((identifier: any) => normalizeDecoratorObject(identifier.getText()));
+  ].map((identifier: any) => identifier.getText());
 }
 
+// TODO - test this function - or just store it as string and remove the function
 function normalizeDecoratorObject(decoratorObject: string): any {
+  console.log('blubi');
+  console.log(decoratorObject);
+  console.log(`${decoratorObject.replace(/(['"])?([a-zA-Z0-9]+)(['"])?:/g, '"$2":').replace(/'/g, '"')}`);
+
   return JSON.parse(`${decoratorObject.replace(/(['"])?([a-zA-Z0-9]+)(['"])?:/g, '"$2":').replace(/'/g, '"')}`);
 }
