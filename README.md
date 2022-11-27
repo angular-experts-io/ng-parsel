@@ -2,7 +2,7 @@
 
 > Convert your Angular components to JSON
 
-![ng-parsel logo](/Users/kiwi/Documents/code/private/ng-parsel/docs/logo.svg)
+![ng-parsel logo](https://github.com/kreuzerk/ng-parsel/blob/main/docs/logo.svg)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
