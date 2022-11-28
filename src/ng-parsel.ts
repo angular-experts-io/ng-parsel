@@ -2,7 +2,7 @@ import { tsquery } from '@phenomnomnominal/tsquery';
 import { existsSync, mkdirSync, readFileSync } from 'fs';
 import * as glob from 'glob';
 
-import { investigateType } from './investigator';
+import { investigateType } from './investigator/investigator';
 import { parseSpec } from './parser/spec/spec.parser';
 import { parsePipe } from './parser/pipe/pipe.parser';
 import { parseModule } from './parser/module/module.parser';
