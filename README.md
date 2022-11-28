@@ -1,33 +1,28 @@
-# ng-parsel - WIP
+# ng-parsel
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 > Convert your Angular components to JSON
-
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors)
-
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ![ng-parsel logo](https://github.com/kreuzerk/ng-parsel/blob/main/docs/logo.svg)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-**Table of Contents** _generated with [DocToc](https://github.com/thlorenz/doctoc)_
-
-- [ng-parsel - WIP](#ng-parsel---wip)
-  - [What is this module about](#what-is-this-module-about)
-  - [Getting started](#getting-started)
-    - [Install](#install)
-    - [Init configuration](#init-configuration)
-    - [Parse codebase](#parse-codebase)
-      - [Parse script](#parse-script)
-      - [NPX](#npx)
-  - [Configuration](#configuration)
-  - [Component type](#component-type)
+- [What is this module about](#what-is-this-module-about)
+- [Getting started](#getting-started)
+  - [Install](#install)
+  - [Init configuration](#init-configuration)
+  - [Parse codebase](#parse-codebase)
+    - [Parse script](#parse-script)
+    - [NPX](#npx)
+- [Configuration](#configuration)
+- [Component type](#component-type)
+- [Contributors](#contributors)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 

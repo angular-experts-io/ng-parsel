@@ -1,0 +1,25 @@
+name: feature-branch
+on:
+  push:
+    branches:
+      - '*'
+      - '*/*'
+      - '**'
+      - '!main'
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Node & NPM
+        uses: actions/setup-node@v3
+      - name: Install node modules
+        run: npm ci
+      - name: Test & Coverage
+        run: npm run test:coverage
+      - name: report coverage
+        uses: coverallsapp/github-action@1.1.3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./coverage/lcov.info
