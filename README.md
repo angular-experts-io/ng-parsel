@@ -33,7 +33,7 @@ This module extracts the most important information of your Angular code base an
 Install ng-parsel as a dev dependency in your repository.
 
 ```bash
-npm i -D ng-parsel
+npm i -D @angular-experts/ng-parsel
 ```
 
 ### Init configuration
@@ -41,7 +41,7 @@ npm i -D ng-parsel
 Once installed you can use npx to create an initial configuration for ng-parsel.
 
 ```bash
-npx ng-parel init
+npx @angular-experts/ng-parsel init
 ```
 
 Running this command will create a `.parselrc.json` configuration file in the root of your repository. Check the initial configuration and adjust if needed. The configuration properties and their meaning are explained in the [configuration section](#configuration).
@@ -55,7 +55,7 @@ To parse the code base you can either create a parse script in your `package.jso
 Add the following script to your `package.json`.
 
 ```json
-"parse": "ng-parsel parse"
+"parse": "@angular-experts/ng-parsel parse"
 ```
 
 Once added, you can open up a terminal and run the following command.
@@ -69,7 +69,7 @@ npm run parse
 To parse your code base with npx you can run the follwoing command inisde a terminal of your choice.
 
 ```bash
-npx ng-parsel parse
+npx @angular-experts/ng-parsel parse
 ```
 
 ## Configuration

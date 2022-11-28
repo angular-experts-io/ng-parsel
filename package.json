@@ -13,9 +13,7 @@
     "test:watch": "jest --config=./jest.config.js --watch",
     "test:coverage": "jest --config=./jest.config.js --coverage"
   },
-  "bin": {
-    "ng-parsel": "./src/bin/ng-parsel.bin.js"
-  },
+  "bin": "./src/bin/ng-parsel.bin.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kreuzerk/mitchell.git"
