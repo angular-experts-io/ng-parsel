@@ -2,7 +2,9 @@
   "name": "@angular-experts/ng-parsel",
   "version": "1.0.0",
   "description": "Tool that transforms Angular codebase to JSON representation",
-  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "bump-version": "rjp package.json version $VERSION",
     "start": "ts-node src/index.ts",
