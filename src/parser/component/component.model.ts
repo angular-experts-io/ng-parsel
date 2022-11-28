@@ -10,4 +10,18 @@ export interface NgParselComponent extends NgParselOutput {
   implementation: string;
   template: string;
   styles: string | string[];
+
+  methodPublicImplicit: {
+    name: string;
+    args: {
+      name: string;
+      type: string;
+    };
+    returnType: string;
+  };
+  methodPublicExplicit: {
+    name: string;
+    args: string;
+    returnType: string;
+  };
 }

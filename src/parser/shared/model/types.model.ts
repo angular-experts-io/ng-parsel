@@ -4,6 +4,8 @@ export enum NgParselOutputType {
   DIRECTIVE = 'Directive',
   MODULE = 'Module',
   PIPE = 'Pipe',
+  // TODO handle this type
+  HARNESS = 'Harness',
   UNKNOWN = 'Unknown',
 }
 
