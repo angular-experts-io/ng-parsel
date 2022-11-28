@@ -2,6 +2,12 @@
 
 > Convert your Angular components to JSON
 
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
+[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors)
+
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 ![ng-parsel logo](https://github.com/kreuzerk/ng-parsel/blob/main/docs/logo.svg)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -99,3 +105,14 @@ Currently ng-parsel classifies each file into one of the following `NgParselOutp
 - Unknown
 
 Unknown files will not be parsed. If you need support for additional types please raise an issue or open a PR.
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
