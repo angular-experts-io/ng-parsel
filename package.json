@@ -1,5 +1,5 @@
 {
-  "name": "ng-parsel",
+  "name": "@angular-experts/ng-parsel",
   "version": "1.0.0",
   "description": "Tool that transforms Angular codebase to JSON representation",
   "main": "index.js",

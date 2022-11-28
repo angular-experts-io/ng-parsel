@@ -6,6 +6,8 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
+[![Coverage Status](https://coveralls.io/repos/github/angular-experts-io/ng-parsel/badge.svg?branch=main)](https://coveralls.io/github/angular-experts-io/ng-parsel?branch=main)
+
 > Convert your Angular components to JSON
 
 ![ng-parsel logo](https://github.com/kreuzerk/ng-parsel/blob/main/docs/logo.svg)
