@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/angular-experts-io/ng-parsel/compare/v1.0.0...v1.1.0) (2022-11-28)
+
+
+### Features
+
+* 🎸 (parser) add harness parser ([9639eb5](https://github.com/angular-experts-io/ng-parsel/commit/9639eb5b7b3cccb0e0ee6ea2505266ff015d573f))
+
 # 1.0.0 (2022-11-28)
 
 
