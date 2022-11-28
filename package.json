@@ -17,7 +17,7 @@
   "bin": "./src/bin/ng-parsel.bin.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kreuzerk/mitchell.git"
+    "url": "git+https://github.com/angular-experts-io/ng-parsel.git"
   },
   "keywords": [
     "Angular",
