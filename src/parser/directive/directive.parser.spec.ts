@@ -7,14 +7,16 @@ import { parseDirective } from './directive.parser';
 
 describe('DirectiveParser', () => {
   it('should extract all the properties from the directive', function () {
+    const implementation = `export class MyTestDirective {
+                @Input() foo: string;
+                @Output() bar = new EventEmitter();
+            }`;
+
     const ast = tsquery.ast(`
             @Directive({
                 selector: '[myTestDirective]'
             })
-            export class MyTestDirective {
-                @Input() foo: string;
-                @Output() bar = new EventEmitter();
-            }
+            ${implementation}
         `);
     const expectedOutput = {
       type: NgParselOutputType.DIRECTIVE,
@@ -36,17 +38,10 @@ describe('DirectiveParser', () => {
           field: '@Output() bar = new EventEmitter()',
         },
       ],
-      implementation: `export class MyTestDirective {
-                @Input() foo: string;
-                @Output() bar = new EventEmitter();
-            }`,
+      implementation,
     };
 
-    jest.spyOn(fs, 'readFileSync').mockReturnValue(`export class MyTestDirective {
-                @Input() foo: string;
-                @Output() bar = new EventEmitter();
-            }
-        `);
+    jest.spyOn(fs, 'readFileSync').mockReturnValue(implementation);
 
     expect(parseDirective(ast, 'foo.directive.ts')).toEqual(expectedOutput);
   });

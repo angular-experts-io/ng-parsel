@@ -13,6 +13,7 @@ import { NgParselComponent } from './component.model';
 
 export function parseComponent(ast: ts.SourceFile, componentFilePath: string): NgParselComponent {
   const componentDecorators = getComponentDecorators(ast);
+
   const template = componentDecorators.template
     ? componentDecorators.template
     : fetchFileContent(componentDecorators.templateUrl as string, componentFilePath);
