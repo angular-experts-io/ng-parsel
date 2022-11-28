@@ -1,4 +1,7 @@
 # ng-parsel - WIP
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 > Convert your Angular components to JSON
 
@@ -109,6 +112,20 @@ Unknown files will not be parsed. If you need support for additional types pleas
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://medium.com/@kevinkreuzer"><img src="https://avatars.githubusercontent.com/u/5468954?v=4?s=100" width="100px;" alt="Kevin Kreuzer"/><br /><sub><b>Kevin Kreuzer</b></sub></a><br /><a href="https://github.com/angular-experts-io/ng-parsel/commits?author=kreuzerk" title="Code">💻</a> <a href="https://github.com/angular-experts-io/ng-parsel/issues?q=author%3Akreuzerk" title="Bug reports">🐛</a> <a href="#content-kreuzerk" title="Content">🖋</a> <a href="https://github.com/angular-experts-io/ng-parsel/commits?author=kreuzerk" title="Documentation">📖</a> <a href="#design-kreuzerk" title="Design">🎨</a> <a href="#ideas-kreuzerk" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-kreuzerk" title="Maintenance">🚧</a> <a href="#platform-kreuzerk" title="Packaging/porting to new platform">📦</a> <a href="#research-kreuzerk" title="Research">🔬</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 
