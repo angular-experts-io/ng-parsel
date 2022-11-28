@@ -9,6 +9,10 @@ export function investigateType(ast: ts.SourceFile, filePath: string): NgParselO
     return NgParselOutputType.SPEC;
   }
 
+  if (filePathFragment[filePathFragment.length - 1].endsWith('harness.ts')) {
+    return NgParselOutputType.HARNESS;
+  }
+
   if (isComponent(ast)) {
     return NgParselOutputType.COMPONENT;
   }

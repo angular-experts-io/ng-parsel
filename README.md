@@ -90,10 +90,11 @@ ng-parsel offers the following configurations.
 | parsePipes      | true          | If set to `true` ng-parsel will parse Angular Pipes and include them in the output.                                                                                                                                                                                        |
 | parseDirectives | true          | If set to `true` ng-parsel will parse Angular Directives and include them in the output.                                                                                                                                                                                   |
 | parseModules    | true          | If set to true ng-parsel will parse Angular Modules and include them in the output.                                                                                                                                                                                        |
+| parseHarnesses  | true          | If set to true ng-parsel will parse Harness test files and include them in the output.                                                                                                                                                                                     |
 | parseSpecs      | true          | If set to true ng-parsel will parse Angular Directives and include them in the output. All files that end with `.spec.ts` are considered testing files                                                                                                                     |
 | singleFile      | true          | If set to to `true` the output will be written to a `ng-parsel.json` file in the output directory. If set to false, ng-parsel will generate multiple output files, one for each `componentType`. (Find out more on component types in the [next section](#component-type)) |
 
-## Component type
+## Types
 
 Currently ng-parsel classifies each file into one of the following `NgParselOutputType`.
 
@@ -101,10 +102,18 @@ Currently ng-parsel classifies each file into one of the following `NgParselOutp
 - Pipes
 - Modules
 - Directives
+- Harnesses
 - Specs
 - Unknown
 
 Unknown files will not be parsed. If you need support for additional types please raise an issue or open a PR.
+
+## Type detection
+
+Harnesses and Specs are detected by the filename. Everything that ends with `.spec` will be classified
+as a spec file. Everything that ends with `.harness` will be classified as a harness file.
+
+All other types are detected by their Angular decorators.
 
 ## Contributors
 
