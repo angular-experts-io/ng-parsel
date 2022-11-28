@@ -6,6 +6,10 @@ import { NgParselOutputType } from '../shared/model/types.model';
 import { parseComponent } from './component.parser';
 
 describe('ComponentParser', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   it('should parse a Angular Component to NgParselComponent', function () {
     const inlineTemplate = `<h1>Foo</h1>`;
     const styles = 'div { color: red; }';
@@ -62,7 +66,6 @@ describe('ComponentParser', () => {
         },
       ],
     };
-
     jest.spyOn(fs, 'readFileSync').mockReturnValue(implementation);
 
     expect(parseComponent(ast, 'foo.component.ts')).toEqual(expectedOutput);

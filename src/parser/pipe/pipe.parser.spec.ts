@@ -6,6 +6,10 @@ import { NgParselOutputType } from '../shared/model/types.model';
 import { parsePipe } from './pipe.parser';
 
 describe('PipeParser', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   it('should parse Angular pipes to NgParselPipes', () => {
     const implementation = `export class MyPipe implements PipeTransform {
             
