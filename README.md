@@ -23,7 +23,8 @@
     - [Parse script](#parse-script)
     - [NPX](#npx)
 - [Configuration](#configuration)
-- [Component type](#component-type)
+- [Types](#types)
+- [Type detection](#type-detection)
 - [Contributors](#contributors)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
