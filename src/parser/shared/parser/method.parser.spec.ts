@@ -1,5 +1,6 @@
 import { tsquery } from '@phenomnomnominal/tsquery';
-import { parseImplictPublicMethods } from './method.parser';
+
+import { parseExplicitPublicMethods } from './method.parser';
 
 describe('MethodParser', () => {
   it('should parse the implicit public methods', () => {
@@ -23,6 +24,6 @@ describe('MethodParser', () => {
       },
     ];
 
-    expect(parseImplictPublicMethods(ast)).toEqual(expectedOutput);
+    expect(parseExplicitPublicMethods(ast)).toEqual(expectedOutput);
   });
 });
