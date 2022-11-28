@@ -1,5 +1,6 @@
 import { NgParselOutput } from '../shared/model/types.model';
 import { NgParselFieldDecorator } from '../shared/model/decorator.model';
+import { NgParselMethod } from '../shared/model/method.model';
 
 export interface NgParselComponent extends NgParselOutput {
   className: string;
@@ -10,18 +11,5 @@ export interface NgParselComponent extends NgParselOutput {
   implementation: string;
   template: string;
   styles: string | string[];
-
-  methodPublicImplicit: {
-    name: string;
-    args: {
-      name: string;
-      type: string;
-    };
-    returnType: string;
-  };
-  methodPublicExplicit: {
-    name: string;
-    args: string;
-    returnType: string;
-  };
+  methodsPublicExplicit: NgParselMethod[];
 }
