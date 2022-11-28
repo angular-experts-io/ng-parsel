@@ -13,16 +13,19 @@ import { NgParselConfig } from './config/config.model';
 import { NgParselComponent } from './parser/component/component.model';
 import { NgParselModule } from './parser/module/module.model';
 import { NgParselDirective } from './parser/directive/directive.model';
+import { NgParselHarness } from './parser/harness/harness.model';
 import { NgParselSpec } from './parser/spec/spec.model';
 import { NgParselPipe } from './parser/pipe/pipe.model';
 import { generateSpinner } from './utils/spinner.util';
 import { writeJson } from './utils/write.util';
+import { parseHarnesses } from './parser/harness/harness.parser';
 
 export function parse(configuration: NgParselConfig): void {
   const directoryGlob = `${configuration.src}/**/*.{ts,html,scss,css,less}`;
 
   let ngParselComponents: NgParselComponent[] = [],
     ngParselSpecs: NgParselSpec[] = [],
+    ngParselHarnesses: NgParselHarness[] = [],
     ngParselPipes: NgParselPipe[] = [],
     ngParselModules: NgParselModule[] = [],
     ngParselDirectives: NgParselDirective[] = [];
@@ -42,6 +45,10 @@ export function parse(configuration: NgParselConfig): void {
 
       if (configuration.parseSpecs && componentType === NgParselOutputType.SPEC) {
         ngParselSpecs.push(parseSpec(ast, filePath));
+      }
+
+      if (configuration.parseSpecs && componentType === NgParselOutputType.HARNESS) {
+        ngParselHarnesses.push(parseHarnesses(ast));
       }
 
       if (configuration.parseModules && componentType === NgParselOutputType.MODULE) {
@@ -71,6 +78,7 @@ export function parse(configuration: NgParselConfig): void {
       ngParselDirectives,
       ngParselModules,
       ngParselSpecs,
+      ngParselHarnesses,
       ngParselPipes
     );
 
@@ -86,6 +94,7 @@ function writeOutputFiles(
   ngParselDirectives: NgParselDirective[],
   ngParselModules: NgParselModule[],
   ngParselSpecs: NgParselSpec[],
+  ngParselHarnesses: NgParselHarness[],
   ngParselPipes: NgParselPipe[]
 ): void {
   if (config.singleFile) {
@@ -98,6 +107,7 @@ function writeOutputFiles(
       ...ngParselModules,
       ...ngParselDirectives,
       ...ngParselSpecs,
+      ...ngParselHarnesses,
       ...ngParselPipes,
     ]);
   } else {
@@ -119,6 +129,10 @@ function writeOutputFiles(
 
     if (ngParselSpecs.length > 0) {
       writeJson(`${config.out}/ng-parsel-spec.json`, ngParselSpecs);
+    }
+
+    if (ngParselHarnesses.length > 0) {
+      writeJson(`${config.out}/ng-parsel-harnesses.json`, ngParselHarnesses);
     }
   }
 }

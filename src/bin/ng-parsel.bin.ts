@@ -22,6 +22,7 @@ program
   .option('--pipes', 'Parse Pipes', true)
   .option('--modules', 'Parse Modules', true)
   .option('--directives', 'Parse Directives', true)
+  .option('--harnesses', 'Parse Harnesses', true)
   .option('--specs', 'Parse Specs', true)
   .option('-o, --out <string>', 'Output directory for generated files')
   .option('--singleFile', 'Output in a single file')
