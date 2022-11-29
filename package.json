@@ -22,6 +22,7 @@
     "type": "git",
     "url": "git+https://github.com/angular-experts-io/ng-parsel.git"
   },
+  "main": "src/public-api.js",
   "keywords": [
     "Angular",
     "Typedoc",

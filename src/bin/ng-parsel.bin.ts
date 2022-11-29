@@ -7,7 +7,7 @@ import { mergeOptionalConfigWithDefaults } from '../config/config.helper';
 import { CONFIG_DEFAULT_VALUES } from '../config/config.model';
 import * as packageJson from '../../package.json';
 import { writeJson } from '../utils/write.util';
-import { parse } from '../ng-parsel';
+import { parse } from '../parser/parser';
 
 const program = new Command();
 const explorer = cosmiconfigSync('ng-parsel');
@@ -25,7 +25,7 @@ program
   .option('--specs', 'Parse Specs', true)
   .option('-o, --out <string>', 'Output directory for generated files')
   .option('--singleFile', 'Output in a single file')
-  .action((srcGlob, options) => {
+  .action((_srcGlob, options) => {
     const configObject = explorer.search();
 
     if (configObject) {

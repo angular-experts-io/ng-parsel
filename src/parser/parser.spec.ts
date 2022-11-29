@@ -1,15 +1,15 @@
 import glob from 'glob';
 import fs from 'fs';
 
-import * as investigateTypeHelper from './investigator/investigator';
-import * as componentParser from './parser/component/component.parser';
-import * as moduleParser from './parser/module/module.parser';
-import * as directiveParser from './parser/directive/directive.parser';
-import * as pipeParser from './parser/pipe/pipe.parser';
-import * as specParser from './parser/spec/spec.parser';
-import * as spinnerUtils from './utils/spinner.util';
-import { NgParselOutputType } from './parser/shared/model/types.model';
-import { parse } from './ng-parsel';
+import * as investigateTypeHelper from '../investigator/investigator';
+import * as componentParser from './component/component.parser';
+import * as moduleParser from './module/module.parser';
+import * as directiveParser from './directive/directive.parser';
+import * as pipeParser from './pipe/pipe.parser';
+import * as specParser from './spec/spec.parser';
+import * as spinnerUtils from '../utils/spinner.util';
+import { NgParselOutputType } from './shared/model/types.model';
+import { parse } from './parser';
 
 describe('NgParsel', () => {
   beforeEach(() => {
