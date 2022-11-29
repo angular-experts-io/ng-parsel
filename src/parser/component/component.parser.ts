@@ -31,6 +31,7 @@ export function parseComponent(ast: ts.SourceFile, componentFilePath: string): N
     selector: componentDecorators.selector as string,
     standalone: componentDecorators.standalone || false,
     template: template,
+    cva: isCva(ast),
     styles: styles,
     implementation: componentImplementation,
     inputs: inputsAndOutputs.inputs,
@@ -55,6 +56,13 @@ function getComponentDecorators(ast: ts.SourceFile): NgParselDecoratorProperties
     decorators[propertyName] = propertyAssignment.initializer.text;
     return decorators;
   }, {});
+}
+
+function isCva(ast: ts.SourceFile): boolean {
+  return (
+    tsquery(ast, 'HeritageClause > ExpressionWithTypeArguments > Identifier:has([escapedText="ControlValueAccessor"])')
+      .length > 0
+  );
 }
 
 function fetchFileContent(filePath: string, componentFilePath: string): string {

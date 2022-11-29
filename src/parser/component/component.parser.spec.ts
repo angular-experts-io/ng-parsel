@@ -37,6 +37,7 @@ describe('ComponentParser', () => {
       className: 'MyTestComponent',
       selector: 'my-test-comp',
       standalone: false,
+      cva: false,
       template: inlineTemplate,
       styles: [styles],
       inputs: [
@@ -98,5 +99,20 @@ describe('ComponentParser', () => {
     jest.spyOn(fs, 'readFileSync').mockReturnValue(styleSheetContent);
 
     expect(parseComponent(ast, 'foo.component.ts').styles).toEqual([styleSheetContent]);
+  });
+
+  it('should detect a control value accessor', function () {
+    const ast = tsquery.ast(`
+            @Component({
+                selector: 'my-test-comp',
+                template: '<h1>Foo</h1>',
+                styles: []
+            })
+            export class MyTestComponent implements ControlValueAccessor{}
+        `);
+
+    jest.spyOn(fs, 'readFileSync').mockReturnValue('');
+
+    expect(parseComponent(ast, 'foo.component.ts').cva).toBeTruthy();
   });
 });
