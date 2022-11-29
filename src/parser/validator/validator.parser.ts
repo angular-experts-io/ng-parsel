@@ -10,6 +10,6 @@ export function parseValidator(ast: ts.SourceFile): NgParselValidtor {
   return {
     className: parseClassName(ast),
     type: NgParselOutputType.VALIDATOR,
-    methods: parseExplicitPublicMethods(ast),
+    methodsPublicExplicit: parseExplicitPublicMethods(ast),
   };
 }

@@ -10,6 +10,6 @@ export function parseHarnesses(ast: ts.SourceFile): NgParselHarness {
   return {
     className: parseClassName(ast),
     type: NgParselOutputType.HARNESS,
-    methods: parseExplicitPublicMethods(ast),
+    methodsPublicExplicit: parseExplicitPublicMethods(ast),
   };
 }
