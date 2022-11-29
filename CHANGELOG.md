@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/angular-experts-io/ng-parsel/compare/v1.1.0...v1.1.1) (2022-11-29)
+
+
+### Bug Fixes
+
+* 🐛 (parse) adjust cosmiconfig module name ([21ff568](https://github.com/angular-experts-io/ng-parsel/commit/21ff568e8efb8d478e6d7fcd63c464dd10499afb))
+
 # [1.1.0](https://github.com/angular-experts-io/ng-parsel/compare/v1.0.0...v1.1.0) (2022-11-28)
 
 
