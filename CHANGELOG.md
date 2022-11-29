@@ -1,3 +1,20 @@
+# [2.0.0](https://github.com/angular-experts-io/ng-parsel/compare/v1.1.2...v2.0.0) (2022-11-29)
+
+
+### Features
+
+* 🎸 (className) add className to all types ([c890cf0](https://github.com/angular-experts-io/ng-parsel/commit/c890cf0654cfaad3eeaf068d71643a7d4a9dea31))
+* 🎸 (components) parse CVA ([44b9487](https://github.com/angular-experts-io/ng-parsel/commit/44b94872dbc9ed26d5da77bdb69b478f151965bb))
+* 🎸 (parse) add validator and change output file names ([d85ad2e](https://github.com/angular-experts-io/ng-parsel/commit/d85ad2eadbcb28c132a8a929a9eb11e81c7b9670))
+* 🎸 (parse) parse validators and change output format ([c6cb686](https://github.com/angular-experts-io/ng-parsel/commit/c6cb6868f8b02a879969400671c3020578fef78d))
+
+
+### BREAKING CHANGES
+
+* 🧨 Output files filename is now in plural - ng-parsel-component becomes
+ng-parsel-components and so on
+* 🧨 Output files are now plural
+
 ## [1.1.2](https://github.com/angular-experts-io/ng-parsel/compare/v1.1.1...v1.1.2) (2022-11-29)
 
 
