@@ -16,6 +16,7 @@ describe('HarnessParser', () => {
 
     const expectedOutput = {
       type: NgParselOutputType.HARNESS,
+      className: 'MyTestHarness',
       methods: [
         {
           name: 'foo',
