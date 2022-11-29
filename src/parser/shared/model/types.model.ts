@@ -9,5 +9,6 @@ export enum NgParselOutputType {
 }
 
 export interface NgParselOutput {
+  className: string;
   type: NgParselOutputType;
 }

@@ -44,7 +44,7 @@ export function parse(configuration: NgParselConfig): void {
       }
 
       if (configuration.parseSpecs && componentType === NgParselOutputType.SPEC) {
-        ngParselSpecs.push(parseSpec(filePath));
+        ngParselSpecs.push(parseSpec(ast, filePath));
       }
 
       if (configuration.parseSpecs && componentType === NgParselOutputType.HARNESS) {
