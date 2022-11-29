@@ -1,3 +1,11 @@
+## [1.1.2](https://github.com/angular-experts-io/ng-parsel/compare/v1.1.1...v1.1.2) (2022-11-29)
+
+
+### Bug Fixes
+
+* 🐛 (declarations) add missing declaration files ([6f75afb](https://github.com/angular-experts-io/ng-parsel/commit/6f75afb98f804876693110b088bdb43b1361119f))
+* 🐛 (declarations) add TypeScript declaration files ([7874183](https://github.com/angular-experts-io/ng-parsel/commit/7874183499cfa27e072f8cc742f24bac341e2739))
+
 ## [1.1.1](https://github.com/angular-experts-io/ng-parsel/compare/v1.1.0...v1.1.1) (2022-11-29)
 
 
