@@ -73,5 +73,15 @@
   },
   "lint-staged": {
     "*.{ts,js,html,css,scss,less,md}": "prettier --write"
+  },
+  "exports": {
+    ".": {
+      "typings": "./src/public-api.js",
+      "default": "./src/public-api.js"
+    },
+    "./types": {
+      "typings": "./types/index.js",
+      "default": "./types/index.js"
+    }
   }
 }

@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "target": "es2016",
-    "module": "commonjs",
+    "module": "esNext",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "declaration": true,
     "outDir": "dist",
@@ -28,7 +29,10 @@
     "allowUnusedLabels": true,
     "allowUnreachableCode": true,
     "skipDefaultLibCheck": true,
-    "skipLibCheck": true,
+    "skipLibCheck": true
   },
-  "include": ["src"]
+  "include": ["src",
+    "types"
+  ],
+  "exclude": ["*.spec.ts"]
 }
