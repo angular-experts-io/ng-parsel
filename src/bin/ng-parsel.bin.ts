@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 import chalk from 'chalk';
-import { writeFileSync } from 'fs';
 import { Command } from 'commander';
 import { cosmiconfigSync } from 'cosmiconfig';
 
@@ -11,7 +10,7 @@ import { writeJson } from '../utils/write.util';
 import { parse } from '../ng-parsel';
 
 const program = new Command();
-const explorer = cosmiconfigSync(packageJson.name);
+const explorer = cosmiconfigSync('ng-parsel');
 
 program.version(packageJson.version);
 
