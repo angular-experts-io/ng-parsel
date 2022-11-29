@@ -2,23 +2,23 @@ import { tsquery } from '@phenomnomnominal/tsquery';
 import { existsSync, mkdirSync, readFileSync } from 'fs';
 import * as glob from 'glob';
 
-import { investigateType } from './investigator/investigator';
-import { parseSpec } from './parser/spec/spec.parser';
-import { parsePipe } from './parser/pipe/pipe.parser';
-import { parseModule } from './parser/module/module.parser';
-import { parseDirective } from './parser/directive/directive.parser';
-import { parseComponent } from './parser/component/component.parser';
-import { NgParselOutputType } from './parser/shared/model/types.model';
-import { NgParselConfig } from './config/config.model';
-import { NgParselComponent } from './parser/component/component.model';
-import { NgParselModule } from './parser/module/module.model';
-import { NgParselDirective } from './parser/directive/directive.model';
-import { NgParselHarness } from './parser/harness/harness.model';
-import { NgParselSpec } from './parser/spec/spec.model';
-import { NgParselPipe } from './parser/pipe/pipe.model';
-import { generateSpinner } from './utils/spinner.util';
-import { writeJson } from './utils/write.util';
-import { parseHarnesses } from './parser/harness/harness.parser';
+import { investigateType } from '../investigator/investigator';
+import { parseSpec } from './spec/spec.parser';
+import { parsePipe } from './pipe/pipe.parser';
+import { parseModule } from './module/module.parser';
+import { parseDirective } from './directive/directive.parser';
+import { parseComponent } from './component/component.parser';
+import { NgParselOutputType } from './shared/model/types.model';
+import { NgParselConfig } from '../config/config.model';
+import { NgParselComponent } from './component/component.model';
+import { NgParselModule } from './module/module.model';
+import { NgParselDirective } from './directive/directive.model';
+import { NgParselHarness } from './harness/harness.model';
+import { NgParselSpec } from './spec/spec.model';
+import { NgParselPipe } from './pipe/pipe.model';
+import { generateSpinner } from '../utils/spinner.util';
+import { writeJson } from '../utils/write.util';
+import { parseHarnesses } from './harness/harness.parser';
 
 export function parse(configuration: NgParselConfig): void {
   const directoryGlob = `${configuration.src}/**/*.{ts,html,scss,css,less}`;
@@ -44,7 +44,7 @@ export function parse(configuration: NgParselConfig): void {
       }
 
       if (configuration.parseSpecs && componentType === NgParselOutputType.SPEC) {
-        ngParselSpecs.push(parseSpec(ast, filePath));
+        ngParselSpecs.push(parseSpec(filePath));
       }
 
       if (configuration.parseSpecs && componentType === NgParselOutputType.HARNESS) {

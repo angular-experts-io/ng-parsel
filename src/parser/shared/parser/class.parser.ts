@@ -2,5 +2,6 @@ import * as ts from 'typescript';
 import { tsquery } from '@phenomnomnominal/tsquery';
 
 export function parseClassName(ast: ts.SourceFile): string {
-  return [...tsquery(ast, 'ClassDeclaration > Identifier')][0].getText();
+  const classDeclarations = [...tsquery(ast, 'ClassDeclaration > Identifier')] as ts.Identifier[];
+  return classDeclarations[0]?.getText() as string;
 }

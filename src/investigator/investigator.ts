@@ -5,11 +5,11 @@ import { NgParselOutputType } from '../parser/shared/model/types.model';
 
 export function investigateType(ast: ts.SourceFile, filePath: string): NgParselOutputType {
   const filePathFragment = filePath.split('/');
-  if (filePathFragment[filePathFragment.length - 1].endsWith('spec.ts')) {
+  if (filePathFragment[filePathFragment.length - 1]?.endsWith('spec.ts')) {
     return NgParselOutputType.SPEC;
   }
 
-  if (filePathFragment[filePathFragment.length - 1].endsWith('harness.ts')) {
+  if (filePathFragment[filePathFragment.length - 1]?.endsWith('harness.ts')) {
     return NgParselOutputType.HARNESS;
   }
 
