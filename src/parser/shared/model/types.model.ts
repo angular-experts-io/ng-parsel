@@ -5,6 +5,7 @@ export enum NgParselOutputType {
   MODULE = 'Module',
   PIPE = 'Pipe',
   HARNESS = 'Harness',
+  VALIDATOR = 'Validator',
   UNKNOWN = 'Unknown',
 }
 

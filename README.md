@@ -25,13 +25,16 @@
 - [Configuration](#configuration)
 - [Types](#types)
 - [Type detection](#type-detection)
+- [Outputs](#outputs)
 - [Contributors](#contributors)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## What is this module about
 
-This module extracts the most important information of your Angular code base and converts it into JSON. Having the most important parts of your Angular code base as JSON can be very useful to perform custom analysis or to display APIs. Displaying APIs is especially useful for library authors that want to illustrate their library in a component showcase.
+This module extracts the most important information of your Angular code base and converts it into JSON. Having the most
+important parts of your Angular code base as JSON can be very useful to perform custom analysis or to display APIs.
+Displaying APIs is especially useful for library authors that want to illustrate their library in a component showcase.
 
 ## Getting started
 
@@ -51,11 +54,14 @@ Once installed you can use npx to create an initial configuration for ng-parsel.
 npx @angular-experts/ng-parsel init
 ```
 
-Running this command will create a `.parselrc.json` configuration file in the root of your repository. Check the initial configuration and adjust if needed. The configuration properties and their meaning are explained in the [configuration section](#configuration).
+Running this command will create a `.parselrc.json` configuration file in the root of your repository. Check the initial
+configuration and adjust if needed. The configuration properties and their meaning are explained in
+the [configuration section](#configuration).
 
 ### Parse codebase
 
-To parse the code base you can either create a parse script in your `package.json`which calls `ng-parsel` or you can use npx.
+To parse the code base you can either create a parse script in your `package.json`which calls `ng-parsel` or you can use
+npx.
 
 #### Parse script
 
@@ -91,8 +97,9 @@ ng-parsel offers the following configurations.
 | parsePipes      | true          | If set to `true` ng-parsel will parse Angular Pipes and include them in the output.                                                                                                                                                                                        |
 | parseDirectives | true          | If set to `true` ng-parsel will parse Angular Directives and include them in the output.                                                                                                                                                                                   |
 | parseModules    | true          | If set to true ng-parsel will parse Angular Modules and include them in the output.                                                                                                                                                                                        |
-| parseHarnesses  | true          | If set to true ng-parsel will parse Harness test files and include them in the output.                                                                                                                                                                                     |
-| parseSpecs      | true          | If set to true ng-parsel will parse Angular Directives and include them in the output. All files that end with `.spec.ts` are considered testing files                                                                                                                     |
+| parseHarnesses  | true          | If set to true ng-parsel will parse Harness test files (all files ending with `.harness.ts`) and include them in the output.                                                                                                                                               |
+| parseValidators | true          | If set to true ng-parsel will parse Validators (all files ending with `.validtor.ts`) and include them in the output.                                                                                                                                                      |
+| parseSpecs      | true          | If set to true ng-parsel will parse testing files (all files ending with `.spec.ts`) and include them in the output.                                                                                                                                                       |
 | singleFile      | true          | If set to to `true` the output will be written to a `ng-parsel.json` file in the output directory. If set to false, ng-parsel will generate multiple output files, one for each `componentType`. (Find out more on component types in the [next section](#component-type)) |
 
 ## Types
@@ -111,10 +118,16 @@ Unknown files will not be parsed. If you need support for additional types pleas
 
 ## Type detection
 
-Harnesses and Specs are detected by the filename. Everything that ends with `.spec` will be classified
-as a spec file. Everything that ends with `.harness` will be classified as a harness file.
+Harnesses, Specs and Validators are detected by the filename. Everything that ends with `.spec` will be classified
+as a spec file. Everything that ends with `.harness` will be classified as a harness file. Everything that ends with
+`.validator` will be classified as a validator file.
 
 All other types are detected by their Angular decorators.
+
+## Outputs
+
+Single outputs will be written to a `ng-parsel.json` file in the output directory.
+If `singleFile` is set to `false` ng-parsel will generate multiple output files, one for each `componentType`. (Find out more on [component types](#component-type))
 
 ## Contributors
 

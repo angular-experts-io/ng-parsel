@@ -19,12 +19,15 @@ import { NgParselPipe } from './pipe/pipe.model';
 import { generateSpinner } from '../utils/spinner.util';
 import { writeJson } from '../utils/write.util';
 import { parseHarnesses } from './harness/harness.parser';
+import { parseValidator } from './validator/validator.parser';
+import { NgParselValidtor } from './validator/validator.model';
 
 export function parse(configuration: NgParselConfig): void {
   const directoryGlob = `${configuration.src}/**/*.{ts,html,scss,css,less}`;
 
   let ngParselComponents: NgParselComponent[] = [],
     ngParselSpecs: NgParselSpec[] = [],
+    ngParselValidators: NgParselValidtor[] = [],
     ngParselHarnesses: NgParselHarness[] = [],
     ngParselPipes: NgParselPipe[] = [],
     ngParselModules: NgParselModule[] = [],
@@ -49,6 +52,10 @@ export function parse(configuration: NgParselConfig): void {
 
       if (configuration.parseSpecs && componentType === NgParselOutputType.HARNESS) {
         ngParselHarnesses.push(parseHarnesses(ast));
+      }
+
+      if (configuration.parseValidators && componentType === NgParselOutputType.VALIDATOR) {
+        ngParselValidators.push(parseValidator(ast));
       }
 
       if (configuration.parseModules && componentType === NgParselOutputType.MODULE) {
@@ -79,7 +86,8 @@ export function parse(configuration: NgParselConfig): void {
       ngParselModules,
       ngParselSpecs,
       ngParselHarnesses,
-      ngParselPipes
+      ngParselPipes,
+      ngParselValidators
     );
 
     writeOutputSpinner.succeed(`Files successfully written to ${configuration.out}`);
@@ -95,13 +103,14 @@ function writeOutputFiles(
   ngParselModules: NgParselModule[],
   ngParselSpecs: NgParselSpec[],
   ngParselHarnesses: NgParselHarness[],
-  ngParselPipes: NgParselPipe[]
+  ngParselPipes: NgParselPipe[],
+  ngParselValidators: NgParselValidtor[]
 ): void {
-  if (config.singleFile) {
-    if (!existsSync(config.out as string)) {
-      mkdirSync(config.out as string, { recursive: true });
-    }
+  if (!existsSync(config.out as string)) {
+    mkdirSync(config.out as string, { recursive: true });
+  }
 
+  if (config.singleFile) {
     writeJson(`${config.out}/ng-parsel.json`, [
       ...ngParselComponents,
       ...ngParselModules,
@@ -109,30 +118,35 @@ function writeOutputFiles(
       ...ngParselSpecs,
       ...ngParselHarnesses,
       ...ngParselPipes,
+      ...ngParselValidators,
     ]);
   } else {
     if (ngParselComponents.length > 0) {
-      writeJson(`${config.out}/ng-parsel-component.json`, ngParselComponents);
+      writeJson(`${config.out}/ng-parsel-components.json`, ngParselComponents);
     }
 
     if (ngParselModules.length > 0) {
-      writeJson(`${config.out}/ng-parsel-module.json`, ngParselModules);
+      writeJson(`${config.out}/ng-parsel-modules.json`, ngParselModules);
     }
 
     if (ngParselDirectives.length > 0) {
-      writeJson(`${config.out}/ng-parsel-directive.json`, ngParselDirectives);
+      writeJson(`${config.out}/ng-parsel-directives.json`, ngParselDirectives);
     }
 
     if (ngParselPipes.length > 0) {
-      writeJson(`${config.out}/ng-parsel-pipe.json`, ngParselPipes);
+      writeJson(`${config.out}/ng-parsel-pipes.json`, ngParselPipes);
     }
 
     if (ngParselSpecs.length > 0) {
-      writeJson(`${config.out}/ng-parsel-spec.json`, ngParselSpecs);
+      writeJson(`${config.out}/ng-parsel-specs.json`, ngParselSpecs);
     }
 
     if (ngParselHarnesses.length > 0) {
       writeJson(`${config.out}/ng-parsel-harnesses.json`, ngParselHarnesses);
+    }
+
+    if (ngParselValidators.length > 0) {
+      writeJson(`${config.out}/ng-parsel-validators.json`, ngParselValidators);
     }
   }
 }

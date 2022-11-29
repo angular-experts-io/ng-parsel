@@ -7,6 +7,7 @@ export const CONFIG_DEFAULT_VALUES: NgParselConfig = {
   parseHarnesses: true,
   parseModules: true,
   parseSpecs: true,
+  parseValidators: true,
   singleFile: true,
 };
 
@@ -19,5 +20,6 @@ export interface NgParselConfig {
   parseHarnesses?: boolean;
   parseModules?: boolean;
   parseSpecs?: boolean;
+  parseValidators?: boolean;
   singleFile?: boolean;
 }
