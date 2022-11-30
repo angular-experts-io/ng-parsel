@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/angular-experts-io/ng-parsel/compare/v3.0.0...v3.0.1) (2022-11-30)
+
+
+### Bug Fixes
+
+* 🐛 (parse) call harness parser ([414e680](https://github.com/angular-experts-io/ng-parsel/commit/414e68027ee1698337777772fac9ed77fc1aeaa5))
+
 # [3.0.0](https://github.com/angular-experts-io/ng-parsel/compare/v2.0.0...v3.0.0) (2022-11-30)
 
 
