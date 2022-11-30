@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import chalk from 'chalk';
 import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
 import { Command } from 'commander';
 import { dirname, resolve } from 'path';
 import { cosmiconfigSync } from 'cosmiconfig';
@@ -10,7 +11,6 @@ import { CONFIG_DEFAULT_VALUES } from '../config/config.model.js';
 import { writeJson } from '../utils/write.util.js';
 import { parse } from '../parser/parser.js';
 import { printWelcomeMessage } from '../utils/welcome.util.js';
-import { fileURLToPath } from 'url';
 
 const program = new Command();
 const explorer = cosmiconfigSync('ng-parsel');
