@@ -1,9 +1,9 @@
 import { tsquery } from '@phenomnomnominal/tsquery';
 import fs from 'fs';
 
-import { NgParselOutputType } from '../shared/model/types.model';
+import { NgParselOutputType } from '../shared/model/types.model.js';
 
-import { parsePipe } from './pipe.parser';
+import { parsePipe } from './pipe.parser.js';
 
 describe('PipeParser', () => {
   afterEach(() => {
@@ -11,6 +11,7 @@ describe('PipeParser', () => {
   });
 
   it('should parse Angular pipes to NgParselPipes', () => {
+    const filePath = 'my-test.pipe.ts';
     const implementation = `export class MyPipe implements PipeTransform {
             
                 transform(value: any, ...args: any[]): any {
@@ -27,6 +28,7 @@ describe('PipeParser', () => {
 
     const expectedPipe = {
       type: NgParselOutputType.PIPE,
+      filePath,
       className: 'MyPipe',
       name: 'myPipe',
       pure: true,
@@ -36,6 +38,6 @@ describe('PipeParser', () => {
 
     jest.spyOn(fs, 'readFileSync').mockReturnValue(implementation);
 
-    expect(parsePipe(ast, 'my-test.pipe.ts')).toEqual(expectedPipe);
+    expect(parsePipe(ast, filePath)).toEqual(expectedPipe);
   });
 });

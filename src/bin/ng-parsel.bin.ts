@@ -3,16 +3,17 @@ import chalk from 'chalk';
 import { Command } from 'commander';
 import { cosmiconfigSync } from 'cosmiconfig';
 
-import { mergeOptionalConfigWithDefaults } from '../config/config.helper';
-import { CONFIG_DEFAULT_VALUES } from '../config/config.model';
-import * as packageJson from '../../package.json';
-import { writeJson } from '../utils/write.util';
-import { parse } from '../parser/parser';
+import { mergeOptionalConfigWithDefaults } from '../config/config.helper.js';
+import { CONFIG_DEFAULT_VALUES } from '../config/config.model.js';
+import { writeJson } from '../utils/write.util.js';
+import { parse } from '../parser/parser.js';
+import * as packageJson from '../../package.json' assert { type: 'json' };
+import { printWelcomeMessage } from '../utils/welcome.util.js';
 
 const program = new Command();
 const explorer = cosmiconfigSync('ng-parsel');
 
-program.version(packageJson.version);
+program.version(packageJson.default.version);
 
 program
   .command('parse')
@@ -26,6 +27,8 @@ program
   .option('-o, --out <string>', 'Output directory for generated files')
   .option('--singleFile', 'Output in a single file')
   .action((_srcGlob, options) => {
+    printWelcomeMessage();
+
     const configObject = explorer.search();
 
     if (configObject) {
@@ -40,15 +43,19 @@ program
       console.log(chalk.cyan(`ng-parsel: no configuration found. CLI arguments will be used.`));
       parse(mergeOptionalConfigWithDefaults(options));
     }
+
+    console.log(chalk.magenta('===================================='));
   });
 
 program.command('init').action(() => {
+  printWelcomeMessage();
   console.log(chalk.cyan(`ng-parsel: creating configuration file`));
 
   // EXTRACT TO UTILS
   writeJson('.ng-parselrc.json', CONFIG_DEFAULT_VALUES);
 
   console.log(chalk.green(`ng-parsel: configuration successfully written to: .ng-parselrc`));
+  console.log(chalk.magenta('===================================='));
 });
 
 program.parse();

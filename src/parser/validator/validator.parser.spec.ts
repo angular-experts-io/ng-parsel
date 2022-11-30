@@ -1,10 +1,11 @@
 import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { parseValidator } from './validator.parser';
-import { NgParselOutputType } from '../shared/model/types.model';
+import { parseValidator } from './validator.parser.js';
+import { NgParselOutputType } from '../shared/model/types.model.js';
 
 describe('ValidatorParser', () => {
   it('should parse a validator file', function () {
+    const filePath = 'foo.validator.ts';
     const ast = tsquery.ast(`
             export class MyValidator {
                 public static atLeastOneSelected(control: FormControl): ValidationErrors | null => {}
@@ -13,7 +14,8 @@ describe('ValidatorParser', () => {
     const expectedOutput = {
       type: NgParselOutputType.VALIDATOR,
       className: 'MyValidator',
-      methods: [
+      filePath,
+      methodsPublicExplicit: [
         {
           name: 'atLeastOneSelected',
           args: [{ name: 'control', type: 'FormControl' }],
@@ -21,6 +23,6 @@ describe('ValidatorParser', () => {
         },
       ],
     };
-    expect(parseValidator(ast)).toEqual(expectedOutput);
+    expect(parseValidator(ast, filePath)).toEqual(expectedOutput);
   });
 });

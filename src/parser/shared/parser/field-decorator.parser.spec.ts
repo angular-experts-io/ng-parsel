@@ -1,6 +1,6 @@
 import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { parseInputsAndOutputs } from './field-decorator.parser';
+import { parseInputsAndOutputs } from './field-decorator.parser.js';
 
 describe('Field Decorator', function () {
   it('should parse input and output decorators', () => {

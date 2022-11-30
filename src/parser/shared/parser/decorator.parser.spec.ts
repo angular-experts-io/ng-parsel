@@ -1,6 +1,6 @@
 import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { getDecoratorProperties } from './decorator.parser';
+import { getDecoratorProperties } from './decorator.parser.js';
 
 describe('DecoratorParser', () => {
   it('should parse decorator properties', () => {

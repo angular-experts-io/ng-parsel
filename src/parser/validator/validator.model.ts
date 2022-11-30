@@ -1,6 +1,6 @@
-import { NgParselOutput } from '../shared/model/types.model';
-import { NgParselMethod } from '../shared/model/method.model';
+import { NgParselOutput } from '../shared/model/types.model.js';
+import { NgParselMethod } from '../shared/model/method.model.js';
 
 export interface NgParselValidtor extends NgParselOutput {
-  methods: NgParselMethod[];
+  methodsPublicExplicit: NgParselMethod[];
 }

@@ -1,16 +1,20 @@
 import * as ts from 'typescript';
 import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { NgParselOutputType } from '../parser/shared/model/types.model';
+import { NgParselOutputType } from '../parser/shared/model/types.model.js';
 
 export function investigateType(ast: ts.SourceFile, filePath: string): NgParselOutputType {
   const filePathFragment = filePath.split('/');
-  if (filePathFragment[filePathFragment.length - 1]?.endsWith('spec.ts')) {
+  if (filePathFragment[filePathFragment.length - 1]?.endsWith('.spec.ts')) {
     return NgParselOutputType.SPEC;
   }
 
-  if (filePathFragment[filePathFragment.length - 1]?.endsWith('harness.ts')) {
+  if (filePathFragment[filePathFragment.length - 1]?.endsWith('.harness.ts')) {
     return NgParselOutputType.HARNESS;
+  }
+
+  if (filePathFragment[filePathFragment.length - 1]?.endsWith('.validator.ts')) {
+    return NgParselOutputType.VALIDATOR;
   }
 
   if (isComponent(ast)) {

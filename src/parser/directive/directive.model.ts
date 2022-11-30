@@ -1,5 +1,5 @@
-import { NgParselOutput } from '../shared/model/types.model';
-import { NgParselFieldDecorator } from '../shared/model/decorator.model';
+import { NgParselOutput } from '../shared/model/types.model.js';
+import { NgParselFieldDecorator } from '../shared/model/decorator.model.js';
 
 export interface NgParselDirective extends NgParselOutput {
   className: string;

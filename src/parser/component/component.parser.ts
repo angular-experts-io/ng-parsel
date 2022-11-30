@@ -3,13 +3,13 @@ import { readFileSync } from 'fs';
 import * as ts from 'typescript';
 import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { parseClassName } from '../shared/parser/class.parser';
-import { NgParselOutputType } from '../shared/model/types.model';
-import { parseExplicitPublicMethods } from '../shared/parser/method.parser';
-import { NgParselDecoratorProperties } from '../shared/model/decorator.model';
-import { parseInputsAndOutputs } from '../shared/parser/field-decorator.parser';
+import { parseInputsAndOutputs } from '../shared/parser/field-decorator.parser.js';
+import { NgParselDecoratorProperties } from '../shared/model/decorator.model.js';
+import { parseExplicitPublicMethods } from '../shared/parser/method.parser.js';
+import { NgParselOutputType } from '../shared/model/types.model.js';
+import { parseClassName } from '../shared/parser/class.parser.js';
 
-import { NgParselComponent } from './component.model';
+import { NgParselComponent } from './component.model.js';
 
 export function parseComponent(ast: ts.SourceFile, componentFilePath: string): NgParselComponent {
   const componentDecorators = getComponentDecorators(ast);
@@ -28,6 +28,7 @@ export function parseComponent(ast: ts.SourceFile, componentFilePath: string): N
   return {
     type: NgParselOutputType.COMPONENT,
     className: parseClassName(ast),
+    filePath: componentFilePath,
     selector: componentDecorators.selector as string,
     standalone: componentDecorators.standalone || false,
     template: template,

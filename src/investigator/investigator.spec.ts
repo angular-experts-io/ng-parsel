@@ -1,7 +1,7 @@
 import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { investigateType } from './investigator';
-import { NgParselOutputType } from '../parser/shared/model/types.model';
+import { investigateType } from './investigator.js';
+import { NgParselOutputType } from '../parser/shared/model/types.model.js';
 
 describe('Investigator', () => {
   it('should detect Angular components', () => {

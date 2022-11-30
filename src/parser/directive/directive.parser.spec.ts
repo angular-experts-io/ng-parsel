@@ -1,9 +1,9 @@
 import fs from 'fs';
 import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { NgParselOutputType } from '../shared/model/types.model';
+import { NgParselOutputType } from '../shared/model/types.model.js';
 
-import { parseDirective } from './directive.parser';
+import { parseDirective } from './directive.parser.js';
 
 describe('DirectiveParser', () => {
   afterEach(() => {
@@ -11,6 +11,7 @@ describe('DirectiveParser', () => {
   });
 
   it('should extract all the properties from the directive', function () {
+    const filePath = 'foo.directive.ts';
     const implementation = `export class MyTestDirective {
                 @Input() foo: string;
                 @Output() bar = new EventEmitter();
@@ -25,6 +26,7 @@ describe('DirectiveParser', () => {
     const expectedOutput = {
       type: NgParselOutputType.DIRECTIVE,
       className: 'MyTestDirective',
+      filePath,
       selector: '[myTestDirective]',
       standalone: false,
       inputs: [
@@ -49,6 +51,6 @@ describe('DirectiveParser', () => {
     };
     jest.spyOn(fs, 'readFileSync').mockReturnValue(implementation);
 
-    expect(parseDirective(ast, 'foo.directive.ts')).toEqual(expectedOutput);
+    expect(parseDirective(ast, filePath)).toEqual(expectedOutput);
   });
 });
