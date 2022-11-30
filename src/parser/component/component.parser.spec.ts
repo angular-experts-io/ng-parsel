@@ -11,6 +11,7 @@ describe('ComponentParser', () => {
   it('should parse a Angular Component to NgParselComponent', function () {
     const inlineTemplate = `<h1>Foo</h1>`;
     const styles = 'div { color: red; }';
+    const filePath = 'foo.component.ts';
 
     const implementation = `export class MyTestComponent {
                 @Input() foo: string;
@@ -32,6 +33,7 @@ describe('ComponentParser', () => {
         `);
     const expectedOutput = {
       type: NgParselOutputType.COMPONENT,
+      filePath,
       className: 'MyTestComponent',
       selector: 'my-test-comp',
       standalone: false,
@@ -67,7 +69,7 @@ describe('ComponentParser', () => {
     };
     jest.spyOn(fs, 'readFileSync').mockReturnValue(implementation);
 
-    expect(parseComponent(ast, 'foo.component.ts')).toEqual(expectedOutput);
+    expect(parseComponent(ast, filePath)).toEqual(expectedOutput);
   });
 
   it('should fetch the content of external templates', function () {

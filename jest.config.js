@@ -1,5 +1,6 @@
-module.exports = {
+export default {
   roots: ['<rootDir>/src'],
+  resolver: 'jest-ts-webcompat-resolver',
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },

@@ -6,6 +6,7 @@ import { parseHarnesses } from './harness.parser.js';
 
 describe('HarnessParser', () => {
   it('should parse the methods of a harness file', () => {
+    const filePath = 'my-test.harness.ts';
     const ast = tsquery.ast(`
             export class MyTestHarness {
             
@@ -18,8 +19,9 @@ describe('HarnessParser', () => {
 
     const expectedOutput = {
       type: NgParselOutputType.HARNESS,
+      filePath,
       className: 'MyTestHarness',
-      methods: [
+      methodsPublicExplicit: [
         {
           name: 'foo',
           args: [{ name: 'test', type: 'string' }],
@@ -32,6 +34,6 @@ describe('HarnessParser', () => {
         },
       ],
     };
-    expect(parseHarnesses(ast, 'my-test.harness.ts')).toEqual(expectedOutput);
+    expect(parseHarnesses(ast, filePath)).toEqual(expectedOutput);
   });
 });
