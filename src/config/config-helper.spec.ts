@@ -1,5 +1,5 @@
-import { mergeOptionalConfigWithDefaults } from './config.helper';
-import { CONFIG_DEFAULT_VALUES } from './config.model';
+import { mergeOptionalConfigWithDefaults } from './config.helper.js';
+import { CONFIG_DEFAULT_VALUES } from './config.model.js';
 
 describe('ConfigHelper', () => {
   it('should return the default config if no config was provided', function () {

@@ -1,12 +1,12 @@
 import { readFileSync } from 'fs';
 import * as ts from 'typescript';
 
-import { parseClassName } from '../shared/parser/class.parser';
-import { NgParselOutputType } from '../shared/model/types.model';
-import { getDecoratorProperties } from '../shared/parser/decorator.parser';
-import { parseInputsAndOutputs } from '../shared/parser/field-decorator.parser';
+import { parseClassName } from '../shared/parser/class.parser.js';
+import { NgParselOutputType } from '../shared/model/types.model.js';
+import { getDecoratorProperties } from '../shared/parser/decorator.parser.js';
+import { parseInputsAndOutputs } from '../shared/parser/field-decorator.parser.js';
 
-import { NgParselDirective } from './directive.model';
+import { NgParselDirective } from './directive.model.js';
 
 export function parseDirective(ast: ts.SourceFile, componentFilePath: string): NgParselDirective {
   const directiveDecorators = getDecoratorProperties(ast);

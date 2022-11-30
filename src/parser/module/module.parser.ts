@@ -1,10 +1,10 @@
 import * as ts from 'typescript';
 import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { parseClassName } from '../shared/parser/class.parser';
-import { NgParselOutputType } from '../shared/model/types.model';
+import { NgParselOutputType } from '../shared/model/types.model.js';
+import { parseClassName } from '../shared/parser/class.parser.js';
 
-import { NgParselModule } from './module.model';
+import { NgParselModule } from './module.model.js';
 
 export function parseModule(ast: ts.SourceFile): NgParselModule {
   return {

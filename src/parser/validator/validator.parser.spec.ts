@@ -1,7 +1,7 @@
 import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { parseValidator } from './validator.parser';
-import { NgParselOutputType } from '../shared/model/types.model';
+import { parseValidator } from './validator.parser.js';
+import { NgParselOutputType } from '../shared/model/types.model.js';
 
 describe('ValidatorParser', () => {
   it('should parse a validator file', function () {

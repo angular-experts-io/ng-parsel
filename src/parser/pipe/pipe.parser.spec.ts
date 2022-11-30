@@ -1,9 +1,9 @@
 import { tsquery } from '@phenomnomnominal/tsquery';
 import fs from 'fs';
 
-import { NgParselOutputType } from '../shared/model/types.model';
+import { NgParselOutputType } from '../shared/model/types.model.js';
 
-import { parsePipe } from './pipe.parser';
+import { parsePipe } from './pipe.parser.js';
 
 describe('PipeParser', () => {
   afterEach(() => {

@@ -1,9 +1,7 @@
 import fs from 'fs';
 import { tsquery } from '@phenomnomnominal/tsquery';
-
-import { NgParselOutputType } from '../shared/model/types.model';
-
-import { parseComponent } from './component.parser';
+import { NgParselOutputType } from '../shared/model/types.model.js';
+import { parseComponent } from './component.parser.js';
 
 describe('ComponentParser', () => {
   afterEach(() => {

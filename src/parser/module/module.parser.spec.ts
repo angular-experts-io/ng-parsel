@@ -1,8 +1,8 @@
 import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { NgParselOutputType } from '../shared/model/types.model';
+import { NgParselOutputType } from '../shared/model/types.model.js';
 
-import { parseModule } from './module.parser';
+import { parseModule } from './module.parser.js';
 
 describe('ModuleParser', () => {
   it('should parse Angular modules to NgParselModules', () => {

@@ -1,6 +1,6 @@
 import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { parseClassName } from './class.parser';
+import { parseClassName } from './class.parser.js';
 
 describe('ClassParser', () => {
   it('should extract the class name', () => {

@@ -1,7 +1,7 @@
 import * as ts from 'typescript';
 import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { NgParselFieldDecorator } from '../model/decorator.model';
+import { NgParselFieldDecorator } from '../model/decorator.model.js';
 
 export function parseInputsAndOutputs(ast: ts.SourceFile): {
   inputs: NgParselFieldDecorator[];

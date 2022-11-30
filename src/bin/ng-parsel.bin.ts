@@ -3,16 +3,16 @@ import chalk from 'chalk';
 import { Command } from 'commander';
 import { cosmiconfigSync } from 'cosmiconfig';
 
-import { mergeOptionalConfigWithDefaults } from '../config/config.helper';
-import { CONFIG_DEFAULT_VALUES } from '../config/config.model';
-import * as packageJson from '../../package.json';
-import { writeJson } from '../utils/write.util';
-import { parse } from '../parser/parser';
+import { mergeOptionalConfigWithDefaults } from '../config/config.helper.js';
+import { CONFIG_DEFAULT_VALUES } from '../config/config.model.js';
+import { writeJson } from '../utils/write.util.js';
+import { parse } from '../parser/parser.js';
+import * as packageJson from '../../package.json' assert { type: 'json' };
 
 const program = new Command();
 const explorer = cosmiconfigSync('ng-parsel');
 
-program.version(packageJson.version);
+program.version(packageJson.default.version);
 
 program
   .command('parse')

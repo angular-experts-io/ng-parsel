@@ -1,8 +1,8 @@
 import * as ts from 'typescript';
 import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { NgParselMethod } from '../model/method.model';
-import { NgParselArgs } from '../model/args.model';
+import { NgParselArgs } from '../model/args.model.js';
+import { NgParselMethod } from '../model/method.model.js';
 
 export function parseExplicitPublicMethods(ast: ts.SourceFile): NgParselMethod[] {
   const explicitMethods = tsquery(ast, 'MethodDeclaration:has(PublicKeyword)');

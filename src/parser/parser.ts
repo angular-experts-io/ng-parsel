@@ -1,26 +1,26 @@
 import { tsquery } from '@phenomnomnominal/tsquery';
 import { existsSync, mkdirSync, readFileSync } from 'fs';
-import * as glob from 'glob';
+import glob from 'glob';
 
-import { investigateType } from '../investigator/investigator';
-import { parseSpec } from './spec/spec.parser';
-import { parsePipe } from './pipe/pipe.parser';
-import { parseModule } from './module/module.parser';
-import { parseDirective } from './directive/directive.parser';
-import { parseComponent } from './component/component.parser';
-import { NgParselOutputType } from './shared/model/types.model';
-import { NgParselConfig } from '../config/config.model';
-import { NgParselComponent } from './component/component.model';
-import { NgParselModule } from './module/module.model';
-import { NgParselDirective } from './directive/directive.model';
-import { NgParselHarness } from './harness/harness.model';
-import { NgParselSpec } from './spec/spec.model';
-import { NgParselPipe } from './pipe/pipe.model';
-import { generateSpinner } from '../utils/spinner.util';
-import { writeJson } from '../utils/write.util';
-import { parseHarnesses } from './harness/harness.parser';
-import { parseValidator } from './validator/validator.parser';
-import { NgParselValidtor } from './validator/validator.model';
+import { investigateType } from '../investigator/investigator.js';
+import { parseSpec } from './spec/spec.parser.js';
+import { parsePipe } from './pipe/pipe.parser.js';
+import { parseModule } from './module/module.parser.js';
+import { parseDirective } from './directive/directive.parser.js';
+import { parseComponent } from './component/component.parser.js';
+import { NgParselOutputType } from './shared/model/types.model.js';
+import { NgParselConfig } from '../config/config.model.js';
+import { NgParselComponent } from './component/component.model.js';
+import { NgParselModule } from './module/module.model.js';
+import { NgParselDirective } from './directive/directive.model.js';
+import { NgParselHarness } from './harness/harness.model.js';
+import { NgParselSpec } from './spec/spec.model.js';
+import { NgParselPipe } from './pipe/pipe.model.js';
+import { generateSpinner } from '../utils/spinner.util.js';
+import { writeJson } from '../utils/write.util.js';
+import { parseHarnesses } from './harness/harness.parser.js';
+import { parseValidator } from './validator/validator.parser.js';
+import { NgParselValidtor } from './validator/validator.model.js';
 
 export function parse(configuration: NgParselConfig): void {
   const directoryGlob = `${configuration.src}/**/*.{ts,html,scss,css,less}`;

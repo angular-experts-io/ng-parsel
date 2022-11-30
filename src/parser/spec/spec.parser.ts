@@ -1,10 +1,10 @@
 import { readFileSync } from 'fs';
 import * as ts from 'typescript';
 
-import { NgParselOutputType } from '../shared/model/types.model';
-import { parseClassName } from '../shared/parser/class.parser';
+import { parseClassName } from '../shared/parser/class.parser.js';
+import { NgParselOutputType } from '../shared/model/types.model.js';
 
-import { NgParselSpec } from './spec.model';
+import { NgParselSpec } from './spec.model.js';
 
 export function parseSpec(ast: ts.SourceFile, specFilePath: string): NgParselSpec {
   return {

@@ -1,6 +1,6 @@
 import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { parseExplicitPublicMethods } from './method.parser';
+import { parseExplicitPublicMethods } from './method.parser.js';
 
 describe('MethodParser', () => {
   it('should parse the implicit public methods', () => {

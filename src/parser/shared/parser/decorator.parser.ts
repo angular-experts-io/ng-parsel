@@ -1,7 +1,7 @@
 import * as ts from 'typescript';
 import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { NgParselDecoratorProperties } from '../model/decorator.model';
+import { NgParselDecoratorProperties } from '../model/decorator.model.js';
 
 export function getDecoratorProperties(ast: ts.SourceFile): NgParselDecoratorProperties {
   const decoratorQuery = 'Decorator > CallExpression > ObjectLiteralExpression > PropertyAssignment';

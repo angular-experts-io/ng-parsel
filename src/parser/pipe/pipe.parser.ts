@@ -1,11 +1,11 @@
 import * as ts from 'typescript';
-
-import { getDecoratorProperties } from '../shared/parser/decorator.parser';
-import { NgParselOutputType } from '../shared/model/types.model';
-import { parseClassName } from '../shared/parser/class.parser';
-
-import { NgParselPipe } from './pipe.model';
 import { readFileSync } from 'fs';
+
+import { parseClassName } from '../shared/parser/class.parser.js';
+import { NgParselOutputType } from '../shared/model/types.model.js';
+import { getDecoratorProperties } from '../shared/parser/decorator.parser.js';
+
+import { NgParselPipe } from './pipe.model.js';
 
 export function parsePipe(ast: ts.SourceFile, componentFilePath: string): NgParselPipe {
   const pipeDecorators = getDecoratorProperties(ast);

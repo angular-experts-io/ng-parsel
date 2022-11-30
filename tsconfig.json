@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "module": "esNext",
-    "moduleResolution": "Node",
+    "lib": ["ESNext"],
+    "target": "ES2021",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     "declaration": true,
     "outDir": "dist",
@@ -34,5 +35,5 @@
   "include": ["src",
     "types"
   ],
-  "exclude": ["*.spec.ts"]
+  "exclude": ["*.spec.ts", "node_modules"]
 }

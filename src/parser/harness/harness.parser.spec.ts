@@ -1,6 +1,8 @@
 import { tsquery } from '@phenomnomnominal/tsquery';
-import { parseHarnesses } from './harness.parser';
-import { NgParselOutputType } from '../shared/model/types.model';
+
+import { NgParselOutputType } from '../shared/model/types.model.js';
+
+import { parseHarnesses } from './harness.parser.js';
 
 describe('HarnessParser', () => {
   it('should parse the methods of a harness file', () => {

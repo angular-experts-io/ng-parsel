@@ -1,9 +1,9 @@
 import fs from 'fs';
 import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { NgParselOutputType } from '../shared/model/types.model';
+import { NgParselOutputType } from '../shared/model/types.model.js';
 
-import { parseDirective } from './directive.parser';
+import { parseDirective } from './directive.parser.js';
 
 describe('DirectiveParser', () => {
   afterEach(() => {
