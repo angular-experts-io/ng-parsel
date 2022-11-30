@@ -33,9 +33,9 @@
   "author": "Kevin Kreuzer",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kreuzerk/mitchell/issues"
+    "url": "https://github.com/angular-experts-io/ng-parsel/issues"
   },
-  "homepage": "https://github.com/kreuzerk/mitchell#readme",
+  "homepage": "https://github.com/angular-experts-io/ng-parsel#readme",
   "dependencies": {
     "@phenomnomnominal/tsquery": "^5.0.0",
     "chalk": "^5.1.2",
