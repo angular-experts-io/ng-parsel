@@ -32,8 +32,13 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
-  "include": ["src",
-    "types"
+  "include": [
+    "src",
+    "types",
+    "./package.json"
   ],
-  "exclude": ["*.spec.ts", "node_modules"]
+  "exclude": [
+    "*.spec.ts",
+    "node_modules"
+  ]
 }

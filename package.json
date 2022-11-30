@@ -8,7 +8,8 @@
   },
   "scripts": {
     "bump-version": "rjp package.json version $VERSION",
-    "start": "ts-node src/index.ts",
+    "start:version": "node --loader ts-node/esm src/bin/ng-parsel.bin.ts --version",
+    "start:help": "node --loader ts-node/esm src/bin/ng-parsel.bin.ts --help",
     "build": "tsc && npm run copy:readme",
     "copy:readme": "copyfiles ./README.md ./dist",
     "lint": "eslint src/**/*.ts",
