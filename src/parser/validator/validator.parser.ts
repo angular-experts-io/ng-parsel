@@ -6,9 +6,10 @@ import { parseExplicitPublicMethods } from '../shared/parser/method.parser.js';
 
 import { NgParselValidtor } from './validator.model.js';
 
-export function parseValidator(ast: ts.SourceFile): NgParselValidtor {
+export function parseValidator(ast: ts.SourceFile, validatorFilePath: string): NgParselValidtor {
   return {
     className: parseClassName(ast),
+    filePath: validatorFilePath,
     type: NgParselOutputType.VALIDATOR,
     methodsPublicExplicit: parseExplicitPublicMethods(ast),
   };

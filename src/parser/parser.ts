@@ -3,6 +3,9 @@ import { existsSync, mkdirSync, readFileSync } from 'fs';
 import glob from 'glob';
 
 import { investigateType } from '../investigator/investigator.js';
+import { generateSpinner } from '../utils/spinner.util.js';
+import { writeJson } from '../utils/write.util.js';
+
 import { parseSpec } from './spec/spec.parser.js';
 import { parsePipe } from './pipe/pipe.parser.js';
 import { parseModule } from './module/module.parser.js';
@@ -16,8 +19,6 @@ import { NgParselDirective } from './directive/directive.model.js';
 import { NgParselHarness } from './harness/harness.model.js';
 import { NgParselSpec } from './spec/spec.model.js';
 import { NgParselPipe } from './pipe/pipe.model.js';
-import { generateSpinner } from '../utils/spinner.util.js';
-import { writeJson } from '../utils/write.util.js';
 import { parseHarnesses } from './harness/harness.parser.js';
 import { parseValidator } from './validator/validator.parser.js';
 import { NgParselValidtor } from './validator/validator.model.js';
@@ -51,15 +52,15 @@ export function parse(configuration: NgParselConfig): void {
       }
 
       if (configuration.parseSpecs && componentType === NgParselOutputType.HARNESS) {
-        ngParselHarnesses.push(parseHarnesses(ast));
+        ngParselHarnesses.push(parseHarnesses(ast, filePath));
       }
 
       if (configuration.parseValidators && componentType === NgParselOutputType.VALIDATOR) {
-        ngParselValidators.push(parseValidator(ast));
+        ngParselValidators.push(parseValidator(ast, filePath));
       }
 
       if (configuration.parseModules && componentType === NgParselOutputType.MODULE) {
-        ngParselModules.push(parseModule(ast));
+        ngParselModules.push(parseModule(ast, filePath));
       }
 
       if (configuration.parseDirectives && componentType === NgParselOutputType.DIRECTIVE) {

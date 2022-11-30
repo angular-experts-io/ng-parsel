@@ -25,6 +25,6 @@ describe('ModuleParser', () => {
       bootstrap: [],
     };
 
-    expect(parseModule(ast)).toEqual(expectedOutput);
+    expect(parseModule(ast, 'my-module.ts')).toEqual(expectedOutput);
   });
 });

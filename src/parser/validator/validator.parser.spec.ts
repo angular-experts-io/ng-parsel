@@ -21,6 +21,6 @@ describe('ValidatorParser', () => {
         },
       ],
     };
-    expect(parseValidator(ast)).toEqual(expectedOutput);
+    expect(parseValidator(ast, 'my-validator.ts')).toEqual(expectedOutput);
   });
 });

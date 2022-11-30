@@ -28,6 +28,7 @@ export function parseComponent(ast: ts.SourceFile, componentFilePath: string): N
   return {
     type: NgParselOutputType.COMPONENT,
     className: parseClassName(ast),
+    filePath: componentFilePath,
     selector: componentDecorators.selector as string,
     standalone: componentDecorators.standalone || false,
     template: template,

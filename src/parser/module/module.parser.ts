@@ -6,10 +6,11 @@ import { parseClassName } from '../shared/parser/class.parser.js';
 
 import { NgParselModule } from './module.model.js';
 
-export function parseModule(ast: ts.SourceFile): NgParselModule {
+export function parseModule(ast: ts.SourceFile, moduleFilePath: string): NgParselModule {
   return {
-    className: parseClassName(ast),
     type: NgParselOutputType.MODULE,
+    className: parseClassName(ast),
+    filePath: moduleFilePath,
     imports: getImports(ast),
     exports: getExports(ast),
     declarations: getDeclarations(ast),

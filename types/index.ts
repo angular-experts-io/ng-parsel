@@ -1,9 +1,9 @@
+export { NgParselOutputType } from '../src/parser/shared/model/types.model.js';
 export * from '../src/parser/shared/model/decorator.model.js';
 export * from '../src/parser/shared/model/method.model.js';
 export * from '../src/parser/validator/validator.model.js';
 export * from '../src/parser/component/component.model.js';
 export * from '../src/parser/directive/directive.model.js';
-export * from '../src/parser/shared/model/types.model.js';
 export * from '../src/parser/harness/harness.model.js';
 export * from '../src/parser/module/module.model.js';
 export * from '../src/parser/spec/spec.model.js';

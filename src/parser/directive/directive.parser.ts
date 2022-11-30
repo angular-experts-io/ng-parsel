@@ -8,16 +8,17 @@ import { parseInputsAndOutputs } from '../shared/parser/field-decorator.parser.j
 
 import { NgParselDirective } from './directive.model.js';
 
-export function parseDirective(ast: ts.SourceFile, componentFilePath: string): NgParselDirective {
+export function parseDirective(ast: ts.SourceFile, directiveFilePath: string): NgParselDirective {
   const directiveDecorators = getDecoratorProperties(ast);
 
-  const directiveImplementation = readFileSync(componentFilePath, 'utf8').toString();
+  const directiveImplementation = readFileSync(directiveFilePath, 'utf8').toString();
 
   const inputsAndOutputs = parseInputsAndOutputs(ast);
 
   return {
     type: NgParselOutputType.DIRECTIVE,
     className: parseClassName(ast),
+    filePath: directiveFilePath,
     selector: directiveDecorators.selector as string,
     standalone: directiveDecorators.standalone || false,
     implementation: directiveImplementation,

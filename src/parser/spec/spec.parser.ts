@@ -10,6 +10,7 @@ export function parseSpec(ast: ts.SourceFile, specFilePath: string): NgParselSpe
   return {
     className: parseClassName(ast),
     type: NgParselOutputType.SPEC,
+    filePath: specFilePath,
     implementation: readFileSync(specFilePath, 'utf8').toString(),
   };
 }

@@ -32,6 +32,6 @@ describe('HarnessParser', () => {
         },
       ],
     };
-    expect(parseHarnesses(ast)).toEqual(expectedOutput);
+    expect(parseHarnesses(ast, 'my-test.harness.ts')).toEqual(expectedOutput);
   });
 });
