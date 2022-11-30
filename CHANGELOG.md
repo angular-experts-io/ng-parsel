@@ -1,3 +1,10 @@
+## [3.0.2](https://github.com/angular-experts-io/ng-parsel/compare/v3.0.1...v3.0.2) (2022-11-30)
+
+
+### Bug Fixes
+
+* 🤖 (node) support node 14 ([0d2c38e](https://github.com/angular-experts-io/ng-parsel/commit/0d2c38eec66f811aea63544155d98e9d026f2c84))
+
 ## [3.0.1](https://github.com/angular-experts-io/ng-parsel/compare/v3.0.0...v3.0.1) (2022-11-30)
 
 
