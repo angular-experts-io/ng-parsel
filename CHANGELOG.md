@@ -1,3 +1,27 @@
+# [3.0.0](https://github.com/angular-experts-io/ng-parsel/compare/v2.0.0...v3.0.0) (2022-11-30)
+
+
+### Bug Fixes
+
+* 🐛 (investigator) detect validators ([eff6660](https://github.com/angular-experts-io/ng-parsel/commit/eff66605f260011fc1f82dc168036b01f2276980))
+* 🐛 (parsel) adjust package.json URLs ([7847c10](https://github.com/angular-experts-io/ng-parsel/commit/7847c10a5ac66b959abadcdb44519f51e87378a7))
+* 🐛 (parser) validtor and harness parser output properties ([38c0445](https://github.com/angular-experts-io/ng-parsel/commit/38c04453f2cfadf9e7ca83c53e7347cec448b2ce))
+
+
+### Features
+
+* 🎸 (esm) convert library to ESM ([cbb3bcd](https://github.com/angular-experts-io/ng-parsel/commit/cbb3bcd0a671e4022b7f9b41e6abfcc6fb76398f))
+* 🎸 (filepath) export filepath for all types ([de7f8ed](https://github.com/angular-experts-io/ng-parsel/commit/de7f8edcc86d2ff26bea110cc979774d37bcc0cd))
+* 🎸 (types) export types subentry for browser usage ([6219283](https://github.com/angular-experts-io/ng-parsel/commit/62192838e0436a9d7c21ad80860bea63665ddc02))
+* 🎸 (welcome) print welcome messages ([599c813](https://github.com/angular-experts-io/ng-parsel/commit/599c81378d1c0debf6fa40db7c17e72396e7802a))
+
+
+### BREAKING CHANGES
+
+* 🧨 ESM - Library is now published as ESM
+* 🧨 rename methods to methodsPublicExplicit for harness and validator
+parsers
+
 # [2.0.0](https://github.com/angular-experts-io/ng-parsel/compare/v1.1.2...v2.0.0) (2022-11-29)
 
 
