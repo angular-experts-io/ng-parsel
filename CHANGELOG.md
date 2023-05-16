@@ -1,3 +1,16 @@
+# [3.1.0](https://github.com/angular-experts-io/ng-parsel/compare/v3.0.2...v3.1.0) (2023-05-16)
+
+
+### Bug Fixes
+
+* 🐛 write service output files ([781bee5](https://github.com/angular-experts-io/ng-parsel/commit/781bee5031bb0d7f6ef506fd9b87c57f83ef74c1))
+
+
+### Features
+
+* 🎸 add parseServices to default config ([6b97e5b](https://github.com/angular-experts-io/ng-parsel/commit/6b97e5b9edd79e409d9595b058d45d9f74e55b25))
+* 🎸 parse services ([d2a9c91](https://github.com/angular-experts-io/ng-parsel/commit/d2a9c91ccf31b63a1cb4a00dfdf83ba02cceed82))
+
 ## [3.0.2](https://github.com/angular-experts-io/ng-parsel/compare/v3.0.1...v3.0.2) (2022-11-30)
 
 
