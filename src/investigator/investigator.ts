@@ -33,6 +33,10 @@ export function investigateType(ast: ts.SourceFile, filePath: string): NgParselO
     return NgParselOutputType.PIPE;
   }
 
+  if (isService(ast)) {
+    return NgParselOutputType.SERVICE;
+  }
+
   return NgParselOutputType.UNKNOWN;
 }
 
@@ -50,6 +54,10 @@ function isModule(ast: ts.SourceFile): boolean {
 
 function isComponent(ast: ts.SourceFile): boolean {
   return isType(ast, 'Component');
+}
+
+function isService(ast: ts.SourceFile): boolean {
+  return isType(ast, 'Injectable');
 }
 
 function isType(ast: ts.SourceFile, type: string): boolean {

@@ -94,6 +94,7 @@ ng-parsel offers the following configurations.
 | src             | 'src'         | Glob to query all the src files that should be parsed                                                                                                                                                                                                                      |
 | out             | 'ng-parsel'   | Output directory                                                                                                                                                                                                                                                           |
 | parseComponents | true          | If set to `true` ng-parsel will parse Angular Components and include them in the output.                                                                                                                                                                                   |
+| parseServices   | true          | If set to `true` ng-parsel will parse Angular Services and include them in the output.                                                                                                                                                                                     |
 | parsePipes      | true          | If set to `true` ng-parsel will parse Angular Pipes and include them in the output.                                                                                                                                                                                        |
 | parseDirectives | true          | If set to `true` ng-parsel will parse Angular Directives and include them in the output.                                                                                                                                                                                   |
 | parseModules    | true          | If set to true ng-parsel will parse Angular Modules and include them in the output.                                                                                                                                                                                        |
@@ -107,6 +108,7 @@ ng-parsel offers the following configurations.
 Currently ng-parsel classifies each file into one of the following `NgParselOutputType`.
 
 - Component
+- Service
 - Pipes
 - Modules
 - Directives
