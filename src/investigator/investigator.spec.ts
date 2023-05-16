@@ -14,6 +14,16 @@ describe('Investigator', () => {
     expect(investigateType(ast, 'foo.component.ts')).toEqual(NgParselOutputType.COMPONENT);
   });
 
+  it('should detect Angular services', () => {
+    const ast = tsquery.ast(`
+        @Injectable({
+          providedIn: 'root'
+        })
+        export class MyTestService {}
+      `);
+    expect(investigateType(ast, 'foo.component.ts')).toEqual(NgParselOutputType.SERVICE);
+  });
+
   it('should detect Angular modules', () => {
     const ast = tsquery.ast(`
         @NgModule({
