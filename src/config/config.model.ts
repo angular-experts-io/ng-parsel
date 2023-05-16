@@ -15,6 +15,7 @@ export interface NgParselConfig {
   src?: string;
   out?: string;
   parseComponents?: boolean;
+  parseServices?: boolean;
   parsePipes?: boolean;
   parseDirectives?: boolean;
   parseHarnesses?: boolean;

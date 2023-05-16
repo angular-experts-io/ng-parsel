@@ -22,6 +22,8 @@ import { NgParselPipe } from './pipe/pipe.model.js';
 import { parseHarnesses } from './harness/harness.parser.js';
 import { parseValidator } from './validator/validator.parser.js';
 import { NgParselValidtor } from './validator/validator.model.js';
+import { NgParselService } from './services/service.model.js';
+import { parseService } from './services/service.parser.js';
 
 export function parse(configuration: NgParselConfig): void {
   const directoryGlob = `${configuration.src}/**/*.{ts,html,scss,css,less}`;
@@ -32,7 +34,8 @@ export function parse(configuration: NgParselConfig): void {
     ngParselHarnesses: NgParselHarness[] = [],
     ngParselPipes: NgParselPipe[] = [],
     ngParselModules: NgParselModule[] = [],
-    ngParselDirectives: NgParselDirective[] = [];
+    ngParselDirectives: NgParselDirective[] = [],
+    ngParselServices: NgParselService[] = [];
 
   const parseSpinner = generateSpinner('Parsing files');
   try {
@@ -45,6 +48,10 @@ export function parse(configuration: NgParselConfig): void {
 
       if (configuration.parseComponents && componentType === NgParselOutputType.COMPONENT) {
         ngParselComponents.push(parseComponent(ast, filePath));
+      }
+
+      if (configuration.parseServices && componentType === NgParselOutputType.SERVICE) {
+        ngParselServices.push(parseService(ast, filePath));
       }
 
       if (configuration.parseSpecs && componentType === NgParselOutputType.SPEC) {
