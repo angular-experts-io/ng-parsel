@@ -17,9 +17,9 @@ const explorer = cosmiconfigSync('ng-parsel');
 
 program.version(
   /*
-     This is very complicated and could be done way simpler by using import assertion.
-     But import assertions are not supported by Node 14.
-     */
+       This is very complicated and could be done way simpler by using import assertion.
+       But import assertions are not supported by Node 14.
+       */
   JSON.parse(readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), '../../package.json')).toString() as any)
     .version
 );
@@ -28,6 +28,7 @@ program
   .command('parse')
   .option('-s, --src', 'Glob pattern to search for files')
   .option('--components', 'Parse Components', true)
+  .option('--services', 'Parse Services', true)
   .option('--pipes', 'Parse Pipes', true)
   .option('--modules', 'Parse Modules', true)
   .option('--directives', 'Parse Directives', true)
