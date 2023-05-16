@@ -90,6 +90,7 @@ export function parse(configuration: NgParselConfig): void {
     writeOutputFiles(
       configuration,
       ngParselComponents,
+      ngParselServices,
       ngParselDirectives,
       ngParselModules,
       ngParselSpecs,
@@ -107,6 +108,7 @@ export function parse(configuration: NgParselConfig): void {
 function writeOutputFiles(
   config: NgParselConfig,
   ngParselComponents: NgParselComponent[],
+  ngParselServices: NgParselService[],
   ngParselDirectives: NgParselDirective[],
   ngParselModules: NgParselModule[],
   ngParselSpecs: NgParselSpec[],
@@ -121,6 +123,7 @@ function writeOutputFiles(
   if (config.singleFile) {
     writeJson(`${config.out}/ng-parsel.json`, [
       ...ngParselComponents,
+      ...ngParselServices,
       ...ngParselModules,
       ...ngParselDirectives,
       ...ngParselSpecs,
@@ -131,6 +134,10 @@ function writeOutputFiles(
   } else {
     if (ngParselComponents.length > 0) {
       writeJson(`${config.out}/ng-parsel-components.json`, ngParselComponents);
+    }
+
+    if (ngParselServices.length > 0) {
+      writeJson(`${config.out}/ng-parsel-services.json`, ngParselServices);
     }
 
     if (ngParselModules.length > 0) {
