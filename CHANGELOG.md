@@ -1,3 +1,10 @@
+## [3.1.1](https://github.com/angular-experts-io/ng-parsel/compare/v3.1.0...v3.1.1) (2024-03-13)
+
+
+### Bug Fixes
+
+* 🐛 (setters) parse input setters ([c014307](https://github.com/angular-experts-io/ng-parsel/commit/c014307b0cde94f9e1d7cefe78ecb40e40692e2e))
+
 # [3.1.0](https://github.com/angular-experts-io/ng-parsel/compare/v3.0.2...v3.1.0) (2023-05-16)
 
 
