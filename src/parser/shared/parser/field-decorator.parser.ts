@@ -7,16 +7,9 @@ export function parseInputsAndOutputs(ast: ts.SourceFile): {
   inputs: NgParselFieldDecorator[];
   outputs: NgParselFieldDecorator[];
 } {
-  return parseDecorators(ast);
-}
-
-function parseDecorators(ast: ts.SourceFile): {
-  inputs: NgParselFieldDecorator[];
-  outputs: NgParselFieldDecorator[];
-} {
   const parsedPropertyDeclarations = parseDecoratedPropertyDeclarations(ast);
   return {
-    inputs: [...parseDecoratedSetters(ast), ...parsedPropertyDeclarations.inputs],
+    inputs: [...parseDecoratedSetters(ast), ...parsedPropertyDeclarations.inputs, ...parseSignalInputs(ast)],
     outputs: [...parsedPropertyDeclarations.outputs],
   };
 }
@@ -89,4 +82,43 @@ function parseDecoratedPropertyDeclarations(ast: ts.SourceFile): {
     }
   }
   return inputsAndOutputs;
+}
+
+function parseSignalInputs(asti: ts.SourceFile): NgParselFieldDecorator[] {
+  const inputNodes = [...tsquery(asti, 'PropertyDeclaration:has(CallExpression [name="input"])')];
+  const signalInputs: NgParselFieldDecorator[] = [];
+
+  function isRequiredSingalInput(file: string): boolean {
+    return [...tsquery(file, 'CallExpression > PropertyAccessExpression > Identifier')].length > 1;
+  }
+
+  inputNodes.forEach((input) => {
+    const field = input.getText();
+    const required = isRequiredSingalInput(field);
+
+    const name = [...tsquery(field, 'BinaryExpression > Identifier')][0]?.getText() || '';
+    const initialValue =
+      [...tsquery(field, 'CallExpression > StringLiteral, Identifier:last-child')][0]?.getText() || '';
+    const type = (required && [...tsquery(field, 'CallExpression > *:last-child')][0]?.getText()) || '';
+
+    if (required) {
+      signalInputs.push({
+        decorator: 'input',
+        required,
+        name,
+        type,
+        field,
+      });
+    } else {
+      signalInputs.push({
+        decorator: 'input',
+        required,
+        name,
+        initialValue,
+        field,
+      });
+    }
+  });
+
+  return signalInputs;
 }

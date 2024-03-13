@@ -39,7 +39,7 @@
   },
   "homepage": "https://github.com/angular-experts-io/ng-parsel#readme",
   "dependencies": {
-    "@phenomnomnominal/tsquery": "^5.0.0",
+    "@phenomnomnominal/tsquery": "^5.0.1",
     "chalk": "^5.1.2",
     "commander": "^9.4.1",
     "cosmiconfig": "^8.0.0",

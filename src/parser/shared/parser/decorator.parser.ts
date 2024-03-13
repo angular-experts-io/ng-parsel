@@ -4,8 +4,7 @@ import { tsquery } from '@phenomnomnominal/tsquery';
 import { NgParselDecoratorProperties } from '../model/decorator.model.js';
 
 export function getDecoratorProperties(ast: ts.SourceFile): NgParselDecoratorProperties {
-  const decoratorQuery = 'Decorator > CallExpression > ObjectLiteralExpression > PropertyAssignment';
-  const componentDecorators = tsquery(ast, decoratorQuery);
+  const componentDecorators = tsquery(ast, 'Decorator > CallExpression > ObjectLiteralExpression > PropertyAssignment');
 
   return componentDecorators.reduce((decorators: any, propertyAssignment: any) => {
     const propertyName = propertyAssignment.name.escapedText;
