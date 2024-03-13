@@ -57,4 +57,48 @@ describe('Field Decorator', function () {
       outputs: [],
     });
   });
+
+  it('should parse signal inputs with an initial value', () => {
+    const ast = tsquery.ast(`
+            export class MyTestClass {
+                test = input("myValue");
+           }
+        `);
+
+    const expectedInputs = [
+      {
+        decorator: 'input',
+        name: 'test',
+        required: false,
+        initialValue: '"myValue"',
+        field: 'test = input("myValue");',
+      },
+    ];
+    expect(parseInputsAndOutputs(ast)).toEqual({
+      inputs: expectedInputs,
+      outputs: [],
+    });
+  });
+
+  it('should parse typed required signal inputs', () => {
+    const ast = tsquery.ast(`
+            export class MyTestClass {
+                test = input.required<string>();
+           }
+        `);
+
+    const expectedInputs = [
+      {
+        decorator: 'input',
+        name: 'test',
+        required: true,
+        type: 'string',
+        field: 'test = input.required<string>();',
+      },
+    ];
+    expect(parseInputsAndOutputs(ast)).toEqual({
+      inputs: expectedInputs,
+      outputs: [],
+    });
+  });
 });
