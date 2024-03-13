@@ -7,11 +7,56 @@ export function parseInputsAndOutputs(ast: ts.SourceFile): {
   inputs: NgParselFieldDecorator[];
   outputs: NgParselFieldDecorator[];
 } {
+  return parseDecorators(ast);
+}
+
+function parseDecorators(ast: ts.SourceFile): {
+  inputs: NgParselFieldDecorator[];
+  outputs: NgParselFieldDecorator[];
+} {
+  const parsedPropertyDeclarations = parseDecoratedPropertyDeclarations(ast);
+  return {
+    inputs: [...parseDecoratedSetters(ast), ...parsedPropertyDeclarations.inputs],
+    outputs: [...parsedPropertyDeclarations.outputs],
+  };
+}
+
+function parseDecoratedSetters(ast: ts.SourceFile): NgParselFieldDecorator[] {
+  const decoratedSetters = [...tsquery(ast, 'SetAccessor:has(Decorator)')];
+  const decoratedSettersPropertyDeclaration = [...tsquery(ast, 'SetAccessor:has(Decorator) > Decorator')];
+
+  const inputSetters = [];
+
+  for (let i = 0; i < decoratedSetters.length; i++) {
+    const decoratorName = decoratedSettersPropertyDeclaration[i]?.getText();
+
+    if (!decoratorName?.startsWith('@Input')) {
+      continue;
+    }
+
+    const name = (decoratedSetters[i] as any)?.name?.getText();
+    const type = (decoratedSetters[i] as any)?.parameters[0]?.type?.getText();
+
+    inputSetters.push({
+      decorator: '@Input()',
+      name,
+      type,
+      field: decoratedSetters[i]?.getText() || '',
+    });
+  }
+
+  return inputSetters;
+}
+
+function parseDecoratedPropertyDeclarations(ast: ts.SourceFile): {
+  inputs: NgParselFieldDecorator[];
+  outputs: NgParselFieldDecorator[];
+} {
   /*
-      This is afaik the only way to get the Decorator name
-        - getDecorators() returns nothing
-        - canHaveDecorators() returns false
-    */
+        This is afaik the only way to get the Decorator name
+          - getDecorators() returns nothing
+          - canHaveDecorators() returns false
+      */
   const decoratorPropertyDecorator = [...tsquery(ast, 'PropertyDeclaration:has(Decorator) > Decorator')];
   const decoratorPropertyDeclaration = [...tsquery(ast, 'PropertyDeclaration:has(Decorator)')];
 
