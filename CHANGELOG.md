@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/angular-experts-io/ng-parsel/compare/v3.1.1...v3.2.0) (2024-03-13)
+
+
+### Features
+
+* 🎸 parse Signal inputs ([37a6729](https://github.com/angular-experts-io/ng-parsel/commit/37a6729b5ef77a2b5ea068dd84c1fe7b65897f91))
+
 ## [3.1.1](https://github.com/angular-experts-io/ng-parsel/compare/v3.1.0...v3.1.1) (2024-03-13)
 
 
