@@ -34,4 +34,27 @@ describe('Field Decorator', function () {
       outputs: expectedOutputs,
     });
   });
+
+  it('should parse input setters', () => {
+    const ast = tsquery.ast(`
+            export class MyTestClass {
+                @Input() set myInput(value: string){
+                  console.log(value);
+                };
+           }
+        `);
+
+    const expectedInputs = [
+      {
+        decorator: '@Input()',
+        name: 'myInput',
+        type: 'string',
+        field: '@Input() set myInput(value: string){\n                  console.log(value);\n                }',
+      },
+    ];
+    expect(parseInputsAndOutputs(ast)).toEqual({
+      inputs: expectedInputs,
+      outputs: [],
+    });
+  });
 });
