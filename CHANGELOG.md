@@ -1,3 +1,11 @@
+# [3.3.0](https://github.com/angular-experts-io/ng-parsel/compare/v3.2.0...v3.3.0) (2024-03-14)
+
+
+### Features
+
+* 🎸 handle outputFromObservable ([fa628d2](https://github.com/angular-experts-io/ng-parsel/commit/fa628d2e3996ad725e41380797aaa87d53b4b5bd))
+* 🎸 parse new output API ([7631f49](https://github.com/angular-experts-io/ng-parsel/commit/7631f49bf0e91d1f1df382cdf828053b8aa5b4f6))
+
 # [3.2.0](https://github.com/angular-experts-io/ng-parsel/compare/v3.1.1...v3.2.0) (2024-03-13)
 
 
