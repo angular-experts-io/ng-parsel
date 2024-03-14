@@ -10,7 +10,7 @@ export function parseInputsAndOutputs(ast: ts.SourceFile): {
   const parsedPropertyDeclarations = parseDecoratedPropertyDeclarations(ast);
   return {
     inputs: [...parseDecoratedSetters(ast), ...parsedPropertyDeclarations.inputs, ...parseSignalInputs(ast)],
-    outputs: [...parsedPropertyDeclarations.outputs],
+    outputs: [...parsedPropertyDeclarations.outputs, ...parseNewOutputAPI(ast)],
   };
 }
 
@@ -121,4 +121,25 @@ function parseSignalInputs(asti: ts.SourceFile): NgParselFieldDecorator[] {
   });
 
   return signalInputs;
+}
+
+function parseNewOutputAPI(ast: ts.SourceFile): NgParselFieldDecorator[] {
+  const nodes = [...tsquery(ast, 'PropertyDeclaration:has(CallExpression:has([name="output"]))')];
+
+  const outputs: NgParselFieldDecorator[] = [];
+
+  nodes.forEach((node) => {
+    const field = node.getText();
+    const name = [...tsquery(field, 'BinaryExpression > Identifier')][0]?.getText() || '';
+    const type = [...tsquery(field, 'CallExpression > *:last-child')][0]?.getText() || '';
+
+    outputs.push({
+      decorator: 'output',
+      name,
+      type,
+      field,
+    });
+  });
+
+  return outputs;
 }

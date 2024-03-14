@@ -101,4 +101,25 @@ describe('Field Decorator', function () {
       outputs: [],
     });
   });
+
+  it('should parse the new output API', () => {
+    const ast = tsquery.ast(`
+            export class MyTestClass {
+                counterChange = output<number>();
+           }
+        `);
+
+    const expectedOutputs = [
+      {
+        decorator: 'output',
+        name: 'counterChange',
+        type: 'number',
+        field: 'counterChange = output<number>();',
+      },
+    ];
+    expect(parseInputsAndOutputs(ast)).toEqual({
+      inputs: [],
+      outputs: expectedOutputs,
+    });
+  });
 });
