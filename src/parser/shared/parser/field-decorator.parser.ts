@@ -124,21 +124,34 @@ function parseSignalInputs(asti: ts.SourceFile): NgParselFieldDecorator[] {
 }
 
 function parseNewOutputAPI(ast: ts.SourceFile): NgParselFieldDecorator[] {
-  const nodes = [...tsquery(ast, 'PropertyDeclaration:has(CallExpression:has([name="output"]))')];
+  const outputNodes = [...tsquery(ast, 'PropertyDeclaration:has(CallExpression:has([name="output"]))')];
+  const outPutnodesFromObservable = [
+    ...tsquery(ast, 'PropertyDeclaration:has(CallExpression:has([name="outputFromObservable"]))'),
+  ];
 
   const outputs: NgParselFieldDecorator[] = [];
 
-  nodes.forEach((node) => {
+  [...outputNodes, ...outPutnodesFromObservable].forEach((node) => {
     const field = node.getText();
+
+    const isObservableOutput = [...tsquery(field, 'CallExpression:has([name="outputFromObservable"])')].length > 0;
     const name = [...tsquery(field, 'BinaryExpression > Identifier')][0]?.getText() || '';
     const type = [...tsquery(field, 'CallExpression > *:last-child')][0]?.getText() || '';
 
-    outputs.push({
-      decorator: 'output',
-      name,
-      type,
-      field,
-    });
+    if (isObservableOutput) {
+      outputs.push({
+        decorator: 'outputFromObservable',
+        name,
+        field,
+      });
+    } else {
+      outputs.push({
+        decorator: 'output',
+        name,
+        type,
+        field,
+      });
+    }
   });
 
   return outputs;

@@ -122,4 +122,24 @@ describe('Field Decorator', function () {
       outputs: expectedOutputs,
     });
   });
+
+  it('should parse the new output outputFromObservable API', () => {
+    const ast = tsquery.ast(`
+            export class MyTestClass {
+                counterChange = outputFromObservable(this.change$);
+           }
+        `);
+
+    const expectedOutputs = [
+      {
+        decorator: 'outputFromObservable',
+        name: 'counterChange',
+        field: 'counterChange = outputFromObservable(this.change$);',
+      },
+    ];
+    expect(parseInputsAndOutputs(ast)).toEqual({
+      inputs: [],
+      outputs: expectedOutputs,
+    });
+  });
 });
