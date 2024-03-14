@@ -10,7 +10,7 @@ export function parseInputsAndOutputs(ast: ts.SourceFile): {
   const parsedPropertyDeclarations = parseDecoratedPropertyDeclarations(ast);
   return {
     inputs: [...parseDecoratedSetters(ast), ...parsedPropertyDeclarations.inputs, ...parseSignalInputs(ast)],
-    outputs: [...parsedPropertyDeclarations.outputs],
+    outputs: [...parsedPropertyDeclarations.outputs, ...parseNewOutputAPI(ast)],
   };
 }
 
@@ -121,4 +121,38 @@ function parseSignalInputs(asti: ts.SourceFile): NgParselFieldDecorator[] {
   });
 
   return signalInputs;
+}
+
+function parseNewOutputAPI(ast: ts.SourceFile): NgParselFieldDecorator[] {
+  const outputNodes = [...tsquery(ast, 'PropertyDeclaration:has(CallExpression:has([name="output"]))')];
+  const outPutnodesFromObservable = [
+    ...tsquery(ast, 'PropertyDeclaration:has(CallExpression:has([name="outputFromObservable"]))'),
+  ];
+
+  const outputs: NgParselFieldDecorator[] = [];
+
+  [...outputNodes, ...outPutnodesFromObservable].forEach((node) => {
+    const field = node.getText();
+
+    const isObservableOutput = [...tsquery(field, 'CallExpression:has([name="outputFromObservable"])')].length > 0;
+    const name = [...tsquery(field, 'BinaryExpression > Identifier')][0]?.getText() || '';
+    const type = [...tsquery(field, 'CallExpression > *:last-child')][0]?.getText() || '';
+
+    if (isObservableOutput) {
+      outputs.push({
+        decorator: 'outputFromObservable',
+        name,
+        field,
+      });
+    } else {
+      outputs.push({
+        decorator: 'output',
+        name,
+        type,
+        field,
+      });
+    }
+  });
+
+  return outputs;
 }
