@@ -1,3 +1,10 @@
+# [3.5.0](https://github.com/angular-experts-io/ng-parsel/compare/v3.4.0...v3.5.0) (2024-04-30)
+
+
+### Features
+
+* 🎸 parse model inputs ([0a96a07](https://github.com/angular-experts-io/ng-parsel/commit/0a96a072d97b4efbd3aed0920ae1e946c7b9389e))
+
 # [3.4.0](https://github.com/angular-experts-io/ng-parsel/compare/v3.3.0...v3.4.0) (2024-04-30)
 
 
