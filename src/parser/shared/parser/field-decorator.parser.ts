@@ -84,8 +84,8 @@ function parseDecoratedPropertyDeclarations(ast: ts.SourceFile): {
   return inputsAndOutputs;
 }
 
-function parseSignalInputs(asti: ts.SourceFile): NgParselFieldDecorator[] {
-  const inputNodes = [...tsquery(asti, 'PropertyDeclaration:has(CallExpression [name="input"])')];
+function parseSignalInputs(ast: ts.SourceFile): NgParselFieldDecorator[] {
+  const inputNodes = [...tsquery(ast, 'PropertyDeclaration:has(CallExpression [name="input"])')];
   const signalInputs: NgParselFieldDecorator[] = [];
 
   function isRequiredSingalInput(file: string): boolean {
@@ -98,7 +98,12 @@ function parseSignalInputs(asti: ts.SourceFile): NgParselFieldDecorator[] {
 
     const name = [...tsquery(field, 'BinaryExpression > Identifier')][0]?.getText() || '';
     const initialValue =
-      [...tsquery(field, 'CallExpression > StringLiteral, Identifier:last-child')][0]?.getText() || '';
+      [
+        ...tsquery(
+          field,
+          'CallExpression > :matches(NullKeyword, ObjectLiteralExpression, ArrayLiteralExpression, TrueKeyword, FalseKeyword, StringLiteral, Identifier[name=undefined])'
+        ),
+      ][0]?.getText() || '';
     const type = (required && [...tsquery(field, 'CallExpression > *:last-child')][0]?.getText()) || '';
 
     if (required) {

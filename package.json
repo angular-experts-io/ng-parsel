@@ -10,7 +10,7 @@
     "bump-version": "rjp package.json version $VERSION",
     "start:version": "node --loader ts-node/esm src/bin/ng-parsel.bin.ts --version",
     "start:help": "node --loader ts-node/esm src/bin/ng-parsel.bin.ts --help",
-    "start:parse": "ts-node --esm src/bin/ng-parsel.bin.ts parse --src './test-spa'",
+    "start:parse": "node --loader ts-node/esm src/bin/ng-parsel.bin.ts parse --src './test-spa'",
     "build": "tsc && npm run copy:readme",
     "copy:readme": "copyfiles ./README.md ./dist",
     "lint": "eslint src/**/*.ts",
