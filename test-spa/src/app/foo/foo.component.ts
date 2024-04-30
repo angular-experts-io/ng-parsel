@@ -1,4 +1,4 @@
-import { Component, EventEmitter, input, Input, Output } from '@angular/core';
+import { Component, EventEmitter, input, Input, model, Output } from '@angular/core';
 
 @Component({
   selector: 'foo',
@@ -12,6 +12,13 @@ export class FooComponent {
   }
 
   name = input<string>('Paul Atreides');
+  firstname = input.required<string>();
+  flag = input(true);
+  address = input({
+    street: 'my street',
+  });
+
+  anotherFlag = model(true);
 
   @Output() fooChanged = new EventEmitter();
   foo: string | undefined;

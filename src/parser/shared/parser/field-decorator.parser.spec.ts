@@ -58,7 +58,7 @@ describe('Field Decorator', function () {
     });
   });
 
-  it('should parse signal inputs with an initial value', () => {
+  it('should parse signal inputs with initial string value', () => {
     const ast = tsquery.ast(`
             export class MyTestClass {
                 test = input("myValue");
@@ -72,6 +72,138 @@ describe('Field Decorator', function () {
         required: false,
         initialValue: '"myValue"',
         field: 'test = input("myValue");',
+      },
+    ];
+    expect(parseInputsAndOutputs(ast)).toEqual({
+      inputs: expectedInputs,
+      outputs: [],
+    });
+  });
+
+  it('should parse signal inputs with an initial boolean (true) value', () => {
+    const ast = tsquery.ast(`
+            export class MyTestClass {
+                test = input(true);
+           }
+        `);
+
+    const expectedInputs = [
+      {
+        decorator: 'input',
+        name: 'test',
+        required: false,
+        initialValue: 'true',
+        field: 'test = input(true);',
+      },
+    ];
+    expect(parseInputsAndOutputs(ast)).toEqual({
+      inputs: expectedInputs,
+      outputs: [],
+    });
+  });
+
+  it('should parse signal inputs with an initial boolean (false) value', () => {
+    const ast = tsquery.ast(`
+            export class MyTestClass {
+                test = input(false);
+           }
+        `);
+
+    const expectedInputs = [
+      {
+        decorator: 'input',
+        name: 'test',
+        required: false,
+        initialValue: 'false',
+        field: 'test = input(false);',
+      },
+    ];
+    expect(parseInputsAndOutputs(ast)).toEqual({
+      inputs: expectedInputs,
+      outputs: [],
+    });
+  });
+
+  it('should parse signal inputs with an initial array', () => {
+    const ast = tsquery.ast(`
+            export class MyTestClass {
+                test = input([]);
+           }
+        `);
+
+    const expectedInputs = [
+      {
+        decorator: 'input',
+        name: 'test',
+        required: false,
+        initialValue: '[]',
+        field: 'test = input([]);',
+      },
+    ];
+    expect(parseInputsAndOutputs(ast)).toEqual({
+      inputs: expectedInputs,
+      outputs: [],
+    });
+  });
+
+  it('should parse signal inputs with an initial object', () => {
+    const ast = tsquery.ast(`
+            export class MyTestClass {
+                test = input({});
+           }
+        `);
+
+    const expectedInputs = [
+      {
+        decorator: 'input',
+        name: 'test',
+        required: false,
+        initialValue: '{}',
+        field: 'test = input({});',
+      },
+    ];
+    expect(parseInputsAndOutputs(ast)).toEqual({
+      inputs: expectedInputs,
+      outputs: [],
+    });
+  });
+
+  it('should parse signal inputs with an null', () => {
+    const ast = tsquery.ast(`
+            export class MyTestClass {
+                test = input(null);
+           }
+        `);
+
+    const expectedInputs = [
+      {
+        decorator: 'input',
+        name: 'test',
+        required: false,
+        initialValue: 'null',
+        field: 'test = input(null);',
+      },
+    ];
+    expect(parseInputsAndOutputs(ast)).toEqual({
+      inputs: expectedInputs,
+      outputs: [],
+    });
+  });
+
+  it('should parse signal inputs with an undefined', () => {
+    const ast = tsquery.ast(`
+            export class MyTestClass {
+                test = input(undefined);
+           }
+        `);
+
+    const expectedInputs = [
+      {
+        decorator: 'input',
+        name: 'test',
+        required: false,
+        initialValue: 'undefined',
+        field: 'test = input(undefined);',
       },
     ];
     expect(parseInputsAndOutputs(ast)).toEqual({
