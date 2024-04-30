@@ -9,7 +9,7 @@ export function parseInputsAndOutputs(ast: ts.SourceFile): {
 } {
   const parsedPropertyDeclarations = parseDecoratedPropertyDeclarations(ast);
   return {
-    inputs: [...parseDecoratedSetters(ast), ...parsedPropertyDeclarations.inputs, ...parseSignalInputs(ast)],
+    inputs: [...parseDecoratedSetters(ast), ...parsedPropertyDeclarations.inputs, ...parseSignalInputsAndModels(ast)],
     outputs: [...parsedPropertyDeclarations.outputs, ...parseNewOutputAPI(ast)],
   };
 }
@@ -84,8 +84,10 @@ function parseDecoratedPropertyDeclarations(ast: ts.SourceFile): {
   return inputsAndOutputs;
 }
 
-function parseSignalInputs(ast: ts.SourceFile): NgParselFieldDecorator[] {
-  const inputNodes = [...tsquery(ast, 'PropertyDeclaration:has(CallExpression [name="input"])')];
+function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[] {
+  const inputNodes = [
+    ...tsquery(ast, 'PropertyDeclaration:has(CallExpression [name="input"], CallExpression [name="model"])'),
+  ];
   const signalInputs: NgParselFieldDecorator[] = [];
 
   function isRequiredSingalInput(file: string): boolean {
@@ -97,6 +99,14 @@ function parseSignalInputs(ast: ts.SourceFile): NgParselFieldDecorator[] {
     const required = isRequiredSingalInput(field);
 
     const name = [...tsquery(field, 'BinaryExpression > Identifier')][0]?.getText() || '';
+    const decorator =
+      [
+        ...tsquery(
+          field,
+          'CallExpression > Identifier:matches([name="model"], [name="input"]), CallExpression > PropertyAccessExpression > Identifier:matches([name="model"], [name="input"])'
+        ),
+      ][0]?.getText() || '';
+    console.log('Decorator', decorator);
     const initialValue =
       [
         ...tsquery(
@@ -108,7 +118,7 @@ function parseSignalInputs(ast: ts.SourceFile): NgParselFieldDecorator[] {
 
     if (required) {
       signalInputs.push({
-        decorator: 'input',
+        decorator,
         required,
         name,
         type,
@@ -116,7 +126,7 @@ function parseSignalInputs(ast: ts.SourceFile): NgParselFieldDecorator[] {
       });
     } else {
       signalInputs.push({
-        decorator: 'input',
+        decorator,
         required,
         name,
         initialValue,
