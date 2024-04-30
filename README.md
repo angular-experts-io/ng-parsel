@@ -60,15 +60,22 @@ the [configuration section](#configuration).
 
 ### Parse codebase
 
-To parse the code base you can either create a parse script in your `package.json`which calls `ng-parsel` or you can use
-npx.
+To parse the code base you can run the command itself `ng-parsel parse`.
+You can also either create a parse script in your `package.json`which calls `ng-parsel` or you can use npx.
 
 #### Parse script
+
+Run command itself
+```bash
+ng-parsel parse
+```
+
+OR
 
 Add the following script to your `package.json`.
 
 ```json
-"parse": "@angular-experts/ng-parsel parse"
+"parse": "ng-parsel parse"
 ```
 
 Once added, you can open up a terminal and run the following command.
@@ -82,7 +89,7 @@ npm run parse
 To parse your code base with npx you can run the follwoing command inisde a terminal of your choice.
 
 ```bash
-npx @angular-experts/ng-parsel parse
+npx @angular-experts/ng-parsel ng-parsel parse
 ```
 
 ## Configuration
