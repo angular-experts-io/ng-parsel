@@ -1,3 +1,10 @@
+# [3.4.0](https://github.com/angular-experts-io/ng-parsel/compare/v3.3.0...v3.4.0) (2024-04-30)
+
+
+### Features
+
+* 🎸 handle all kinds of default valus for Signal inputs ([d88c1ab](https://github.com/angular-experts-io/ng-parsel/commit/d88c1ab142d9385d16203669af6f271cff05b130))
+
 # [3.3.0](https://github.com/angular-experts-io/ng-parsel/compare/v3.2.0...v3.3.0) (2024-03-14)
 
 
