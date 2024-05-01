@@ -46,10 +46,10 @@ function parseDecoratedPropertyDeclarations(ast: ts.SourceFile): {
   outputs: NgParselFieldDecorator[];
 } {
   /*
-        This is afaik the only way to get the Decorator name
-          - getDecorators() returns nothing
-          - canHaveDecorators() returns false
-      */
+          This is afaik the only way to get the Decorator name
+            - getDecorators() returns nothing
+            - canHaveDecorators() returns false
+        */
   const decoratorPropertyDecorator = [...tsquery(ast, 'PropertyDeclaration:has(Decorator) > Decorator')];
   const decoratorPropertyDeclaration = [...tsquery(ast, 'PropertyDeclaration:has(Decorator)')];
 
@@ -113,7 +113,14 @@ function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[
           'CallExpression > :matches(NullKeyword, ObjectLiteralExpression, ArrayLiteralExpression, TrueKeyword, FalseKeyword, StringLiteral, Identifier[name=undefined], NumericLiteral, TemplateExpression, NoSubstitutionTemplateLiteral)'
         ),
       ][0]?.getText() || '';
-    const type = (required && [...tsquery(field, 'CallExpression > *:last-child')][0]?.getText()) || '';
+
+    const type =
+      [
+        ...tsquery(
+          field,
+          'CallExpression > :matches(BooleanKeyword, AnyKeyword, TypeReference, StringKeyword, LiteralType, TypeLiteral, NullKeyword, UndefinedKeyword, Identifier[name=Array], ArrayType)'
+        ),
+      ][0]?.getText() || 'inferred';
 
     if (required) {
       signalInputs.push({
@@ -127,8 +134,9 @@ function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[
       signalInputs.push({
         decorator,
         required,
-        name,
         initialValue,
+        name,
+        type,
         field,
       });
     }

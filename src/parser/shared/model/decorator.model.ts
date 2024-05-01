@@ -1,7 +1,7 @@
 export interface NgParselFieldDecorator {
   decorator: string;
   name: string;
-  type?: string;
+  type?: string | 'inferred';
   required?: boolean;
   initializer?: string;
   initialValue?: string | null;
