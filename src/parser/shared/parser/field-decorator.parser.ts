@@ -110,7 +110,7 @@ function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[
       [
         ...tsquery(
           field,
-          'CallExpression > :matches(NullKeyword, ObjectLiteralExpression, ArrayLiteralExpression, TrueKeyword, FalseKeyword, StringLiteral, Identifier[name=undefined])'
+          'CallExpression > :matches(NullKeyword, ObjectLiteralExpression, ArrayLiteralExpression, TrueKeyword, FalseKeyword, StringLiteral, Identifier[name=undefined], NumericLiteral, TemplateExpression, NoSubstitutionTemplateLiteral)'
         ),
       ][0]?.getText() || '';
     const type = (required && [...tsquery(field, 'CallExpression > *:last-child')][0]?.getText()) || '';
