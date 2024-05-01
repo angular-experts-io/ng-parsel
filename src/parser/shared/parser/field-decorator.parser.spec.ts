@@ -61,6 +61,29 @@ describe('Field Decorator', function () {
   });
 
   describe('signal inputs', () => {
+    it('should parse a custom type type of an optional input', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                test = input<myIcon>();
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'input',
+          name: 'test',
+          initialValue: '',
+          type: 'myIcon',
+          required: false,
+          field: 'test = input<myIcon>();',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+
     it('should parse signal inputs with initial string value', () => {
       const ast = tsquery.ast(`
             export class MyTestClass {
@@ -74,6 +97,7 @@ describe('Field Decorator', function () {
           name: 'test',
           required: false,
           initialValue: '"myValue"',
+          type: 'inferred',
           field: 'test = input("myValue");',
         },
       ];
@@ -95,6 +119,7 @@ describe('Field Decorator', function () {
           decorator: 'input',
           name: 'test',
           required: false,
+          type: 'inferred',
           initialValue: 'true',
           field: 'test = input(true);',
         },
@@ -118,6 +143,7 @@ describe('Field Decorator', function () {
           name: 'test',
           required: false,
           initialValue: 'false',
+          type: 'inferred',
           field: 'test = input(false);',
         },
       ];
@@ -139,6 +165,7 @@ describe('Field Decorator', function () {
           decorator: 'input',
           name: 'test',
           required: false,
+          type: 'inferred',
           initialValue: '[]',
           field: 'test = input([]);',
         },
@@ -161,6 +188,7 @@ describe('Field Decorator', function () {
           decorator: 'input',
           name: 'test',
           required: false,
+          type: 'inferred',
           initialValue: '{}',
           field: 'test = input({});',
         },
@@ -183,6 +211,7 @@ describe('Field Decorator', function () {
           decorator: 'input',
           name: 'test',
           required: false,
+          type: 'null',
           initialValue: 'null',
           field: 'test = input(null);',
         },
@@ -205,6 +234,7 @@ describe('Field Decorator', function () {
           decorator: 'input',
           name: 'test',
           required: false,
+          type: 'inferred',
           initialValue: 'undefined',
           field: 'test = input(undefined);',
         },
@@ -227,6 +257,7 @@ describe('Field Decorator', function () {
           decorator: 'input',
           name: 'test',
           required: false,
+          type: 'inferred',
           initialValue: '0',
           field: 'test = input(0);',
         },
@@ -249,6 +280,7 @@ describe('Field Decorator', function () {
           decorator: 'input',
           name: 'test',
           required: false,
+          type: 'inferred',
           initialValue: '`test`',
           field: 'test = input(`test`);',
         },
@@ -293,6 +325,7 @@ describe('Field Decorator', function () {
           decorator: 'input',
           name: 'test',
           initialValue: '`myvalue`',
+          type: 'inferred',
           required: false,
           field: 'test = input(`myvalue`);',
         },
@@ -315,6 +348,7 @@ describe('Field Decorator', function () {
         {
           decorator: 'input',
           name: 'test',
+          type: 'inferred',
           initialValue: '`myvalue bar`',
           required: false,
           field: 'test = input(`myvalue bar`);',
@@ -339,6 +373,7 @@ describe('Field Decorator', function () {
         {
           decorator: 'model',
           name: 'test',
+          type: 'inferred',
           required: false,
           initialValue: '"myValue"',
           field: 'test = model("myValue");',
@@ -362,6 +397,7 @@ describe('Field Decorator', function () {
           decorator: 'model',
           name: 'test',
           required: false,
+          type: 'inferred',
           initialValue: 'true',
           field: 'test = model(true);',
         },
@@ -384,6 +420,7 @@ describe('Field Decorator', function () {
           decorator: 'model',
           name: 'test',
           required: false,
+          type: 'inferred',
           initialValue: 'false',
           field: 'test = model(false);',
         },
@@ -406,6 +443,7 @@ describe('Field Decorator', function () {
           decorator: 'model',
           name: 'test',
           required: false,
+          type: 'inferred',
           initialValue: '[]',
           field: 'test = model([]);',
         },
@@ -428,6 +466,7 @@ describe('Field Decorator', function () {
           decorator: 'model',
           name: 'test',
           required: false,
+          type: 'inferred',
           initialValue: '{}',
           field: 'test = model({});',
         },
@@ -450,6 +489,7 @@ describe('Field Decorator', function () {
           decorator: 'model',
           name: 'test',
           required: false,
+          type: 'null',
           initialValue: 'null',
           field: 'test = model(null);',
         },
@@ -472,6 +512,7 @@ describe('Field Decorator', function () {
           decorator: 'model',
           name: 'test',
           required: false,
+          type: 'inferred',
           initialValue: 'undefined',
           field: 'test = model(undefined);',
         },
@@ -515,6 +556,7 @@ describe('Field Decorator', function () {
         {
           decorator: 'model',
           name: 'test',
+          type: 'inferred',
           initialValue: '0',
           required: false,
           field: 'test = model(0);',
@@ -537,6 +579,7 @@ describe('Field Decorator', function () {
         {
           decorator: 'model',
           name: 'test',
+          type: 'inferred',
           initialValue: '`myvalue`',
           required: false,
           field: 'test = model(`myvalue`);',
@@ -560,6 +603,7 @@ describe('Field Decorator', function () {
         {
           decorator: 'model',
           name: 'test',
+          type: 'inferred',
           initialValue: '`myvalue bar`',
           required: false,
           field: 'test = model(`myvalue bar`);',
