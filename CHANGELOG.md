@@ -1,3 +1,15 @@
+# [4.0.0](https://github.com/angular-experts-io/ng-parsel/compare/v3.6.0...v4.0.0) (2024-05-01)
+
+
+### Features
+
+* 🎸 improve type detection ([974e74e](https://github.com/angular-experts-io/ng-parsel/commit/974e74e58c14b8f23f569de21f4744e5c123eb38))
+
+
+### BREAKING CHANGES
+
+* 🧨 Type now returns a string or inferred
+
 # [3.6.0](https://github.com/angular-experts-io/ng-parsel/compare/v3.5.1...v3.6.0) (2024-05-01)
 
 
