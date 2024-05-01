@@ -215,6 +215,50 @@ describe('Field Decorator', function () {
       });
     });
 
+    it('should parse signal inputs with a number', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                test = input(0);
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'input',
+          name: 'test',
+          required: false,
+          initialValue: '0',
+          field: 'test = input(0);',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+
+    it('should parse signal inputs with a template string', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                test = input(\`test\`);
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'input',
+          name: 'test',
+          required: false,
+          initialValue: '`test`',
+          field: 'test = input(`test`);',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+
     it('should parse typed required signal inputs', () => {
       const ast = tsquery.ast(`
             export class MyTestClass {
@@ -229,6 +273,51 @@ describe('Field Decorator', function () {
           required: true,
           type: 'string',
           field: 'test = input.required<string>();',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+
+    it('should parse model inputs with a template string', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                test = input(\`myvalue\`);
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'input',
+          name: 'test',
+          initialValue: '`myvalue`',
+          required: false,
+          field: 'test = input(`myvalue`);',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+
+    it('should parse signal inputs with a template string and dynamic variable access', () => {
+      const foo = 'bar';
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                test = input(\`myvalue ${foo}\`);
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'input',
+          name: 'test',
+          initialValue: '`myvalue bar`',
+          required: false,
+          field: 'test = input(`myvalue bar`);',
         },
       ];
       expect(parseInputsAndOutputs(ast)).toEqual({
@@ -407,6 +496,73 @@ describe('Field Decorator', function () {
           required: true,
           type: 'string',
           field: 'test = model.required<string>();',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+
+    it('should parse model inputs with a number', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                test = model(0);
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'model',
+          name: 'test',
+          initialValue: '0',
+          required: false,
+          field: 'test = model(0);',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+
+    it('should parse model inputs with a template string', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                test = model(\`myvalue\`);
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'model',
+          name: 'test',
+          initialValue: '`myvalue`',
+          required: false,
+          field: 'test = model(`myvalue`);',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+
+    it('should parse model inputs with a template string and dynamic variable access', () => {
+      const foo = 'bar';
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                test = model(\`myvalue ${foo}\`);
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'model',
+          name: 'test',
+          initialValue: '`myvalue bar`',
+          required: false,
+          field: 'test = model(`myvalue bar`);',
         },
       ];
       expect(parseInputsAndOutputs(ast)).toEqual({
