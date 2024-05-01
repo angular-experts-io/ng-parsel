@@ -118,7 +118,7 @@ function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[
       [
         ...tsquery(
           field,
-          'CallExpression > :matches(BooleanKeyword, AnyKeyword, TypeReference, StringKeyword, LiteralType, TypeLiteral, NullKeyword, UndefinedKeyword, Identifier[name=Array], ArrayType)'
+          'CallExpression > :matches(BooleanKeyword, AnyKeyword, TypeReference, StringKeyword, LiteralType, TypeLiteral, NullKeyword, UndefinedKeyword, Identifier[name=Array], ArrayType, UnionType, IntersectionType)'
         ),
       ][0]?.getText() || 'inferred';
 
