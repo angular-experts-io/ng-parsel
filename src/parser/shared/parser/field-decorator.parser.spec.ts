@@ -84,6 +84,52 @@ describe('Field Decorator', function () {
       });
     });
 
+    it('should parse a signal input with a union type', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                test = input<myIcon | string>();
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'input',
+          name: 'test',
+          initialValue: '',
+          type: 'myIcon | string',
+          required: false,
+          field: 'test = input<myIcon | string>();',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+
+    it('should parse a signal input with a intersection type', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                test = input<myIcon & string>();
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'input',
+          name: 'test',
+          initialValue: '',
+          type: 'myIcon & string',
+          required: false,
+          field: 'test = input<myIcon & string>();',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+
     it('should parse signal inputs with initial string value', () => {
       const ast = tsquery.ast(`
             export class MyTestClass {
