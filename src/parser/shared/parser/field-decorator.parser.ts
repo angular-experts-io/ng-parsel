@@ -106,7 +106,6 @@ function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[
           'CallExpression > Identifier:matches([name="model"], [name="input"]), CallExpression > PropertyAccessExpression > Identifier:matches([name="model"], [name="input"])'
         ),
       ][0]?.getText() || '';
-    console.log('Decorator', decorator);
     const initialValue =
       [
         ...tsquery(
