@@ -1,3 +1,10 @@
+# [4.1.0](https://github.com/angular-experts-io/ng-parsel/compare/v4.0.0...v4.1.0) (2024-05-01)
+
+
+### Features
+
+* 🎸 intersection and union types ([e2e79a8](https://github.com/angular-experts-io/ng-parsel/commit/e2e79a8604ae676fa46d2d29024b695d4b998a31))
+
 # [4.0.0](https://github.com/angular-experts-io/ng-parsel/compare/v3.6.0...v4.0.0) (2024-05-01)
 
 
