@@ -1,3 +1,10 @@
+## [3.5.1](https://github.com/angular-experts-io/ng-parsel/compare/v3.5.0...v3.5.1) (2024-05-01)
+
+
+### Bug Fixes
+
+* 🐛 remove leftover console.log ([37839c3](https://github.com/angular-experts-io/ng-parsel/commit/37839c383747ac53c417aad90a20acca89b42da9))
+
 # [3.5.0](https://github.com/angular-experts-io/ng-parsel/compare/v3.4.0...v3.5.0) (2024-04-30)
 
 

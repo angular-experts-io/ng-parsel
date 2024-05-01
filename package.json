@@ -1,6 +1,6 @@
 {
   "name": "@angular-experts/ng-parsel",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "description": "Tool that transforms Angular codebase to JSON representation",
   "type": "module",
   "publishConfig": {
