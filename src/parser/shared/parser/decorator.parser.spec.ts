@@ -41,7 +41,7 @@ describe('DecoratorParser', () => {
 
   it('should parse directive decorator properties', () => {
     const ast = tsquery.ast(`
-            @Component({
+            @Directive({
                 selector: 'my-directive',
             })
             export class MyTestClass {}
@@ -56,7 +56,7 @@ describe('DecoratorParser', () => {
 
   it('should parse standalone directive decorator properties', () => {
     const ast = tsquery.ast(`
-            @Component({
+            @Directive({
                 selector: 'my-directive',
                 standalone: true,
             })
@@ -73,7 +73,7 @@ describe('DecoratorParser', () => {
 
   it('should parse pipe decorator properties', () => {
     const ast = tsquery.ast(`
-            @Component({
+            @Pipe({
                 name: 'my-pipe',
             })
             export class MyTestClass {}
@@ -88,7 +88,7 @@ describe('DecoratorParser', () => {
 
   it('should parse pipe decorator properties', () => {
     const ast = tsquery.ast(`
-            @Component({
+            @Pipe({
                 name: 'my-pipe',
                 standalone: true,
             })
