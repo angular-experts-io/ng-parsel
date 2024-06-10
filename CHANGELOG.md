@@ -1,3 +1,11 @@
+## [4.1.1](https://github.com/angular-experts-io/ng-parsel/compare/v4.1.0...v4.1.1) (2024-06-10)
+
+
+### Bug Fixes
+
+* 🐛 parse standalone flag correctly ([43b86af](https://github.com/angular-experts-io/ng-parsel/commit/43b86afacc2c42c3dd04f4c7079c5e9f53f06156)), closes [#24](https://github.com/angular-experts-io/ng-parsel/issues/24)
+* 🐛 update tests for pipe and directive ([a442ad6](https://github.com/angular-experts-io/ng-parsel/commit/a442ad66959a309242f583366e1ce3d922eee65a))
+
 # [4.1.0](https://github.com/angular-experts-io/ng-parsel/compare/v4.0.0...v4.1.0) (2024-05-01)
 
 
