@@ -72,6 +72,71 @@ describe('ComponentParser', () => {
     expect(parseComponent(ast, filePath)).toEqual(expectedOutput);
   });
 
+  it('should parse a standalone Angular Component to NgParselComponent', function () {
+    const inlineTemplate = `<h1>Foo</h1>`;
+    const styles = 'div { color: red; }';
+    const filePath = 'foo.component.ts';
+
+    const implementation = `export class MyTestComponent {
+                @Input() foo: string;
+                @Output() bar = new EventEmitter();
+                
+                public foo(bar: string): string {
+                }
+                
+                bar(foo: string): string {}
+            }`;
+
+    const ast = tsquery.ast(`
+            @Component({
+                selector: 'my-test-comp',
+                template: '${inlineTemplate}'
+                styles: ['${styles}'],
+                standalone: true
+            })
+            ${implementation}
+        `);
+    const expectedOutput = {
+      type: NgParselOutputType.COMPONENT,
+      filePath,
+      className: 'MyTestComponent',
+      selector: 'my-test-comp',
+      standalone: true,
+      cva: false,
+      template: inlineTemplate,
+      styles: [styles],
+      inputs: [
+        {
+          decorator: '@Input()',
+          name: 'foo',
+          type: 'string',
+          initializer: undefined,
+          field: '@Input() foo: string',
+        },
+      ],
+      outputs: [
+        {
+          decorator: '@Output()',
+          name: 'bar',
+          type: undefined,
+          initializer: 'new EventEmitter()',
+          field: '@Output() bar = new EventEmitter()',
+        },
+      ],
+      implementation,
+      methodsPublicExplicit: [
+        {
+          name: 'foo',
+          args: [{ name: 'bar', type: 'string' }],
+          returnType: 'string',
+        },
+      ],
+    };
+    jest.spyOn(fs, 'readFileSync').mockReturnValue(implementation);
+
+    expect(parseComponent(ast, filePath)).toEqual(expectedOutput);
+  });
+
   it('should fetch the content of external templates', function () {
     const templateContent = `<h1>Foo</h1>`;
     const ast = tsquery.ast(`
