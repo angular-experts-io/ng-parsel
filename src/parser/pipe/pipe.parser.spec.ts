@@ -40,4 +40,36 @@ describe('PipeParser', () => {
 
     expect(parsePipe(ast, filePath)).toEqual(expectedPipe);
   });
+
+  it('should parse standalone Angular pipes to NgParselPipes', () => {
+    const filePath = 'my-test.pipe.ts';
+    const implementation = `export class MyPipe implements PipeTransform {
+            
+                transform(value: any, ...args: any[]): any {
+                   return null;
+                }
+            }`;
+
+    const ast = tsquery.ast(`
+            @Pipe({
+                name: 'myPipe',
+                standalone: true
+            })
+            ${implementation}
+        `);
+
+    const expectedPipe = {
+      type: NgParselOutputType.PIPE,
+      filePath,
+      className: 'MyPipe',
+      name: 'myPipe',
+      pure: true,
+      standalone: true,
+      implementation,
+    };
+
+    jest.spyOn(fs, 'readFileSync').mockReturnValue(implementation);
+
+    expect(parsePipe(ast, filePath)).toEqual(expectedPipe);
+  });
 });
