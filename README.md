@@ -1,7 +1,7 @@
 # ng-parsel
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![Coverage Status](https://coveralls.io/repos/github/angular-experts-io/ng-parsel/badge.svg?branch=main)](https://coveralls.io/github/angular-experts-io/ng-parsel?branch=main)
@@ -139,6 +139,7 @@ If `singleFile` is set to `false` ng-parsel will generate multiple output files,
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://medium.com/@kevinkreuzer"><img src="https://avatars.githubusercontent.com/u/5468954?v=4?s=100" width="100px;" alt="Kevin Kreuzer"/><br /><sub><b>Kevin Kreuzer</b></sub></a><br /><a href="https://github.com/angular-experts-io/ng-parsel/commits?author=kreuzerk" title="Code">💻</a> <a href="https://github.com/angular-experts-io/ng-parsel/issues?q=author%3Akreuzerk" title="Bug reports">🐛</a> <a href="#content-kreuzerk" title="Content">🖋</a> <a href="https://github.com/angular-experts-io/ng-parsel/commits?author=kreuzerk" title="Documentation">📖</a> <a href="#design-kreuzerk" title="Design">🎨</a> <a href="#ideas-kreuzerk" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-kreuzerk" title="Maintenance">🚧</a> <a href="#platform-kreuzerk" title="Packaging/porting to new platform">📦</a> <a href="#research-kreuzerk" title="Research">🔬</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.npmjs.com/~ngdaddy"><img src="https://avatars.githubusercontent.com/u/81327266?v=4?s=100" width="100px;" alt="@NgDaddy"/><br /><sub><b>@NgDaddy</b></sub></a><br /><a href="#ideas-NgDaddy" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://medium.com/@lilbeqiri"><img src="https://avatars.githubusercontent.com/u/24731032?v=4?s=100" width="100px;" alt="Ilir Beqiri"/><br /><sub><b>Ilir Beqiri</b></sub></a><br /><a href="https://github.com/angular-experts-io/ng-parsel/commits?author=ilirbeqirii" title="Code">💻</a> <a href="https://github.com/angular-experts-io/ng-parsel/commits?author=ilirbeqirii" title="Tests">⚠️</a></td>
     </tr>
   </tbody>
 </table>
