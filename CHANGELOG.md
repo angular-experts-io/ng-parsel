@@ -1,3 +1,10 @@
+## [4.1.2](https://github.com/angular-experts-io/ng-parsel/compare/v4.1.1...v4.1.2) (2024-06-24)
+
+
+### Bug Fixes
+
+* adjust snake ([7e61a65](https://github.com/angular-experts-io/ng-parsel/commit/7e61a653836f1a0797eaf7cf01b901e3d51cb4f3))
+
 ## [4.1.1](https://github.com/angular-experts-io/ng-parsel/compare/v4.1.0...v4.1.1) (2024-06-10)
 
 
