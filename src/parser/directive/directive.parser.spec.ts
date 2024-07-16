@@ -48,6 +48,7 @@ describe('DirectiveParser', () => {
         },
       ],
       implementation,
+      methodsPublicExplicit: [],
     };
     jest.spyOn(fs, 'readFileSync').mockReturnValue(implementation);
 
@@ -93,6 +94,7 @@ describe('DirectiveParser', () => {
         },
       ],
       implementation,
+      methodsPublicExplicit: [],
     };
     jest.spyOn(fs, 'readFileSync').mockReturnValue(implementation);
 
