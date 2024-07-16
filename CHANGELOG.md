@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/angular-experts-io/ng-parsel/compare/v4.1.2...v4.2.0) (2024-07-16)
+
+
+### Features
+
+* 🎸 parse public methods for directives ([bace09b](https://github.com/angular-experts-io/ng-parsel/commit/bace09b6a5f4cf5cbf66b37be8916c5cd1ca9856))
+
 ## [4.1.2](https://github.com/angular-experts-io/ng-parsel/compare/v4.1.1...v4.1.2) (2024-06-24)
 
 
