@@ -51,6 +51,8 @@ program
       parse(mergeOptionalConfigWithDefaults(configObject.config));
     } else {
       console.log(chalk.cyan(`ng-parsel: no configuration found. CLI arguments will be used.`));
+      options.src = './test-spa';
+
       parse(mergeOptionalConfigWithDefaults(options));
     }
 
