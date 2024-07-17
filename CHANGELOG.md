@@ -1,3 +1,10 @@
+## [4.2.1](https://github.com/angular-experts-io/ng-parsel/compare/v4.2.0...v4.2.1) (2024-07-17)
+
+
+### Bug Fixes
+
+* welcome message line spacing ([5b41a81](https://github.com/angular-experts-io/ng-parsel/commit/5b41a8109927ef7a074f012827ead4e91e93f821))
+
 # [4.2.0](https://github.com/angular-experts-io/ng-parsel/compare/v4.1.2...v4.2.0) (2024-07-16)
 
 
