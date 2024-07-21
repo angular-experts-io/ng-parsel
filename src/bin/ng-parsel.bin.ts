@@ -4,17 +4,14 @@ import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { Command } from 'commander';
 import { dirname, resolve } from 'path';
-import { cosmiconfigSync } from 'cosmiconfig';
 
-import { mergeOptionalConfigWithDefaults } from '../config/config.helper.js';
 import { CONFIG_DEFAULT_VALUES } from '../config/config.model.js';
 import { writeJson } from '../utils/write.util.js';
-import { parse } from '../parser/parser.js';
 import { printWelcomeMessage } from '../utils/welcome.util.js';
 import { parseCommand } from '../commands/parse.js';
+import { statsCommand } from '../commands/stats.js';
 
 const program = new Command();
-const explorer = cosmiconfigSync('ng-parsel');
 
 program.version(
   /*
@@ -37,8 +34,8 @@ program
   .option('--specs', 'Parse Specs', true)
   .option('-o, --out <string>', 'Output directory for generated files')
   .option('--singleFile', 'Output in a single file')
-  .action((_srcGlob, options) => {
-    parseCommand(options);
+  .action((_srcGlob, cliArgs) => {
+    parseCommand(cliArgs);
   });
 
 program.command('init').action(() => {
@@ -55,21 +52,8 @@ program.command('init').action(() => {
 program
   .command('stats')
   .option('-s, --src', 'Glob pattern to search for files')
-  .action(() => {
-    printWelcomeMessage();
-
-    const configObject = explorer.search();
-
-    // TODO: extract this
-    if (configObject) {
-      console.log(
-        chalk.cyan(
-          `ng-parsel: configuration found under ${configObject.filepath}.
-                Configuraton from config file will be used.`
-        )
-      );
-      parse(mergeOptionalConfigWithDefaults(configObject.config));
-    }
+  .action((_srcGlob, cliArgs) => {
+    statsCommand(cliArgs);
   });
 
 program.parse();

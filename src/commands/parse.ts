@@ -25,8 +25,8 @@ export function parseCommand(cliArgs: { [key: string]: string }) {
   // TODO: clean this up later
   config['src'] = './test-spa';
 
-  const parseOutput = parse(config);
-  writeParsedOutputToDisk(config, parseOutput);
+  const parsedOutput = parse(config);
+  writeParsedOutputToDisk(config, parsedOutput);
 
   console.log(chalk.magenta('===================================='));
 }
