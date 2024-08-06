@@ -1,14 +1,16 @@
 # ng-parsel
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![Coverage Status](https://coveralls.io/repos/github/angular-experts-io/ng-parsel/badge.svg?branch=main)](https://coveralls.io/github/angular-experts-io/ng-parsel?branch=main)
 
 > Convert your Angular components to JSON
 
-![ng-parsel logo](https://raw.githubusercontent.com/kreuzerk/ng-parsel/main/docs/logo.svg)
+![ng-parsel logo](https://raw.githubusercontent.com/kreuzerk/ng-parsel/main/docs/logo.png)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
