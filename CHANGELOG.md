@@ -1,3 +1,10 @@
+## [4.3.1](https://github.com/angular-experts-io/ng-parsel/compare/v4.3.0...v4.3.1) (2024-08-06)
+
+
+### Bug Fixes
+
+* 🐛 (parser) rename validtor in validator ([d5e656c](https://github.com/angular-experts-io/ng-parsel/commit/d5e656c3e8f3fbdcb0b77e70617743c1609fc207))
+
 # [4.3.0](https://github.com/angular-experts-io/ng-parsel/compare/v4.2.1...v4.3.0) (2024-08-06)
 
 
