@@ -1,3 +1,10 @@
+## [5.0.1](https://github.com/angular-experts-io/ng-parsel/compare/v5.0.0...v5.0.1) (2024-08-06)
+
+
+### Bug Fixes
+
+* 🐛 adjust document image and realese new logo ([e33d352](https://github.com/angular-experts-io/ng-parsel/commit/e33d352762d0ccae921dbf9cd627e130d373d57a))
+
 # [5.0.0](https://github.com/angular-experts-io/ng-parsel/compare/v4.3.1...v5.0.0) (2024-08-06)
 
 
