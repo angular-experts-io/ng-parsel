@@ -2,7 +2,7 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
@@ -99,7 +99,7 @@ ng-parsel offers the following configurations.
 | parseDirectives | true          | If set to `true` ng-parsel will parse Angular Directives and include them in the output.                                                                                                                                                                                   |
 | parseModules    | true          | If set to true ng-parsel will parse Angular Modules and include them in the output.                                                                                                                                                                                        |
 | parseHarnesses  | true          | If set to true ng-parsel will parse Harness test files (all files ending with `.harness.ts`) and include them in the output.                                                                                                                                               |
-| parseValidators | true          | If set to true ng-parsel will parse Validators (all files ending with `.validtor.ts`) and include them in the output.                                                                                                                                                      |
+| parseValidators | true          | If set to true ng-parsel will parse Validators (all files ending with `.validator.ts`) and include them in the output.                                                                                                                                                     |
 | parseSpecs      | true          | If set to true ng-parsel will parse testing files (all files ending with `.spec.ts`) and include them in the output.                                                                                                                                                       |
 | singleFile      | true          | If set to to `true` the output will be written to a `ng-parsel.json` file in the output directory. If set to false, ng-parsel will generate multiple output files, one for each `componentType`. (Find out more on component types in the [next section](#component-type)) |
 
@@ -142,6 +142,7 @@ If `singleFile` is set to `false` ng-parsel will generate multiple output files,
       <td align="center" valign="top" width="14.28%"><a href="https://medium.com/@kevinkreuzer"><img src="https://avatars.githubusercontent.com/u/5468954?v=4?s=100" width="100px;" alt="Kevin Kreuzer"/><br /><sub><b>Kevin Kreuzer</b></sub></a><br /><a href="https://github.com/angular-experts-io/ng-parsel/commits?author=kreuzerk" title="Code">💻</a> <a href="https://github.com/angular-experts-io/ng-parsel/issues?q=author%3Akreuzerk" title="Bug reports">🐛</a> <a href="#content-kreuzerk" title="Content">🖋</a> <a href="https://github.com/angular-experts-io/ng-parsel/commits?author=kreuzerk" title="Documentation">📖</a> <a href="#design-kreuzerk" title="Design">🎨</a> <a href="#ideas-kreuzerk" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-kreuzerk" title="Maintenance">🚧</a> <a href="#platform-kreuzerk" title="Packaging/porting to new platform">📦</a> <a href="#research-kreuzerk" title="Research">🔬</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.npmjs.com/~ngdaddy"><img src="https://avatars.githubusercontent.com/u/81327266?v=4?s=100" width="100px;" alt="@NgDaddy"/><br /><sub><b>@NgDaddy</b></sub></a><br /><a href="#ideas-NgDaddy" title="Ideas, Planning, & Feedback">🤔</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://medium.com/@lilbeqiri"><img src="https://avatars.githubusercontent.com/u/24731032?v=4?s=100" width="100px;" alt="Ilir Beqiri"/><br /><sub><b>Ilir Beqiri</b></sub></a><br /><a href="https://github.com/angular-experts-io/ng-parsel/commits?author=ilirbeqirii" title="Code">💻</a> <a href="https://github.com/angular-experts-io/ng-parsel/commits?author=ilirbeqirii" title="Tests">⚠️</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://quentin.monmert.pagesperso-orange.fr/"><img src="https://avatars.githubusercontent.com/u/9989211?v=4?s=100" width="100px;" alt="Quentin"/><br /><sub><b>Quentin</b></sub></a><br /><a href="#maintenance-qmonmert" title="Maintenance">🚧</a> <a href="https://github.com/angular-experts-io/ng-parsel/commits?author=qmonmert" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
