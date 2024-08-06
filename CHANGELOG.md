@@ -1,3 +1,10 @@
+# [4.3.0](https://github.com/angular-experts-io/ng-parsel/compare/v4.2.1...v4.3.0) (2024-08-06)
+
+
+### Features
+
+* 🎸 parse public service fields ([404dbc3](https://github.com/angular-experts-io/ng-parsel/commit/404dbc3eca5306c42c617d93561de3d8aea14e58))
+
 ## [4.2.1](https://github.com/angular-experts-io/ng-parsel/compare/v4.2.0...v4.2.1) (2024-07-17)
 
 
