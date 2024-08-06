@@ -1,14 +1,16 @@
 # ng-parsel
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![Coverage Status](https://coveralls.io/repos/github/angular-experts-io/ng-parsel/badge.svg?branch=main)](https://coveralls.io/github/angular-experts-io/ng-parsel?branch=main)
 
 > Convert your Angular components to JSON
 
-![ng-parsel logo](https://raw.githubusercontent.com/kreuzerk/ng-parsel/main/docs/logo.svg)
+![ng-parsel logo](https://raw.githubusercontent.com/kreuzerk/ng-parsel/main/docs/logo.png)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -97,7 +99,7 @@ ng-parsel offers the following configurations.
 | parseDirectives | true          | If set to `true` ng-parsel will parse Angular Directives and include them in the output.                                                                                                                                                                                   |
 | parseModules    | true          | If set to true ng-parsel will parse Angular Modules and include them in the output.                                                                                                                                                                                        |
 | parseHarnesses  | true          | If set to true ng-parsel will parse Harness test files (all files ending with `.harness.ts`) and include them in the output.                                                                                                                                               |
-| parseValidators | true          | If set to true ng-parsel will parse Validators (all files ending with `.validator.ts`) and include them in the output.                                                                                                                                                      |
+| parseValidators | true          | If set to true ng-parsel will parse Validators (all files ending with `.validator.ts`) and include them in the output.                                                                                                                                                     |
 | parseSpecs      | true          | If set to true ng-parsel will parse testing files (all files ending with `.spec.ts`) and include them in the output.                                                                                                                                                       |
 | singleFile      | true          | If set to to `true` the output will be written to a `ng-parsel.json` file in the output directory. If set to false, ng-parsel will generate multiple output files, one for each `componentType`. (Find out more on component types in the [next section](#component-type)) |
 
