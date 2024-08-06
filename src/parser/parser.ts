@@ -21,7 +21,7 @@ import { NgParselSpec } from './spec/spec.model.js';
 import { NgParselPipe } from './pipe/pipe.model.js';
 import { parseHarnesses } from './harness/harness.parser.js';
 import { parseValidator } from './validator/validator.parser.js';
-import { NgParselValidtor } from './validator/validator.model.js';
+import { NgParselValidator } from './validator/validator.model.js';
 import { NgParselService } from './services/service.model.js';
 import { parseService } from './services/service.parser.js';
 
@@ -30,7 +30,7 @@ export function parse(configuration: NgParselConfig): void {
 
   let ngParselComponents: NgParselComponent[] = [],
     ngParselSpecs: NgParselSpec[] = [],
-    ngParselValidators: NgParselValidtor[] = [],
+    ngParselValidators: NgParselValidator[] = [],
     ngParselHarnesses: NgParselHarness[] = [],
     ngParselPipes: NgParselPipe[] = [],
     ngParselModules: NgParselModule[] = [],
@@ -114,7 +114,7 @@ function writeOutputFiles(
   ngParselSpecs: NgParselSpec[],
   ngParselHarnesses: NgParselHarness[],
   ngParselPipes: NgParselPipe[],
-  ngParselValidators: NgParselValidtor[]
+  ngParselValidators: NgParselValidator[]
 ): void {
   if (!existsSync(config.out as string)) {
     mkdirSync(config.out as string, { recursive: true });
