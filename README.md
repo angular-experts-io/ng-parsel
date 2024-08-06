@@ -11,7 +11,7 @@
 > Convert your Angular components to JSON
 
 <div style="display: flex; justify-content: center">
-<img src="https://github.com/angular-experts-io/ng-parsel/blob/main/docs/logo.png?raw=true" style="max-width: 250px">
+<img src="https://github.com/angular-experts-io/ng-parsel/blob/main/docs/logo.png?raw=true" style="width: 250px">
 </div>
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
