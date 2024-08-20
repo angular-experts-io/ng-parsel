@@ -6,7 +6,7 @@ describe('Module converter', () => {
     const moduleStats = [
       {
         className: 'first',
-        type: NgParselOutputType.DIRECTIVE,
+        type: NgParselOutputType.MODULE,
         filePath: '',
         imports: [],
         exports: [],

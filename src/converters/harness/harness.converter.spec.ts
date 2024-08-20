@@ -6,19 +6,19 @@ describe('Harness converter', () => {
     const harnessStats = [
       {
         className: 'first',
-        type: NgParselOutputType.DIRECTIVE,
+        type: NgParselOutputType.HARNESS,
         filePath: '',
         methodsPublicExplicit: [],
       },
       {
         className: 'second',
-        type: NgParselOutputType.MODULE,
+        type: NgParselOutputType.HARNESS,
         filePath: '',
         methodsPublicExplicit: [],
       },
       {
         className: 'third',
-        type: NgParselOutputType.MODULE,
+        type: NgParselOutputType.HARNESS,
         filePath: '',
         methodsPublicExplicit: [],
       },
