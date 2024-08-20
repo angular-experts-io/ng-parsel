@@ -1,3 +1,12 @@
+# [5.1.0](https://github.com/angular-experts-io/ng-parsel/compare/v5.0.1...v5.1.0) (2024-08-20)
+
+
+### Features
+
+* 🎸 add all kinds of stats converters and printers ([af8ce77](https://github.com/angular-experts-io/ng-parsel/commit/af8ce77f39a3fde05b153a78a42d02d6d60a89fc))
+* 🎸 add stats command ([2f1c01a](https://github.com/angular-experts-io/ng-parsel/commit/2f1c01afb5fd55dd4fde014b6c23f12e7aa089ce))
+* 🎸 stats ([b1c4eec](https://github.com/angular-experts-io/ng-parsel/commit/b1c4eec229f22354e2b847d1b433facd9cab5d0c))
+
 ## [5.0.1](https://github.com/angular-experts-io/ng-parsel/compare/v5.0.0...v5.0.1) (2024-08-06)
 
 ### Bug Fixes
