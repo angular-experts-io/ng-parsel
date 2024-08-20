@@ -9,18 +9,21 @@ describe('Service stats converter', () => {
         className: 'first',
         type: NgParselOutputType.SERVICE,
         filePath: '',
+        fieldsPublicExplicit: [],
         methodsPublicExplicit: [],
       },
       {
         className: 'second',
         type: NgParselOutputType.SERVICE,
         filePath: '',
+        fieldsPublicExplicit: [],
         methodsPublicExplicit: [],
       },
       {
         className: 'third',
         type: NgParselOutputType.SERVICE,
         filePath: '',
+        fieldsPublicExplicit: [],
         methodsPublicExplicit: [],
       },
     ];

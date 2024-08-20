@@ -1,4 +1,4 @@
-import { convertToDirectiveStats } from './directive.component.js';
+import { convertToDirectiveStats } from './directive.converter.js';
 import { NgParselOutputType } from '../../parser/shared/model/types.model.js';
 
 describe('Directive converter', () => {

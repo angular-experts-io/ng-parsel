@@ -1,5 +1,5 @@
 import { NgParselOutputType } from '../../parser/shared/model/types.model.js';
-import { convertToPipeStats } from './pipes.component.js';
+import { convertToPipeStats } from './pipes.converter.js';
 
 describe('Directive converter', () => {
   it('should convert to directive stats', () => {

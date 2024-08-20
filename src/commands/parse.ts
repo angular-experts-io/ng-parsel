@@ -12,7 +12,7 @@ import { NgParselModule } from '../parser/module/module.model.js';
 import { NgParselSpec } from '../parser/spec/spec.model.js';
 import { NgParselHarness } from '../parser/harness/harness.model.js';
 import { NgParselPipe } from '../parser/pipe/pipe.model.js';
-import { NgParselValidtor } from '../parser/validator/validator.model.js';
+import { NgParselValidator } from '../parser/validator/validator.model.js';
 import { writeJson } from '../utils/write.util.js';
 import { NgParselOutput } from '../parser/parse-output.model.js';
 import { loadAndMergeConfig } from '../utils/config.util.js';
@@ -21,9 +21,6 @@ export function parseCommand(cliArgs: { [key: string]: string }) {
   printWelcomeMessage();
 
   const config = loadAndMergeConfig(cliArgs);
-
-  // TODO: clean this up later
-  config['src'] = './test-spa';
 
   const parsedOutput = parse(config);
   writeParsedOutputToDisk(config, parsedOutput);
@@ -63,7 +60,7 @@ function writeOutputFiles(
   ngParselSpecs: NgParselSpec[],
   ngParselHarnesses: NgParselHarness[],
   ngParselPipes: NgParselPipe[],
-  ngParselValidators: NgParselValidtor[]
+  ngParselValidators: NgParselValidator[]
 ): void {
   if (!existsSync(config.out as string)) {
     mkdirSync(config.out as string, { recursive: true });
