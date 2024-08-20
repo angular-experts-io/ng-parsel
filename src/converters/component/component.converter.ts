@@ -1,4 +1,4 @@
-import { NgParselComponent } from '../parser/component/component.model.js';
+import { NgParselComponent } from '../../parser/component/component.model.js';
 
 export interface NgParselComponentStats {
   standalone: number;
