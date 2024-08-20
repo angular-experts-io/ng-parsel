@@ -21,9 +21,6 @@ export function statsCommand(cliArgs: { [key: string]: string }) {
 
   const config = loadAndMergeConfig(cliArgs);
 
-  // TODO: clean this up later
-  config['src'] = './test-spa';
-
   const parsedOutput = parse(config);
   const componentStats = convertToComponentStats(parsedOutput.ngParselComponents);
   const directiveStats = convertToDirectiveStats(parsedOutput.ngParselDirectives);

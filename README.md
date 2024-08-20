@@ -1,7 +1,9 @@
 # ng-parsel
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![Coverage Status](https://coveralls.io/repos/github/angular-experts-io/ng-parsel/badge.svg?branch=main)](https://coveralls.io/github/angular-experts-io/ng-parsel?branch=main)
@@ -17,10 +19,14 @@
 - [Getting started](#getting-started)
   - [Install](#install)
   - [Init configuration](#init-configuration)
-  - [Parse codebase](#parse-codebase)
+- [Commands](#commands)
+  - [Parse](#parse)
     - [Parse script](#parse-script)
     - [NPX](#npx)
-- [Configuration](#configuration)
+    - [Configuration](#configuration)
+  - [Stats](#stats)
+    - [Stats script](#stats-script)
+    - [NPX](#npx-1)
 - [Types](#types)
 - [Type detection](#type-detection)
 - [Outputs](#outputs)
@@ -56,7 +62,9 @@ Running this command will create a `.parselrc.json` configuration file in the ro
 configuration and adjust if needed. The configuration properties and their meaning are explained in
 the [configuration section](#configuration).
 
-### Parse codebase
+## Commands
+
+### Parse
 
 To parse the code base you can either create a parse script in your `package.json`which calls `ng-parsel` or you can use
 npx.
@@ -83,7 +91,7 @@ To parse your code base with npx you can run the follwoing command inisde a term
 npx @angular-experts/ng-parsel parse
 ```
 
-## Configuration
+#### Configuration
 
 ng-parsel offers the following configurations.
 
@@ -100,6 +108,23 @@ ng-parsel offers the following configurations.
 | parseValidators | true          | If set to true ng-parsel will parse Validators (all files ending with `.validtor.ts`) and include them in the output.                                                                                                                                                      |
 | parseSpecs      | true          | If set to true ng-parsel will parse testing files (all files ending with `.spec.ts`) and include them in the output.                                                                                                                                                       |
 | singleFile      | true          | If set to to `true` the output will be written to a `ng-parsel.json` file in the output directory. If set to false, ng-parsel will generate multiple output files, one for each `componentType`. (Find out more on component types in the [next section](#component-type)) |
+
+### Stats
+
+The stats command is a command that gives you a quick overview of your Angular application. It shows you how many components, services, pipes, directives, modules, harnesses and specs you have in your application. Furthermore, it shows you interesting insights, like how many are standanlone and how many are part of a module.
+To run the stats command you can either create a stats script in your `package.json`which calls `ng-parsel` or you can use `npx`;
+
+#### Stats script
+
+```json
+"stats": "@angular-experts/ng-parsel stats"
+```
+
+#### NPX
+
+```bash
+npx @angular-experts/ng-parsel stats
+```
 
 ## Types
 
