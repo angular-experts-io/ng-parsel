@@ -1,21 +1,18 @@
 ## [5.0.1](https://github.com/angular-experts-io/ng-parsel/compare/v5.0.0...v5.0.1) (2024-08-06)
 
-
 ### Bug Fixes
 
-* 🐛 adjust document image and realese new logo ([e33d352](https://github.com/angular-experts-io/ng-parsel/commit/e33d352762d0ccae921dbf9cd627e130d373d57a))
+- 🐛 adjust document image and realese new logo ([e33d352](https://github.com/angular-experts-io/ng-parsel/commit/e33d352762d0ccae921dbf9cd627e130d373d57a))
 
 # [5.0.0](https://github.com/angular-experts-io/ng-parsel/compare/v4.3.1...v5.0.0) (2024-08-06)
 
-
 ### Features
 
-* 🎸 new logo and v5 release ([01b409c](https://github.com/angular-experts-io/ng-parsel/commit/01b409cc428d6e1e95c309fc5d9407fd5b8a1340))
-
+- 🎸 new logo and v5 release ([01b409c](https://github.com/angular-experts-io/ng-parsel/commit/01b409cc428d6e1e95c309fc5d9407fd5b8a1340))
 
 ### BREAKING CHANGES
 
-* 🧨 fix typo / NgParselValidtor becomes NgParselValidator
+- 🧨 fix typo / NgParselValidtor becomes NgParselValidator
 
 ## [4.3.1](https://github.com/angular-experts-io/ng-parsel/compare/v4.3.0...v4.3.1) (2024-08-06)
 
