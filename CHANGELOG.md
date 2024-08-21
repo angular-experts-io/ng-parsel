@@ -1,3 +1,10 @@
+## [5.1.1](https://github.com/angular-experts-io/ng-parsel/compare/v5.1.0...v5.1.1) (2024-08-21)
+
+
+### Bug Fixes
+
+* 🐛 move glob to dep instead of devDep ([8093b20](https://github.com/angular-experts-io/ng-parsel/commit/8093b207d1b01e935098e175b2e19b81cbefc48f))
+
 # [5.1.0](https://github.com/angular-experts-io/ng-parsel/compare/v5.0.1...v5.1.0) (2024-08-20)
 
 
