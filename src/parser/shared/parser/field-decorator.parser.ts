@@ -99,6 +99,12 @@ function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[
     const required = isRequiredSingalInput(field);
 
     const name = [...tsquery(field, 'BinaryExpression > Identifier')][0]?.getText() || '';
+    const alias = [
+      ...tsquery(field, 'CallExpression ObjectLiteralExpression PropertyAssignment[name.name="alias"] StringLiteral'),
+    ][0]
+      ?.getText()
+      .replace(/"/g, '');
+
     const decorator =
       [
         ...tsquery(
@@ -126,7 +132,7 @@ function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[
       signalInputs.push({
         decorator,
         required,
-        name,
+        name: alias || name,
         type,
         field,
       });
@@ -135,7 +141,7 @@ function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[
         decorator,
         required,
         initialValue,
-        name,
+        name: alias || name,
         type,
         field,
       });

@@ -405,6 +405,29 @@ describe('Field Decorator', function () {
         outputs: [],
       });
     });
+
+    it('should use the alias as name', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                test = input<myIcon>("el-icon", {alias: "foo"});
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'input',
+          name: 'foo',
+          initialValue: '"el-icon"',
+          type: 'myIcon',
+          required: false,
+          field: 'test = input<myIcon>("el-icon", {alias: "foo"});',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
   });
 
   describe('model inputs', () => {
@@ -653,6 +676,29 @@ describe('Field Decorator', function () {
           initialValue: '`myvalue bar`',
           required: false,
           field: 'test = model(`myvalue bar`);',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+
+    it('should parse signal model with aliases and use the alias as name', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                test = model("myValue", {alias: "foo"});
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'model',
+          name: 'foo',
+          type: 'inferred',
+          required: false,
+          initialValue: '"myValue"',
+          field: 'test = model("myValue", {alias: "foo"});',
         },
       ];
       expect(parseInputsAndOutputs(ast)).toEqual({
