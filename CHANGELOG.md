@@ -1,3 +1,10 @@
+# [5.2.0](https://github.com/angular-experts-io/ng-parsel/compare/v5.1.1...v5.2.0) (2025-04-08)
+
+
+### Features
+
+* 🎸 (parser) correctly parse aliased signal inputs ([9dfb3d5](https://github.com/angular-experts-io/ng-parsel/commit/9dfb3d56431bcbc7df8476fc032843a91d62b82b))
+
 ## [5.1.1](https://github.com/angular-experts-io/ng-parsel/compare/v5.1.0...v5.1.1) (2024-08-21)
 
 
