@@ -1,3 +1,10 @@
+## [5.2.1](https://github.com/angular-experts-io/ng-parsel/compare/v5.2.0...v5.2.1) (2025-04-08)
+
+
+### Bug Fixes
+
+* 🐛 (parser) parse single quote aliases ([a0015b7](https://github.com/angular-experts-io/ng-parsel/commit/a0015b7f5d37f741af461769c24d03844d5bfc6a))
+
 # [5.2.0](https://github.com/angular-experts-io/ng-parsel/compare/v5.1.1...v5.2.0) (2025-04-08)
 
 
