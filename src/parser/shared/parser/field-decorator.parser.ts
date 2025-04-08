@@ -103,7 +103,8 @@ function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[
       ...tsquery(field, 'CallExpression ObjectLiteralExpression PropertyAssignment[name.name="alias"] StringLiteral'),
     ][0]
       ?.getText()
-      .replace(/"/g, '');
+      .replace(/"/g, '')
+      .replace(/'/g, '');
 
     const decorator =
       [
