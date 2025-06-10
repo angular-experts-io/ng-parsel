@@ -36,6 +36,49 @@ describe('Field Decorator', function () {
       });
     });
 
+    it('should parse JSDoc comments for input and output decorators', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                /**
+                 * This is a JSDoc comment for myInput
+                 * @description Input field for the component
+                 */
+                @Input() myInput: string;
+
+                /**
+                 * This is a JSDoc comment for myOutput
+                 * @description Output event for the component
+                 */
+                @Output() myOutput = new EventEmitter();
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: '@Input()',
+          name: 'myInput',
+          type: 'string',
+          field: '@Input() myInput: string',
+          jsDoc: 'This is a JSDoc comment for myInput\n@description Input field for the component',
+        },
+      ];
+
+      const expectedOutputs = [
+        {
+          decorator: '@Output()',
+          name: 'myOutput',
+          initializer: 'new EventEmitter()',
+          field: '@Output() myOutput = new EventEmitter()',
+          jsDoc: 'This is a JSDoc comment for myOutput\n@description Output event for the component',
+        },
+      ];
+
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: expectedOutputs,
+      });
+    });
+
     it('should parse input setters', () => {
       const ast = tsquery.ast(`
             export class MyTestClass {
@@ -76,6 +119,35 @@ describe('Field Decorator', function () {
           type: 'myIcon',
           required: false,
           field: 'test = input<myIcon>();',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+
+    it('should parse JSDoc comments for signal inputs', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                /**
+                 * This is a JSDoc comment for a signal input
+                 * @description Signal input field for the component
+                 */
+                test = input<string>("default value");
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'input',
+          name: 'test',
+          initialValue: '"default value"',
+          type: 'string',
+          required: false,
+          field: 'test = input<string>("default value");',
+          jsDoc:
+            '/**\n                 * This is a JSDoc comment for a signal input\n                 * @description Signal input field for the component\n                 */',
         },
       ];
       expect(parseInputsAndOutputs(ast)).toEqual({
@@ -722,6 +794,33 @@ describe('Field Decorator', function () {
           name: 'counterChange',
           type: 'number',
           field: 'counterChange = output<number>();',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: [],
+        outputs: expectedOutputs,
+      });
+    });
+
+    it('should parse JSDoc comments for outputs', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                /**
+                 * This is a JSDoc comment for an output
+                 * @description Output event for the component
+                 */
+                counterChange = output<number>();
+           }
+        `);
+
+      const expectedOutputs = [
+        {
+          decorator: 'output',
+          name: 'counterChange',
+          type: 'number',
+          field: 'counterChange = output<number>();',
+          jsDoc:
+            '/**\n                 * This is a JSDoc comment for an output\n                 * @description Output event for the component\n                 */',
         },
       ];
       expect(parseInputsAndOutputs(ast)).toEqual({

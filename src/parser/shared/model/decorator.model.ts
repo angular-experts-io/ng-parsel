@@ -6,6 +6,7 @@ export interface NgParselFieldDecorator {
   initializer?: string;
   initialValue?: string | null;
   field: string;
+  jsDoc: string | undefined;
 }
 
 export interface NgParselDecoratorProperties {
