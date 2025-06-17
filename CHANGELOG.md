@@ -1,3 +1,11 @@
+# [5.3.0](https://github.com/angular-experts-io/ng-parsel/compare/v5.2.1...v5.3.0) (2025-06-17)
+
+
+### Features
+
+* 🎸 add jsdocs to demo app ([7ec6924](https://github.com/angular-experts-io/ng-parsel/commit/7ec69244293ef60909b520fd84f0ae44cd4fc776))
+* 🎸 parse JSDocs ([bde0e95](https://github.com/angular-experts-io/ng-parsel/commit/bde0e95249609d59c32314e4cc7d175791527d81))
+
 ## [5.2.1](https://github.com/angular-experts-io/ng-parsel/compare/v5.2.0...v5.2.1) (2025-04-08)
 
 
