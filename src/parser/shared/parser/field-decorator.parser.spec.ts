@@ -146,8 +146,8 @@ describe('Field Decorator', function () {
           type: 'string',
           required: false,
           field: 'test = input<string>("default value");',
-          jsDoc:
-            '/**\n                 * This is a JSDoc comment for a signal input\n                 * @description Signal input field for the component\n                 */',
+          jsDoc: `This is a JSDoc comment for a signal input
+@description Signal input field for the component`,
         },
       ];
       expect(parseInputsAndOutputs(ast)).toEqual({
