@@ -22,8 +22,6 @@ export function parseCommand(cliArgs: { [key: string]: string }) {
 
   const config = loadAndMergeConfig(cliArgs);
 
-  config.src = './test-spa';
-
   const parsedOutput = parse(config);
   writeParsedOutputToDisk(config, parsedOutput);
 
