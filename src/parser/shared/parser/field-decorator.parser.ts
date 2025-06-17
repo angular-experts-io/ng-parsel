@@ -110,7 +110,10 @@ function parseDecoratedPropertyDeclarations(ast: ts.SourceFile): {
 
 function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[] {
   const inputNodes = [
-    ...tsquery(ast, 'PropertyDeclaration:has(CallExpression [name="input"], CallExpression [name="model"])'),
+    ...tsquery(
+      ast,
+      'PropertyDeclaration[initializer.expression.name="model"], PropertyDeclaration[initializer.expression.name="input"]'
+    ),
   ];
   const signalInputs: NgParselFieldDecorator[] = [];
 

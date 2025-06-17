@@ -780,6 +780,39 @@ describe('Field Decorator', function () {
     });
   });
 
+  describe('effect', () => {
+    it('should not parse effect declarations', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                /*
+                  some jsdocs
+                */
+                #effectRef = effect(() => {});
+           }
+        `);
+
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: [],
+        outputs: [],
+      });
+    });
+
+    it('should not parse afterRenderEffect declarations with model in the name', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                #effectModelToDate = afterRenderEffect(() => {
+                  console.log('effect');
+                });
+           }
+        `);
+
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: [],
+        outputs: [],
+      });
+    });
+  });
+
   describe('output', () => {
     it('should parse the new output API', () => {
       const ast = tsquery.ast(`
