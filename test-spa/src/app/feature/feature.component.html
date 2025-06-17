@@ -1,0 +1,34 @@
+<div class="feature-container" [class.dark-theme]="theme === 'dark'">
+  <h2>{{ title }}</h2>
+
+  <div class="counter-section">
+    <p>Current count: {{ counter() }}</p>
+    <p>Doubled count: {{ doubledCounter() }}</p>
+
+    <div class="actions">
+      <button (click)="increment()">Increment</button>
+      <button (click)="decrement()">Decrement</button>
+      <button (click)="reset()">Reset</button>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <p>Component name: {{ name() }}</p>
+    <p>User ID: {{ userId() }}</p>
+    <p>Enabled: {{ isEnabled() ? 'Yes' : 'No' }}</p>
+    <p>Show header: {{ config().showHeader ? 'Yes' : 'No' }}</p>
+    <p>Max items: {{ config().maxItems }}</p>
+  </div>
+
+  <div class="checkbox-section">
+    <label>
+      <input type="checkbox" [checked]="checked()" (change)="checked.set(!checked())" />
+      Toggle me
+    </label>
+  </div>
+
+  <div class="action-section">
+    <button (click)="performAction('save')">Save</button>
+    <button (click)="performAction('cancel')">Cancel</button>
+  </div>
+</div>

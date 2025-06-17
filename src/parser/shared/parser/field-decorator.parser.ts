@@ -3,6 +3,24 @@ import { tsquery } from '@phenomnomnominal/tsquery';
 
 import { NgParselFieldDecorator } from '../model/decorator.model.js';
 
+function extractJSDocComment(node: ts.Node | undefined): string | undefined {
+  if (!node) return undefined;
+
+  const jsDocs = (node as any).jsDoc as ts.JSDoc[] | undefined;
+  if (!jsDocs || jsDocs.length === 0) return undefined;
+
+  const jsDoc = jsDocs[0];
+  let result = (jsDoc?.comment as string) ?? '';
+
+  if (jsDoc?.tags) {
+    for (const tag of jsDoc.tags) {
+      result += `\n@${tag.tagName.getText()} ${tag.comment ?? ''}`;
+    }
+  }
+
+  return result.trim();
+}
+
 export function parseInputsAndOutputs(ast: ts.SourceFile): {
   inputs: NgParselFieldDecorator[];
   outputs: NgParselFieldDecorator[];
@@ -30,11 +48,14 @@ function parseDecoratedSetters(ast: ts.SourceFile): NgParselFieldDecorator[] {
     const name = (decoratedSetters[i] as any)?.name?.getText();
     const type = (decoratedSetters[i] as any)?.parameters[0]?.type?.getText();
 
+    const jsDoc = extractJSDocComment(decoratedSetters[i]);
+
     inputSetters.push({
       decorator: '@Input()',
       name,
       type,
       field: decoratedSetters[i]?.getText() || '',
+      jsDoc,
     });
   }
 
@@ -46,10 +67,10 @@ function parseDecoratedPropertyDeclarations(ast: ts.SourceFile): {
   outputs: NgParselFieldDecorator[];
 } {
   /*
-          This is afaik the only way to get the Decorator name
-            - getDecorators() returns nothing
-            - canHaveDecorators() returns false
-        */
+            This is afaik the only way to get the Decorator name
+              - getDecorators() returns nothing
+              - canHaveDecorators() returns false
+          */
   const decoratorPropertyDecorator = [...tsquery(ast, 'PropertyDeclaration:has(Decorator) > Decorator')];
   const decoratorPropertyDeclaration = [...tsquery(ast, 'PropertyDeclaration:has(Decorator)')];
 
@@ -65,12 +86,15 @@ function parseDecoratedPropertyDeclarations(ast: ts.SourceFile): {
     const initializer = (decoratorPropertyDeclaration[i] as any)?.initializer?.getText();
     const field = `${decorator} ${name}${type ? ': ' + type : ' = ' + initializer}`;
 
+    const jsDoc = extractJSDocComment(decoratorPropertyDeclaration[i]!);
+
     const componentDecorator = {
       decorator: decorator as string,
       name,
       type,
       initializer,
       field,
+      jsDoc,
     };
 
     if (decorator?.startsWith('@Inp')) {
@@ -129,6 +153,8 @@ function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[
         ),
       ][0]?.getText() || 'inferred';
 
+    const jsDoc = extractJSDocComment(input);
+
     if (required) {
       signalInputs.push({
         decorator,
@@ -136,6 +162,7 @@ function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[
         name: alias || name,
         type,
         field,
+        jsDoc,
       });
     } else {
       signalInputs.push({
@@ -145,6 +172,7 @@ function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[
         name: alias || name,
         type,
         field,
+        jsDoc,
       });
     }
   });
@@ -153,6 +181,29 @@ function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[
 }
 
 function parseNewOutputAPI(ast: ts.SourceFile): NgParselFieldDecorator[] {
+  // First, try to find JSDoc comments directly in the source file
+  const fullText = ast.getFullText();
+  const jsDocRegex = /\/\*\*([\s\S]*?)\*\//g;
+  const jsDocMatches: { [key: string]: string } = {};
+
+  let match;
+  while ((match = jsDocRegex.exec(fullText)) !== null) {
+    // Find the next non-whitespace character after the JSDoc comment
+    let nextNonWhitespace = match.index + match[0].length;
+    while (nextNonWhitespace < fullText.length && /\s/.test(fullText[nextNonWhitespace]!)) {
+      nextNonWhitespace++;
+    }
+
+    // Extract the field name if it's followed by an output declaration
+    if (nextNonWhitespace < fullText.length) {
+      const remainingText = fullText.substring(nextNonWhitespace);
+      const outputMatch = /(\w+)\s*=\s*output/.exec(remainingText);
+      if (outputMatch) {
+        jsDocMatches[outputMatch[1]!] = match[0];
+      }
+    }
+  }
+
   const outputNodes = [...tsquery(ast, 'PropertyDeclaration:has(CallExpression:has([name="output"]))')];
   const outPutnodesFromObservable = [
     ...tsquery(ast, 'PropertyDeclaration:has(CallExpression:has([name="outputFromObservable"]))'),
@@ -167,11 +218,18 @@ function parseNewOutputAPI(ast: ts.SourceFile): NgParselFieldDecorator[] {
     const name = [...tsquery(field, 'BinaryExpression > Identifier')][0]?.getText() || '';
     const type = [...tsquery(field, 'CallExpression > *:last-child')][0]?.getText() || '';
 
+    // Try to get JSDoc from our map first, then fall back to extractJSDocComment
+    let jsDoc = jsDocMatches[name];
+    if (!jsDoc) {
+      jsDoc = extractJSDocComment(node);
+    }
+
     if (isObservableOutput) {
       outputs.push({
         decorator: 'outputFromObservable',
         name,
         field,
+        jsDoc,
       });
     } else {
       outputs.push({
@@ -179,6 +237,7 @@ function parseNewOutputAPI(ast: ts.SourceFile): NgParselFieldDecorator[] {
         name,
         type,
         field,
+        jsDoc,
       });
     }
   });

@@ -539,6 +539,14 @@
     <pre *ngSwitchCase="'build'">ng build</pre>
   </div>
 
+  <!-- Feature Component -->
+  <h2>Feature Component Demo</h2>
+  <app-feature
+    userId="user123"
+    (counterChanged)="onCounterChanged($event)"
+    (actionPerformed)="onActionPerformed($event)"
+  ></app-feature>
+
   <!-- Links -->
   <div class="card-container">
     <a
