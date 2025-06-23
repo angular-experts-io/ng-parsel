@@ -1,3 +1,11 @@
+## [5.3.1](https://github.com/angular-experts-io/ng-parsel/compare/v5.3.0...v5.3.1) (2025-06-23)
+
+
+### Bug Fixes
+
+* 🐛 do not parse model in effects ([76c0591](https://github.com/angular-experts-io/ng-parsel/commit/76c05915d4356dc1e824be147bcbae87b9fbd418))
+* 🐛 improve robustness of model / input parsing ([02e36ee](https://github.com/angular-experts-io/ng-parsel/commit/02e36eefda4a63a7df5f9c3317181443e4d0c62f))
+
 # [5.3.0](https://github.com/angular-experts-io/ng-parsel/compare/v5.2.1...v5.3.0) (2025-06-17)
 
 
