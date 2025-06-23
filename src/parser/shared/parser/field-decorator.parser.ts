@@ -112,7 +112,7 @@ function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[
   const inputNodes = [
     ...tsquery(
       ast,
-      'PropertyDeclaration[initializer.expression.name="model"], PropertyDeclaration[initializer.expression.name="input"]'
+      'PropertyDeclaration[initializer.expression.name="model"], PropertyDeclaration[initializer.expression.name="input"], PropertyDeclaration[initializer.expression.expression.name="model"], PropertyDeclaration[initializer.expression.expression.name="input"]'
     ),
   ];
   const signalInputs: NgParselFieldDecorator[] = [];
