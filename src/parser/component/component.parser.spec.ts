@@ -180,4 +180,19 @@ describe('ComponentParser', () => {
 
     expect(parseComponent(ast, 'foo.component.ts').cva).toBeTruthy();
   });
+
+  it('should be able to parse a component with an empty template', () => {
+    const ast = tsquery.ast(`
+            @Component({
+                selector: 'my-test-comp',
+                template: '',
+                styles: []
+            })
+            export class MyTestComponent implements ControlValueAccessor{}
+        `);
+
+    jest.spyOn(fs, 'readFileSync').mockReturnValue('');
+
+    expect(parseComponent(ast, 'foo.component.ts').template).toBe('');
+  });
 });

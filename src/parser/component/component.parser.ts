@@ -48,7 +48,10 @@ function isCva(ast: ts.SourceFile): boolean {
   );
 }
 
-function fetchFileContent(filePath: string, componentFilePath: string): string {
+function fetchFileContent(filePath: string | undefined, componentFilePath: string): string {
+  if (!filePath) {
+    return '';
+  }
   const filePathFragements = componentFilePath.split('/');
   filePathFragements.pop();
   const componentDirectory = filePathFragements.join('/');
