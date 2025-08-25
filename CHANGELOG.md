@@ -1,3 +1,10 @@
+## [5.3.2](https://github.com/angular-experts-io/ng-parsel/compare/v5.3.1...v5.3.2) (2025-08-25)
+
+
+### Bug Fixes
+
+* 🐛 handle undefined file paths in component parser ([7607313](https://github.com/angular-experts-io/ng-parsel/commit/76073130413a51d2e0a0445c83f4711a3a1cc03b))
+
 ## [5.3.1](https://github.com/angular-experts-io/ng-parsel/compare/v5.3.0...v5.3.1) (2025-06-23)
 
 
