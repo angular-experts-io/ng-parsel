@@ -33,6 +33,7 @@ export function parseComponent(ast: ts.SourceFile, componentFilePath: string): N
     standalone: componentDecorators.standalone || false,
     template: template,
     cva: isCva(ast),
+    onPush: isOnPushChangeDetection(ast),
     styles: styles,
     implementation: componentImplementation,
     inputs: inputsAndOutputs.inputs,
@@ -46,6 +47,22 @@ function isCva(ast: ts.SourceFile): boolean {
     tsquery(ast, 'HeritageClause > ExpressionWithTypeArguments > Identifier:has([escapedText="ControlValueAccessor"])')
       .length > 0
   );
+}
+
+function isOnPushChangeDetection(ast: ts.SourceFile): boolean {
+  const changeDetectionNodes = tsquery(
+    ast,
+    'Decorator > CallExpression > ObjectLiteralExpression > PropertyAssignment:has(Identifier[name="changeDetection"])'
+  );
+
+  if (changeDetectionNodes.length === 0) {
+    return false;
+  }
+
+  const changeDetectionNode = changeDetectionNodes[0] as ts.PropertyAssignment;
+  const initializer = changeDetectionNode.initializer.getText();
+
+  return initializer.includes('ChangeDetectionStrategy.OnPush');
 }
 
 function fetchFileContent(filePath: string | undefined, componentFilePath: string): string {

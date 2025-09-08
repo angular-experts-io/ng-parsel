@@ -38,6 +38,7 @@ describe('ComponentParser', () => {
       selector: 'my-test-comp',
       standalone: false,
       cva: false,
+      onPush: false,
       template: inlineTemplate,
       styles: [styles],
       inputs: [
@@ -47,6 +48,7 @@ describe('ComponentParser', () => {
           type: 'string',
           initializer: undefined,
           field: '@Input() foo: string',
+          jsDoc: undefined,
         },
       ],
       outputs: [
@@ -56,6 +58,7 @@ describe('ComponentParser', () => {
           type: undefined,
           initializer: 'new EventEmitter()',
           field: '@Output() bar = new EventEmitter()',
+          jsDoc: undefined,
         },
       ],
       implementation,
@@ -103,6 +106,7 @@ describe('ComponentParser', () => {
       selector: 'my-test-comp',
       standalone: true,
       cva: false,
+      onPush: false,
       template: inlineTemplate,
       styles: [styles],
       inputs: [
@@ -112,6 +116,7 @@ describe('ComponentParser', () => {
           type: 'string',
           initializer: undefined,
           field: '@Input() foo: string',
+          jsDoc: undefined,
         },
       ],
       outputs: [
@@ -121,6 +126,7 @@ describe('ComponentParser', () => {
           type: undefined,
           initializer: 'new EventEmitter()',
           field: '@Output() bar = new EventEmitter()',
+          jsDoc: undefined,
         },
       ],
       implementation,
@@ -194,5 +200,36 @@ describe('ComponentParser', () => {
     jest.spyOn(fs, 'readFileSync').mockReturnValue('');
 
     expect(parseComponent(ast, 'foo.component.ts').template).toBe('');
+  });
+
+  it('should detect OnPush change detection strategy', () => {
+    const ast = tsquery.ast(`
+            @Component({
+                selector: 'my-test-comp',
+                template: '<h1>Foo</h1>',
+                styles: [],
+                changeDetection: ChangeDetectionStrategy.OnPush
+            })
+            export class MyTestComponent {}
+        `);
+
+    jest.spyOn(fs, 'readFileSync').mockReturnValue('');
+
+    expect(parseComponent(ast, 'foo.component.ts').onPush).toBeTruthy();
+  });
+
+  it('should default to false for change detection strategy when not specified', () => {
+    const ast = tsquery.ast(`
+            @Component({
+                selector: 'my-test-comp',
+                template: '<h1>Foo</h1>',
+                styles: []
+            })
+            export class MyTestComponent {}
+        `);
+
+    jest.spyOn(fs, 'readFileSync').mockReturnValue('');
+
+    expect(parseComponent(ast, 'foo.component.ts').onPush).toBeFalsy();
   });
 });
