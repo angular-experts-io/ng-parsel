@@ -1,3 +1,10 @@
+# [5.4.0](https://github.com/angular-experts-io/ng-parsel/compare/v5.3.2...v5.4.0) (2025-09-08)
+
+
+### Features
+
+* 🎸 detect OnPush change detection strategy in parser ([e6ee246](https://github.com/angular-experts-io/ng-parsel/commit/e6ee246c2b2865654ae44b55bd676d44b8ddc503))
+
 ## [5.3.2](https://github.com/angular-experts-io/ng-parsel/compare/v5.3.1...v5.3.2) (2025-08-25)
 
 
