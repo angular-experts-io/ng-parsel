@@ -4,14 +4,40 @@ import { tsquery } from '@phenomnomnominal/tsquery';
 import { NgParselArgs } from '../model/args.model.js';
 import { NgParselMethod } from '../model/method.model.js';
 
-export function parseExplicitPublicMethods(ast: ts.SourceFile): NgParselMethod[] {
-  const explicitMethods = tsquery(ast, 'MethodDeclaration:has(PublicKeyword)');
+/**
+ * Extracts JSDoc comments from a TypeScript node
+ * @param node The TypeScript node to extract JSDoc comments from
+ * @returns The extracted JSDoc comment as a string, or undefined if no JSDoc comment exists
+ */
+function extractJSDocComment(node: ts.Node | undefined): string | undefined {
+  if (!node) return undefined;
 
-  return explicitMethods.map((method: any) => {
+  const jsDocs = (node as any).jsDoc as ts.JSDoc[] | undefined;
+  if (!jsDocs || jsDocs.length === 0) return undefined;
+
+  const jsDoc = jsDocs[0];
+  let result = (jsDoc?.comment as string) ?? '';
+
+  if (jsDoc?.tags) {
+    for (const tag of jsDoc.tags) {
+      result += `\n@${tag.tagName.getText()} ${tag.comment ?? ''}`;
+    }
+  }
+
+  return result.trim();
+}
+
+export function parseExplicitPublicMethods(ast: ts.SourceFile): NgParselMethod[] {
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const explicitMethods = tsquery(ast, 'MethodDeclaration:has(PublicKeyword)') as any[];
+
+  return explicitMethods.map((method) => {
     return {
       name: method.name.getText(),
       args: method.parameters.map((parameters: ts.ParameterDeclaration) => parseMethodParameters(parameters)),
       returnType: method.type?.getText(),
+      jsDoc: extractJSDocComment(method),
     };
   });
 }
