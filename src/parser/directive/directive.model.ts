@@ -10,4 +10,5 @@ export interface NgParselDirective extends NgParselOutput {
   inputs: NgParselFieldDecorator[];
   outputs: NgParselFieldDecorator[];
   methodsPublicExplicit: NgParselMethod[];
+  classJsDoc?: string | undefined;
 }

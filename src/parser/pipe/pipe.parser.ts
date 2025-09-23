@@ -1,7 +1,7 @@
 import * as ts from 'typescript';
 import { readFileSync } from 'fs';
 
-import { parseClassName } from '../shared/parser/class.parser.js';
+import { parseClassName, parseClassJsDoc } from '../shared/parser/class.parser.js';
 import { NgParselOutputType } from '../shared/model/types.model.js';
 import { getDecoratorProperties } from '../shared/parser/decorator.parser.js';
 
@@ -19,5 +19,6 @@ export function parsePipe(ast: ts.SourceFile, pipeFilePath: string): NgParselPip
     pure: pipeDecorators.pure || true,
     standalone: pipeDecorators.standalone || false,
     implementation: pipeImplementation,
+    classJsDoc: parseClassJsDoc(ast),
   };
 }

@@ -6,7 +6,7 @@ import { tsquery } from '@phenomnomnominal/tsquery';
 import { parseInputsAndOutputs } from '../shared/parser/field-decorator.parser.js';
 import { parseExplicitPublicMethods } from '../shared/parser/method.parser.js';
 import { NgParselOutputType } from '../shared/model/types.model.js';
-import { parseClassName } from '../shared/parser/class.parser.js';
+import { parseClassName, parseClassJsDoc } from '../shared/parser/class.parser.js';
 
 import { NgParselComponent } from './component.model.js';
 import { getDecoratorProperties } from '../shared/parser/decorator.parser.js';
@@ -39,6 +39,7 @@ export function parseComponent(ast: ts.SourceFile, componentFilePath: string): N
     inputs: inputsAndOutputs.inputs,
     outputs: inputsAndOutputs.outputs,
     methodsPublicExplicit: parseExplicitPublicMethods(ast),
+    classJsDoc: parseClassJsDoc(ast),
   };
 }
 

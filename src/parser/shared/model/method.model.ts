@@ -4,4 +4,5 @@ export interface NgParselMethod {
   name: string;
   args: NgParselArgs[];
   returnType: string;
+  jsDoc?: string | undefined;
 }

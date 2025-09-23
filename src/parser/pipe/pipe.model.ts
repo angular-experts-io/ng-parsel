@@ -6,4 +6,5 @@ export interface NgParselPipe extends NgParselOutput {
   pure: boolean;
   standalone: boolean;
   implementation: string;
+  classJsDoc?: string | undefined;
 }
