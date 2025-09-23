@@ -1,3 +1,10 @@
+# [5.5.0](https://github.com/angular-experts-io/ng-parsel/compare/v5.4.0...v5.5.0) (2025-09-23)
+
+
+### Features
+
+* 🎸 add JSDoc parsing for classes and methods ([fd9615e](https://github.com/angular-experts-io/ng-parsel/commit/fd9615ee5872c94c3fe60446dfa9f5d3db3757ef))
+
 # [5.4.0](https://github.com/angular-experts-io/ng-parsel/compare/v5.3.2...v5.4.0) (2025-09-08)
 
 
