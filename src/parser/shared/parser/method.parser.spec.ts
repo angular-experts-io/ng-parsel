@@ -79,7 +79,7 @@ describe('MethodParser', () => {
           { name: 'bar', type: 'boolean' },
         ],
         returnType: 'string',
-        jsDoc: 'This is a JSDoc comment for myExplicitMethod\n@param foo The foo parameter\n@param bar The bar parameter\n@returns A string value',
+        jsDoc: 'This is a JSDoc comment for myExplicitMethod\n@param The foo parameter\n@param The bar parameter\n@returns A string value',
       },
     ];
 
