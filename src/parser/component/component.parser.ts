@@ -10,6 +10,7 @@ import { parseClassName, parseClassJsDoc } from '../shared/parser/class.parser.j
 
 import { NgParselComponent } from './component.model.js';
 import { getDecoratorProperties } from '../shared/parser/decorator.parser.js';
+import { parseExplicitPublicFields } from '../shared/parser/field.parser.js';
 
 export function parseComponent(ast: ts.SourceFile, componentFilePath: string): NgParselComponent {
   const componentDecorators = getDecoratorProperties(ast);
@@ -39,6 +40,7 @@ export function parseComponent(ast: ts.SourceFile, componentFilePath: string): N
     inputs: inputsAndOutputs.inputs,
     outputs: inputsAndOutputs.outputs,
     methodsPublicExplicit: parseExplicitPublicMethods(ast),
+    fieldsPublicExplicit: parseExplicitPublicFields(ast),
     classJsDoc: parseClassJsDoc(ast),
   };
 }
