@@ -15,6 +15,8 @@ describe('DirectiveParser', () => {
     const implementation = `export class MyTestDirective {
                 @Input() foo: string;
                 @Output() bar = new EventEmitter();
+                
+                public value = signal<string>('');
             }`;
 
     const ast = tsquery.ast(`
@@ -49,6 +51,11 @@ describe('DirectiveParser', () => {
       ],
       implementation,
       methodsPublicExplicit: [],
+      fieldsPublicExplicit: [{
+        name: 'value',
+        type: 'inferred',
+        value: `signal<string>('')`,
+      }]
     };
     jest.spyOn(fs, 'readFileSync').mockReturnValue(implementation);
 
@@ -95,6 +102,7 @@ describe('DirectiveParser', () => {
       ],
       implementation,
       methodsPublicExplicit: [],
+      fieldsPublicExplicit: [],
     };
     jest.spyOn(fs, 'readFileSync').mockReturnValue(implementation);
 

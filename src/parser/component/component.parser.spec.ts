@@ -17,6 +17,8 @@ describe('ComponentParser', () => {
                 @Input() foo: string;
                 @Output() bar = new EventEmitter();
                 
+                public value = signal<string>('');
+                
                 public foo(bar: string): string {
                 }
                 
@@ -69,6 +71,11 @@ describe('ComponentParser', () => {
           returnType: 'string',
         },
       ],
+      fieldsPublicExplicit: [{
+        name: 'value',
+        type: 'inferred',
+        value: `signal<string>('')`,
+      }],
     };
     jest.spyOn(fs, 'readFileSync').mockReturnValue(implementation);
 
@@ -137,6 +144,7 @@ describe('ComponentParser', () => {
           returnType: 'string',
         },
       ],
+      fieldsPublicExplicit: [],
     };
     jest.spyOn(fs, 'readFileSync').mockReturnValue(implementation);
 

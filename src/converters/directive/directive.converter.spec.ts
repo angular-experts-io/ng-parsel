@@ -14,6 +14,7 @@ describe('Directive converter', () => {
         outputs: [],
         implementation: '',
         methodsPublicExplicit: [],
+        fieldsPublicExplicit: [],
       },
       {
         type: NgParselOutputType.DIRECTIVE,
@@ -25,6 +26,7 @@ describe('Directive converter', () => {
         outputs: [],
         implementation: '',
         methodsPublicExplicit: [],
+        fieldsPublicExplicit: [],
       },
       {
         type: NgParselOutputType.DIRECTIVE,
@@ -36,6 +38,7 @@ describe('Directive converter', () => {
         outputs: [],
         implementation: '',
         methodsPublicExplicit: [],
+        fieldsPublicExplicit: [],
       },
     ];
 

@@ -18,6 +18,7 @@ describe('Component converter', () => {
         template: '',
         styles: '',
         methodsPublicExplicit: [],
+        fieldsPublicExplicit: [],
       },
       {
         type: NgParselOutputType.COMPONENT,
@@ -33,6 +34,7 @@ describe('Component converter', () => {
         template: '',
         styles: '',
         methodsPublicExplicit: [],
+        fieldsPublicExplicit: [],
       },
       {
         type: NgParselOutputType.COMPONENT,
@@ -48,6 +50,7 @@ describe('Component converter', () => {
         template: '',
         styles: '',
         methodsPublicExplicit: [],
+        fieldsPublicExplicit: [],
       },
     ];
 
