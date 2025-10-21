@@ -1,3 +1,10 @@
+# [5.6.0](https://github.com/angular-experts-io/ng-parsel/compare/v5.5.0...v5.6.0) (2025-10-21)
+
+
+### Features
+
+* 🎸 parse fields public explicit for directive & component ([efdc740](https://github.com/angular-experts-io/ng-parsel/commit/efdc7407676e8978090591ce98a9c7edfcee8d6b))
+
 # [5.5.0](https://github.com/angular-experts-io/ng-parsel/compare/v5.4.0...v5.5.0) (2025-09-23)
 
 
