@@ -36,7 +36,9 @@ describe('ClassParser', () => {
         }
     `);
 
-    expect(parseClassJsDoc(ast)).toEqual('This is a JSDoc comment for MyTestClass\n@description A test class\n@example const myClass = new MyTestClass();');
+    expect(parseClassJsDoc(ast)).toEqual(
+      'This is a JSDoc comment for MyTestClass\n@description A test class\n@example const myClass = new MyTestClass();',
+    );
   });
 
   it('should parse JSDoc comments with multiple tags', () => {
@@ -54,6 +56,8 @@ describe('ClassParser', () => {
         }
     `);
 
-    expect(parseClassJsDoc(ast)).toEqual('This is a JSDoc comment for MyTestClass\n@description A test class\n@deprecated Use NewTestClass instead\n@since 1.0.0');
+    expect(parseClassJsDoc(ast)).toEqual(
+      'This is a JSDoc comment for MyTestClass\n@description A test class\n@deprecated Use NewTestClass instead\n@since 1.0.0',
+    );
   });
 });

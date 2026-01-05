@@ -28,6 +28,6 @@ export function convertToComponentStats(componentStats: NgParselComponent[]): Ng
       moduleBased: 0,
       cva: 0,
       total: 0,
-    }
+    },
   );
 }

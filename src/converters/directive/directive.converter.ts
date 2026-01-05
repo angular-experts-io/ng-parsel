@@ -21,6 +21,6 @@ export function convertToDirectiveStats(directiveStats: NgParselDirective[]): Ng
       standalone: 0,
       moduleBased: 0,
       total: 0,
-    }
+    },
   );
 }

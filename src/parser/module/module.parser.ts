@@ -43,7 +43,7 @@ function getDecoratorPropertyValue(ast: ts.SourceFile, identifier: string): stri
   return [
     ...tsquery(
       ast,
-      `Decorator > CallExpression > ObjectLiteralExpression > PropertyAssignment:has(Identifier[escapedText="${identifier}"]) > ArrayLiteralExpression > Identifier`
+      `Decorator > CallExpression > ObjectLiteralExpression > PropertyAssignment:has(Identifier[escapedText="${identifier}"]) > ArrayLiteralExpression > Identifier`,
     ),
   ].map((identifier: any) => identifier.getText());
 }
@@ -52,7 +52,7 @@ function getDecoratorPropertyObject(ast: ts.SourceFile, identifier: string): str
   return [
     ...tsquery(
       ast,
-      `Decorator > CallExpression > ObjectLiteralExpression > PropertyAssignment:has(Identifier[escapedText="${identifier}"]) > ArrayLiteralExpression > ObjectLiteralExpression`
+      `Decorator > CallExpression > ObjectLiteralExpression > PropertyAssignment:has(Identifier[escapedText="${identifier}"]) > ArrayLiteralExpression > ObjectLiteralExpression`,
     ),
   ].map((identifier: any) => identifier.getText());
 }

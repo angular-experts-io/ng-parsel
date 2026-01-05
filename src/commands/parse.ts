@@ -42,7 +42,7 @@ function writeParsedOutputToDisk(config: NgParselConfig, parseOutput: NgParselOu
       parseOutput.ngParselSpecs,
       parseOutput.ngParselHarnesses,
       parseOutput.ngParselPipes,
-      parseOutput.ngParselValidators
+      parseOutput.ngParselValidators,
     );
 
     writeOutputSpinner.succeed(`Files successfully written to ${config.out}`);
@@ -60,7 +60,7 @@ function writeOutputFiles(
   ngParselSpecs: NgParselSpec[],
   ngParselHarnesses: NgParselHarness[],
   ngParselPipes: NgParselPipe[],
-  ngParselValidators: NgParselValidator[]
+  ngParselValidators: NgParselValidator[],
 ): void {
   if (!existsSync(config.out as string)) {
     mkdirSync(config.out as string, { recursive: true });

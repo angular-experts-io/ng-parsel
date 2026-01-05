@@ -19,7 +19,7 @@ program.version(
            But import assertions are not supported by Node 14.
            */
   JSON.parse(readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), '../../package.json')).toString() as any)
-    .version
+    .version,
 );
 
 program

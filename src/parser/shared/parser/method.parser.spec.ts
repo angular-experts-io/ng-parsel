@@ -28,6 +28,40 @@ describe('MethodParser', () => {
     expect(parseExplicitPublicMethods(ast)).toEqual(expectedOutput);
   });
 
+  it('should parse all methods', () => {
+    const ast = tsquery.ast(`
+        export class MyTestClass {
+            public myExplicitMethod(foo: string, bar: boolean): string {
+            }
+        
+            myMethod(foo: string, bar: boolean): string {
+            }
+        `);
+
+    const expectedOutput = [
+      {
+        name: 'myExplicitMethod',
+        args: [
+          { name: 'foo', type: 'string' },
+          { name: 'bar', type: 'boolean' },
+        ],
+        returnType: 'string',
+        jsDoc: undefined,
+      },
+      {
+        name: 'myMethod',
+        args: [
+          { name: 'foo', type: 'string' },
+          { name: 'bar', type: 'boolean' },
+        ],
+        returnType: 'string',
+        jsDoc: undefined,
+      },
+    ];
+
+    expect(parseExplicitPublicMethods(ast)).toEqual(expectedOutput);
+  });
+
   it('should parse the static explicit public methods', () => {
     const ast = tsquery.ast(`
         export class MyTestClass {
@@ -79,7 +113,8 @@ describe('MethodParser', () => {
           { name: 'bar', type: 'boolean' },
         ],
         returnType: 'string',
-        jsDoc: 'This is a JSDoc comment for myExplicitMethod\n@param The foo parameter\n@param The bar parameter\n@returns A string value',
+        jsDoc:
+          'This is a JSDoc comment for myExplicitMethod\n@param The foo parameter\n@param The bar parameter\n@returns A string value',
       },
     ];
 

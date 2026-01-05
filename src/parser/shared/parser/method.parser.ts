@@ -3,6 +3,7 @@ import { tsquery } from '@phenomnomnominal/tsquery';
 
 import { NgParselArgs } from '../model/args.model.js';
 import { NgParselMethod } from '../model/method.model.js';
+import { AccessType } from '../model/common.model.js';
 
 /**
  * Extracts JSDoc comments from a TypeScript node
@@ -28,7 +29,6 @@ function extractJSDocComment(node: ts.Node | undefined): string | undefined {
 }
 
 export function parseExplicitPublicMethods(ast: ts.SourceFile): NgParselMethod[] {
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const explicitMethods = tsquery(ast, 'MethodDeclaration:has(PublicKeyword)') as any[];
 
@@ -38,6 +38,34 @@ export function parseExplicitPublicMethods(ast: ts.SourceFile): NgParselMethod[]
       args: method.parameters.map((parameters: ts.ParameterDeclaration) => parseMethodParameters(parameters)),
       returnType: method.type?.getText(),
       jsDoc: extractJSDocComment(method),
+      accessType: 'public',
+    };
+  });
+}
+
+export function parseMethods(ast: ts.SourceFile): NgParselMethod[] {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const methods = tsquery(ast, 'MethodDeclaration') as any[];
+  return methods.map((method) => {
+    // determine access type from modifiers
+    const modifiers = (method.modifiers as ts.NodeArray<ts.Modifier>) ?? undefined;
+
+    const kind = modifiers?.find((m) => m.kind)?.kind;
+    const accessType: AccessType =
+      kind === ts.SyntaxKind.PublicKeyword
+        ? 'public'
+        : kind === ts.SyntaxKind.ProtectedKeyword
+          ? 'protected'
+          : kind === ts.SyntaxKind.PrivateKeyword
+            ? 'private'
+            : 'implicitPublic';
+
+    return {
+      name: method.name.getText(),
+      args: method.parameters.map((parameters: ts.ParameterDeclaration) => parseMethodParameters(parameters)),
+      returnType: method.type?.getText(),
+      jsDoc: extractJSDocComment(method),
+      accessType,
     };
   });
 }

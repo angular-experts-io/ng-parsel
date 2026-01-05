@@ -1,6 +1,6 @@
 import * as ts from 'typescript';
 
-import { parseExplicitPublicMethods } from '../shared/parser/method.parser.js';
+import { parseExplicitPublicMethods, parseMethods } from '../shared/parser/method.parser.js';
 import { NgParselOutputType } from '../shared/model/types.model.js';
 import { parseClassName } from '../shared/parser/class.parser.js';
 
@@ -11,6 +11,7 @@ export function parseHarnesses(ast: ts.SourceFile, harnessFilePath: string): NgP
     className: parseClassName(ast),
     type: NgParselOutputType.HARNESS,
     filePath: harnessFilePath,
+    methods: parseMethods(ast),
     methodsPublicExplicit: parseExplicitPublicMethods(ast),
   };
 }

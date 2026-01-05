@@ -71,11 +71,13 @@ describe('ComponentParser', () => {
           returnType: 'string',
         },
       ],
-      fieldsPublicExplicit: [{
-        name: 'value',
-        type: 'inferred',
-        value: `signal<string>('')`,
-      }],
+      fieldsPublicExplicit: [
+        {
+          name: 'value',
+          type: 'inferred',
+          value: `signal<string>('')`,
+        },
+      ],
     };
     jest.spyOn(fs, 'readFileSync').mockReturnValue(implementation);
 

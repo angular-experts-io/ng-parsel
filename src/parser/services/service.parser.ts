@@ -2,7 +2,7 @@ import * as ts from 'typescript';
 
 import { NgParselOutputType } from '../shared/model/types.model.js';
 import { parseClassName, parseClassJsDoc } from '../shared/parser/class.parser.js';
-import { parseExplicitPublicMethods } from '../shared/parser/method.parser.js';
+import { parseExplicitPublicMethods, parseMethods } from '../shared/parser/method.parser.js';
 
 import { NgParselService } from './service.model.js';
 import { parseExplicitPublicFields } from '../shared/parser/field.parser.js';
@@ -13,6 +13,7 @@ export function parseService(ast: ts.SourceFile, filePath: string): NgParselServ
     className: parseClassName(ast),
     filePath,
     fieldsPublicExplicit: parseExplicitPublicFields(ast),
+    methods: parseMethods(ast),
     methodsPublicExplicit: parseExplicitPublicMethods(ast),
     classJsDoc: parseClassJsDoc(ast),
   };
