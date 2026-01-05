@@ -1,3 +1,11 @@
+# [5.7.0](https://github.com/angular-experts-io/ng-parsel/compare/v5.6.0...v5.7.0) (2026-01-05)
+
+
+### Features
+
+* cva for directives ([3d6b792](https://github.com/angular-experts-io/ng-parsel/commit/3d6b79254e43404f8c1be6f40702c8e84501a3e2))
+* parse all methods ([8107e52](https://github.com/angular-experts-io/ng-parsel/commit/8107e5201a9d17dbbbb6c96d8542198df267b724))
+
 # [5.6.0](https://github.com/angular-experts-io/ng-parsel/compare/v5.5.0...v5.6.0) (2025-10-21)
 
 
