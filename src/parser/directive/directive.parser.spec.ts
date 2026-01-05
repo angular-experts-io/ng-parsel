@@ -31,6 +31,7 @@ describe('DirectiveParser', () => {
       filePath,
       selector: '[myTestDirective]',
       standalone: false,
+      cva: false,
       inputs: [
         {
           decorator: '@Input()',
@@ -88,6 +89,7 @@ describe('DirectiveParser', () => {
       filePath,
       selector: '[myTestDirective]',
       standalone: true,
+      cva: false,
       inputs: [
         {
           decorator: '@Input()',

@@ -1,14 +1,15 @@
 import { readFileSync } from 'fs';
 import * as ts from 'typescript';
 
-import { parseClassName, parseClassJsDoc } from '../shared/parser/class.parser.js';
+import { isCva } from '../shared/parser/cva.parser.js';
 import { NgParselOutputType } from '../shared/model/types.model.js';
-import { getDecoratorProperties } from '../shared/parser/decorator.parser.js';
 import { parseInputsAndOutputs } from '../shared/parser/field-decorator.parser.js';
+import { getDecoratorProperties } from '../shared/parser/decorator.parser.js';
+import { parseExplicitPublicFields } from '../shared/parser/field.parser.js';
+import { parseClassName, parseClassJsDoc } from '../shared/parser/class.parser.js';
+import { parseExplicitPublicMethods, parseMethods } from '../shared/parser/method.parser.js';
 
 import { NgParselDirective } from './directive.model.js';
-import { parseExplicitPublicMethods, parseMethods } from '../shared/parser/method.parser.js';
-import { parseExplicitPublicFields } from '../shared/parser/field.parser.js';
 
 export function parseDirective(ast: ts.SourceFile, directiveFilePath: string): NgParselDirective {
   const directiveDecorators = getDecoratorProperties(ast);
@@ -23,6 +24,7 @@ export function parseDirective(ast: ts.SourceFile, directiveFilePath: string): N
     filePath: directiveFilePath,
     selector: directiveDecorators.selector as string,
     standalone: directiveDecorators.standalone || false,
+    cva: isCva(ast),
     implementation: directiveImplementation,
     inputs: inputsAndOutputs.inputs,
     outputs: inputsAndOutputs.outputs,
