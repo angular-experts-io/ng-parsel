@@ -1,3 +1,11 @@
+# [5.8.0](https://github.com/angular-experts-io/ng-parsel/compare/v5.7.0...v5.8.0) (2026-01-05)
+
+
+### Features
+
+* extends ([88a569d](https://github.com/angular-experts-io/ng-parsel/commit/88a569d1a419ecd3f997b29b939a01ed81c6edc3))
+* extends ([9fdac1c](https://github.com/angular-experts-io/ng-parsel/commit/9fdac1c8d06f3629b4fce7016d3700879d83e949))
+
 # [5.7.0](https://github.com/angular-experts-io/ng-parsel/compare/v5.6.0...v5.7.0) (2026-01-05)
 
 
