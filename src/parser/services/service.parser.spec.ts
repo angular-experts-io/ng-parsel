@@ -25,6 +25,32 @@ describe('ServiceParser', () => {
       className,
       filePath,
       fieldsPublicExplicit: [],
+      methods: [
+        {
+          name: 'foo',
+          args: [
+            {
+              name: 'bar',
+              type: 'string',
+            },
+          ],
+          returnType: 'string',
+          jsDoc: undefined,
+          accessType: 'public',
+        },
+        {
+          name: 'bar',
+          args: [
+            {
+              name: 'foo',
+              type: 'string',
+            },
+          ],
+          returnType: 'string',
+          jsDoc: undefined,
+          accessType: 'publicImplicit',
+        },
+      ],
       methodsPublicExplicit: [
         {
           name: 'foo',
@@ -35,8 +61,10 @@ describe('ServiceParser', () => {
             },
           ],
           returnType: 'string',
+          accessType: 'public',
         },
       ],
+      classJsDoc: undefined,
     };
 
     const parselOutput = parseService(ast, filePath);
@@ -61,7 +89,34 @@ describe('ServiceParser', () => {
       className,
       filePath,
       fieldsPublicExplicit: [],
+      methods: [
+        {
+          name: 'foo',
+          args: [
+            {
+              name: 'bar',
+              type: 'string',
+            },
+          ],
+          returnType: 'string',
+          jsDoc: undefined,
+          accessType: 'publicImplicit',
+        },
+        {
+          name: 'bar',
+          args: [
+            {
+              name: 'foo',
+              type: 'string',
+            },
+          ],
+          returnType: 'string',
+          jsDoc: undefined,
+          accessType: 'publicImplicit',
+        },
+      ],
       methodsPublicExplicit: [],
+      classJsDoc: undefined,
     };
 
     const parselOutput = parseService(ast, filePath);
@@ -107,7 +162,34 @@ describe('ServiceParser', () => {
           type: 'Subject<number>',
         },
       ],
+      methods: [
+        {
+          name: 'foo',
+          args: [
+            {
+              name: 'bar',
+              type: 'string',
+            },
+          ],
+          returnType: 'string',
+          jsDoc: undefined,
+          accessType: 'publicImplicit',
+        },
+        {
+          name: 'bar',
+          args: [
+            {
+              name: 'foo',
+              type: 'string',
+            },
+          ],
+          returnType: 'string',
+          jsDoc: undefined,
+          accessType: 'publicImplicit',
+        },
+      ],
       methodsPublicExplicit: [],
+      classJsDoc: undefined,
     };
 
     const parselOutput = parseService(ast, filePath);

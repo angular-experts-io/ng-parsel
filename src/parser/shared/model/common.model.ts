@@ -1,1 +1,1 @@
-export type AccessType = 'implicitPublic' | 'public' | 'protected' | 'private';
+export type AccessType = 'publicImplicit' | 'public' | 'protected' | 'private';

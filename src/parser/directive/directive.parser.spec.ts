@@ -38,6 +38,7 @@ describe('DirectiveParser', () => {
           type: 'string',
           initializer: undefined,
           field: '@Input() foo: string',
+          jsDoc: undefined,
         },
       ],
       outputs: [
@@ -47,9 +48,11 @@ describe('DirectiveParser', () => {
           type: undefined,
           initializer: 'new EventEmitter()',
           field: '@Output() bar = new EventEmitter()',
+          jsDoc: undefined,
         },
       ],
       implementation,
+      methods: [],
       methodsPublicExplicit: [],
       fieldsPublicExplicit: [
         {
@@ -58,6 +61,7 @@ describe('DirectiveParser', () => {
           value: `signal<string>('')`,
         },
       ],
+      classJsDoc: undefined,
     };
     jest.spyOn(fs, 'readFileSync').mockReturnValue(implementation);
 
@@ -91,6 +95,7 @@ describe('DirectiveParser', () => {
           type: 'string',
           initializer: undefined,
           field: '@Input() foo: string',
+          jsDoc: undefined,
         },
       ],
       outputs: [
@@ -100,11 +105,14 @@ describe('DirectiveParser', () => {
           type: undefined,
           initializer: 'new EventEmitter()',
           field: '@Output() bar = new EventEmitter()',
+          jsDoc: undefined,
         },
       ],
       implementation,
+      methods: [],
       methodsPublicExplicit: [],
       fieldsPublicExplicit: [],
+      classJsDoc: undefined,
     };
     jest.spyOn(fs, 'readFileSync').mockReturnValue(implementation);
 

@@ -1,6 +1,6 @@
 import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { parseExplicitPublicMethods } from './method.parser.js';
+import { parseExplicitPublicMethods, parseMethods } from './method.parser.js';
 
 describe('MethodParser', () => {
   it('should parse the explicit public methods', () => {
@@ -22,6 +22,7 @@ describe('MethodParser', () => {
         ],
         returnType: 'string',
         jsDoc: undefined,
+        accessType: 'public',
       },
     ];
 
@@ -47,6 +48,7 @@ describe('MethodParser', () => {
         ],
         returnType: 'string',
         jsDoc: undefined,
+        accessType: 'public',
       },
       {
         name: 'myMethod',
@@ -56,10 +58,11 @@ describe('MethodParser', () => {
         ],
         returnType: 'string',
         jsDoc: undefined,
+        accessType: 'publicImplicit',
       },
     ];
 
-    expect(parseExplicitPublicMethods(ast)).toEqual(expectedOutput);
+    expect(parseMethods(ast)).toEqual(expectedOutput);
   });
 
   it('should parse the static explicit public methods', () => {
@@ -81,6 +84,7 @@ describe('MethodParser', () => {
         ],
         returnType: 'string',
         jsDoc: undefined,
+        accessType: 'public',
       },
     ];
 
@@ -115,6 +119,7 @@ describe('MethodParser', () => {
         returnType: 'string',
         jsDoc:
           'This is a JSDoc comment for myExplicitMethod\n@param The foo parameter\n@param The bar parameter\n@returns A string value',
+        accessType: 'public',
       },
     ];
 

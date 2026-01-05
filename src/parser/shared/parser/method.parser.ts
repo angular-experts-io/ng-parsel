@@ -58,7 +58,7 @@ export function parseMethods(ast: ts.SourceFile): NgParselMethod[] {
           ? 'protected'
           : kind === ts.SyntaxKind.PrivateKeyword
             ? 'private'
-            : 'implicitPublic';
+            : 'publicImplicit';
 
     return {
       name: method.name.getText(),

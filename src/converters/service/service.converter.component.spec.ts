@@ -10,6 +10,7 @@ describe('Service stats converter', () => {
         type: NgParselOutputType.SERVICE,
         filePath: '',
         fieldsPublicExplicit: [],
+        methods: [],
         methodsPublicExplicit: [],
       },
       {
@@ -17,6 +18,7 @@ describe('Service stats converter', () => {
         type: NgParselOutputType.SERVICE,
         filePath: '',
         fieldsPublicExplicit: [],
+        methods: [],
         methodsPublicExplicit: [],
       },
       {
@@ -24,6 +26,7 @@ describe('Service stats converter', () => {
         type: NgParselOutputType.SERVICE,
         filePath: '',
         fieldsPublicExplicit: [],
+        methods: [],
         methodsPublicExplicit: [],
       },
     ];
