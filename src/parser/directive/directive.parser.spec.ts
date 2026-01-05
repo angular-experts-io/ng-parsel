@@ -32,6 +32,7 @@ describe('DirectiveParser', () => {
       selector: '[myTestDirective]',
       standalone: false,
       cva: false,
+      extends: [],
       inputs: [
         {
           decorator: '@Input()',
@@ -90,6 +91,7 @@ describe('DirectiveParser', () => {
       selector: '[myTestDirective]',
       standalone: true,
       cva: false,
+      extends: [],
       inputs: [
         {
           decorator: '@Input()',

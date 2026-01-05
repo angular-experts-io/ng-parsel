@@ -4,6 +4,7 @@ import * as ts from 'typescript';
 import { tsquery } from '@phenomnomnominal/tsquery';
 
 import { isCva } from '../shared/parser/cva.parser.js';
+import { parseExtends } from '../shared/parser/extends.parser.js';
 import { NgParselOutputType } from '../shared/model/types.model.js';
 import { parseInputsAndOutputs } from '../shared/parser/field-decorator.parser.js';
 import { getDecoratorProperties } from '../shared/parser/decorator.parser.js';
@@ -33,6 +34,7 @@ export function parseComponent(ast: ts.SourceFile, componentFilePath: string): N
     filePath: componentFilePath,
     selector: componentDecorators.selector as string,
     standalone: componentDecorators.standalone || false,
+    extends: parseExtends(ast),
     template: template,
     cva: isCva(ast),
     onPush: isOnPushChangeDetection(ast),
