@@ -10,6 +10,7 @@ import { parseClassName, parseClassJsDoc } from '../shared/parser/class.parser.j
 import { parseExplicitPublicMethods, parseMethods } from '../shared/parser/method.parser.js';
 
 import { NgParselDirective } from './directive.model.js';
+import { parseExtends } from '../shared/parser/extends.parser.js';
 
 export function parseDirective(ast: ts.SourceFile, directiveFilePath: string): NgParselDirective {
   const directiveDecorators = getDecoratorProperties(ast);
@@ -24,6 +25,7 @@ export function parseDirective(ast: ts.SourceFile, directiveFilePath: string): N
     filePath: directiveFilePath,
     selector: directiveDecorators.selector as string,
     standalone: directiveDecorators.standalone || false,
+    extends: parseExtends(ast),
     cva: isCva(ast),
     implementation: directiveImplementation,
     inputs: inputsAndOutputs.inputs,

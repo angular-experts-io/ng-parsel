@@ -51,6 +51,16 @@
         "maintenance",
         "code"
       ]
+    },
+    {
+      "login": "tomastrajan",
+      "name": "Tomas Trajan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3764868?v=4",
+      "profile": "http://angularexperts.io",
+      "contributions": [
+        "maintenance",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
