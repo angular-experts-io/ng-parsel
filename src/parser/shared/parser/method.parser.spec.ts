@@ -1,6 +1,6 @@
 import { tsquery } from '@phenomnomnominal/tsquery';
 
-import { parseExplicitPublicMethods } from './method.parser.js';
+import { parseExplicitPublicMethods, parseMethods } from './method.parser.js';
 
 describe('MethodParser', () => {
   it('should parse the explicit public methods', () => {
@@ -22,10 +22,47 @@ describe('MethodParser', () => {
         ],
         returnType: 'string',
         jsDoc: undefined,
+        accessType: 'public',
       },
     ];
 
     expect(parseExplicitPublicMethods(ast)).toEqual(expectedOutput);
+  });
+
+  it('should parse all methods', () => {
+    const ast = tsquery.ast(`
+        export class MyTestClass {
+            public myExplicitMethod(foo: string, bar: boolean): string {
+            }
+        
+            myMethod(foo: string, bar: boolean): string {
+            }
+        `);
+
+    const expectedOutput = [
+      {
+        name: 'myExplicitMethod',
+        args: [
+          { name: 'foo', type: 'string' },
+          { name: 'bar', type: 'boolean' },
+        ],
+        returnType: 'string',
+        jsDoc: undefined,
+        accessType: 'public',
+      },
+      {
+        name: 'myMethod',
+        args: [
+          { name: 'foo', type: 'string' },
+          { name: 'bar', type: 'boolean' },
+        ],
+        returnType: 'string',
+        jsDoc: undefined,
+        accessType: 'publicImplicit',
+      },
+    ];
+
+    expect(parseMethods(ast)).toEqual(expectedOutput);
   });
 
   it('should parse the static explicit public methods', () => {
@@ -47,6 +84,7 @@ describe('MethodParser', () => {
         ],
         returnType: 'string',
         jsDoc: undefined,
+        accessType: 'public',
       },
     ];
 
@@ -79,7 +117,9 @@ describe('MethodParser', () => {
           { name: 'bar', type: 'boolean' },
         ],
         returnType: 'string',
-        jsDoc: 'This is a JSDoc comment for myExplicitMethod\n@param The foo parameter\n@param The bar parameter\n@returns A string value',
+        jsDoc:
+          'This is a JSDoc comment for myExplicitMethod\n@param The foo parameter\n@param The bar parameter\n@returns A string value',
+        accessType: 'public',
       },
     ];
 

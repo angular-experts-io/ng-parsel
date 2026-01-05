@@ -64,18 +64,38 @@ describe('ComponentParser', () => {
         },
       ],
       implementation,
+      methods: [
+        {
+          name: 'foo',
+          args: [{ name: 'bar', type: 'string' }],
+          returnType: 'string',
+          jsDoc: undefined,
+          accessType: 'public',
+        },
+        {
+          name: 'bar',
+          args: [{ name: 'foo', type: 'string' }],
+          returnType: 'string',
+          jsDoc: undefined,
+          accessType: 'publicImplicit',
+        },
+      ],
       methodsPublicExplicit: [
         {
           name: 'foo',
           args: [{ name: 'bar', type: 'string' }],
           returnType: 'string',
+          accessType: 'public',
         },
       ],
-      fieldsPublicExplicit: [{
-        name: 'value',
-        type: 'inferred',
-        value: `signal<string>('')`,
-      }],
+      fieldsPublicExplicit: [
+        {
+          name: 'value',
+          type: 'inferred',
+          value: `signal<string>('')`,
+        },
+      ],
+      classJsDoc: undefined,
     };
     jest.spyOn(fs, 'readFileSync').mockReturnValue(implementation);
 
@@ -137,14 +157,32 @@ describe('ComponentParser', () => {
         },
       ],
       implementation,
+      methods: [
+        {
+          name: 'foo',
+          args: [{ name: 'bar', type: 'string' }],
+          returnType: 'string',
+          jsDoc: undefined,
+          accessType: 'public',
+        },
+        {
+          name: 'bar',
+          args: [{ name: 'foo', type: 'string' }],
+          returnType: 'string',
+          jsDoc: undefined,
+          accessType: 'publicImplicit',
+        },
+      ],
       methodsPublicExplicit: [
         {
           name: 'foo',
           args: [{ name: 'bar', type: 'string' }],
           returnType: 'string',
+          accessType: 'public',
         },
       ],
       fieldsPublicExplicit: [],
+      classJsDoc: undefined,
     };
     jest.spyOn(fs, 'readFileSync').mockReturnValue(implementation);
 

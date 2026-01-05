@@ -7,7 +7,7 @@ import { getDecoratorProperties } from '../shared/parser/decorator.parser.js';
 import { parseInputsAndOutputs } from '../shared/parser/field-decorator.parser.js';
 
 import { NgParselDirective } from './directive.model.js';
-import { parseExplicitPublicMethods } from '../shared/parser/method.parser.js';
+import { parseExplicitPublicMethods, parseMethods } from '../shared/parser/method.parser.js';
 import { parseExplicitPublicFields } from '../shared/parser/field.parser.js';
 
 export function parseDirective(ast: ts.SourceFile, directiveFilePath: string): NgParselDirective {
@@ -26,6 +26,7 @@ export function parseDirective(ast: ts.SourceFile, directiveFilePath: string): N
     implementation: directiveImplementation,
     inputs: inputsAndOutputs.inputs,
     outputs: inputsAndOutputs.outputs,
+    methods: parseMethods(ast),
     methodsPublicExplicit: parseExplicitPublicMethods(ast),
     fieldsPublicExplicit: parseExplicitPublicFields(ast),
     classJsDoc: parseClassJsDoc(ast),

@@ -11,8 +11,8 @@ export function loadAndMergeConfig(cliArgsConfig: { [key: string]: string }) {
     console.log(
       chalk.cyan(
         `ng-parsel: configuration found under ${configObject.filepath}.
-                Configuraton from config file will be used.`
-      )
+                Configuraton from config file will be used.`,
+      ),
     );
     return mergeOptionalConfigWithDefaults(configObject.config);
   } else {

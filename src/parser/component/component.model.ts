@@ -14,6 +14,7 @@ export interface NgParselComponent extends NgParselOutput {
   implementation: string;
   template: string;
   styles: string | string[];
+  methods: NgParselMethod[];
   methodsPublicExplicit: NgParselMethod[];
   fieldsPublicExplicit: NgParselField[];
   classJsDoc?: string | undefined;

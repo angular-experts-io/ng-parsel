@@ -112,7 +112,7 @@ function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[
   const inputNodes = [
     ...tsquery(
       ast,
-      'PropertyDeclaration[initializer.expression.name="model"], PropertyDeclaration[initializer.expression.name="input"], PropertyDeclaration[initializer.expression.expression.name="model"], PropertyDeclaration[initializer.expression.expression.name="input"]'
+      'PropertyDeclaration[initializer.expression.name="model"], PropertyDeclaration[initializer.expression.name="input"], PropertyDeclaration[initializer.expression.expression.name="model"], PropertyDeclaration[initializer.expression.expression.name="input"]',
     ),
   ];
   const signalInputs: NgParselFieldDecorator[] = [];
@@ -137,14 +137,14 @@ function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[
       [
         ...tsquery(
           field,
-          'CallExpression > Identifier:matches([name="model"], [name="input"]), CallExpression > PropertyAccessExpression > Identifier:matches([name="model"], [name="input"])'
+          'CallExpression > Identifier:matches([name="model"], [name="input"]), CallExpression > PropertyAccessExpression > Identifier:matches([name="model"], [name="input"])',
         ),
       ][0]?.getText() || '';
     const initialValue =
       [
         ...tsquery(
           field,
-          'CallExpression > :matches(NullKeyword, ObjectLiteralExpression, ArrayLiteralExpression, TrueKeyword, FalseKeyword, StringLiteral, Identifier[name=undefined], NumericLiteral, TemplateExpression, NoSubstitutionTemplateLiteral)'
+          'CallExpression > :matches(NullKeyword, ObjectLiteralExpression, ArrayLiteralExpression, TrueKeyword, FalseKeyword, StringLiteral, Identifier[name=undefined], NumericLiteral, TemplateExpression, NoSubstitutionTemplateLiteral)',
         ),
       ][0]?.getText() || '';
 
@@ -152,7 +152,7 @@ function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[
       [
         ...tsquery(
           field,
-          'CallExpression > :matches(BooleanKeyword, AnyKeyword, TypeReference, StringKeyword, LiteralType, TypeLiteral, NullKeyword, UndefinedKeyword, Identifier[name=Array], ArrayType, UnionType, IntersectionType)'
+          'CallExpression > :matches(BooleanKeyword, AnyKeyword, TypeReference, StringKeyword, LiteralType, TypeLiteral, NullKeyword, UndefinedKeyword, Identifier[name=Array], ArrayType, UnionType, IntersectionType)',
         ),
       ][0]?.getText() || 'inferred';
 

@@ -4,7 +4,7 @@ import * as ts from 'typescript';
 import { tsquery } from '@phenomnomnominal/tsquery';
 
 import { parseInputsAndOutputs } from '../shared/parser/field-decorator.parser.js';
-import { parseExplicitPublicMethods } from '../shared/parser/method.parser.js';
+import { parseExplicitPublicMethods, parseMethods } from '../shared/parser/method.parser.js';
 import { NgParselOutputType } from '../shared/model/types.model.js';
 import { parseClassName, parseClassJsDoc } from '../shared/parser/class.parser.js';
 
@@ -39,6 +39,7 @@ export function parseComponent(ast: ts.SourceFile, componentFilePath: string): N
     implementation: componentImplementation,
     inputs: inputsAndOutputs.inputs,
     outputs: inputsAndOutputs.outputs,
+    methods: parseMethods(ast),
     methodsPublicExplicit: parseExplicitPublicMethods(ast),
     fieldsPublicExplicit: parseExplicitPublicFields(ast),
     classJsDoc: parseClassJsDoc(ast),
@@ -55,7 +56,7 @@ function isCva(ast: ts.SourceFile): boolean {
 function isOnPushChangeDetection(ast: ts.SourceFile): boolean {
   const changeDetectionNodes = tsquery(
     ast,
-    'Decorator > CallExpression > ObjectLiteralExpression > PropertyAssignment:has(Identifier[name="changeDetection"])'
+    'Decorator > CallExpression > ObjectLiteralExpression > PropertyAssignment:has(Identifier[name="changeDetection"])',
   );
 
   if (changeDetectionNodes.length === 0) {

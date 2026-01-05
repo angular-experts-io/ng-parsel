@@ -4,6 +4,7 @@ import { NgParselField } from '../shared/model/field.model.js';
 
 export interface NgParselService extends NgParselOutput {
   fieldsPublicExplicit: NgParselField[];
+  methods: NgParselMethod[];
   methodsPublicExplicit: NgParselMethod[];
   classJsDoc?: string | undefined;
 }

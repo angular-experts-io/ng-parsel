@@ -22,6 +22,6 @@ export function convertToPipeStats(pipeStats: NgParselPipe[]): NgParselPipeStats
       standalone: 0,
       pure: 0,
       total: 0,
-    }
+    },
   );
 }

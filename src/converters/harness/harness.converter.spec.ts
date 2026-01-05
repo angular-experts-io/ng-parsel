@@ -8,18 +8,21 @@ describe('Harness converter', () => {
         className: 'first',
         type: NgParselOutputType.HARNESS,
         filePath: '',
+        methods: [],
         methodsPublicExplicit: [],
       },
       {
         className: 'second',
         type: NgParselOutputType.HARNESS,
         filePath: '',
+        methods: [],
         methodsPublicExplicit: [],
       },
       {
         className: 'third',
         type: NgParselOutputType.HARNESS,
         filePath: '',
+        methods: [],
         methodsPublicExplicit: [],
       },
     ];

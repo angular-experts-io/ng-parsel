@@ -21,16 +21,34 @@ describe('HarnessParser', () => {
       type: NgParselOutputType.HARNESS,
       filePath,
       className: 'MyTestHarness',
-      methodsPublicExplicit: [
+      methods: [
         {
           name: 'foo',
           args: [{ name: 'test', type: 'string' }],
           returnType: 'Promise<string>',
+          jsDoc: undefined,
+          accessType: 'public',
         },
         {
           name: 'bar',
           args: [],
           returnType: 'Promise<boolean>',
+          jsDoc: undefined,
+          accessType: 'public',
+        },
+      ],
+      methodsPublicExplicit: [
+        {
+          name: 'foo',
+          args: [{ name: 'test', type: 'string' }],
+          returnType: 'Promise<string>',
+          accessType: 'public',
+        },
+        {
+          name: 'bar',
+          args: [],
+          returnType: 'Promise<boolean>',
+          accessType: 'public',
         },
       ],
     };

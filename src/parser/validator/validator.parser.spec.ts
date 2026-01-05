@@ -15,13 +15,24 @@ describe('ValidatorParser', () => {
       type: NgParselOutputType.VALIDATOR,
       className: 'MyValidator',
       filePath,
+      methods: [
+        {
+          name: 'atLeastOneSelected',
+          args: [{ name: 'control', type: 'FormControl' }],
+          returnType: 'ValidationErrors | null',
+          jsDoc: undefined,
+          accessType: 'public',
+        },
+      ],
       methodsPublicExplicit: [
         {
           name: 'atLeastOneSelected',
           args: [{ name: 'control', type: 'FormControl' }],
           returnType: 'ValidationErrors | null',
+          accessType: 'public',
         },
       ],
+      classJsDoc: undefined,
     };
     expect(parseValidator(ast, filePath)).toEqual(expectedOutput);
   });
