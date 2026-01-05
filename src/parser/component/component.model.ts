@@ -8,7 +8,7 @@ export interface NgParselComponent extends NgParselOutput {
   selector: string;
   standalone: boolean;
   cva: boolean;
-  extends: string[];
+  extends: string | undefined;
   onPush: boolean;
   inputs: NgParselFieldDecorator[];
   outputs: NgParselFieldDecorator[];

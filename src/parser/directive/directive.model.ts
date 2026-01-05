@@ -7,7 +7,7 @@ export interface NgParselDirective extends NgParselOutput {
   className: string;
   selector: string;
   standalone: boolean;
-  extends: string[];
+  extends: string | undefined;
   cva: boolean;
   implementation: string;
   inputs: NgParselFieldDecorator[];

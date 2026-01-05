@@ -24,7 +24,7 @@ describe('ServiceParser', () => {
       type: NgParselOutputType.SERVICE,
       className,
       filePath,
-      extends: [],
+      extends: undefined,
       fieldsPublicExplicit: [],
       methods: [
         {
@@ -90,7 +90,7 @@ describe('ServiceParser', () => {
       className,
       filePath,
       fieldsPublicExplicit: [],
-      extends: [],
+      extends: undefined,
       methods: [
         {
           name: 'foo',
@@ -148,7 +148,7 @@ describe('ServiceParser', () => {
       type: NgParselOutputType.SERVICE,
       className,
       filePath,
-      extends: [],
+      extends: undefined,
       fieldsPublicExplicit: [
         {
           name: 'counter',

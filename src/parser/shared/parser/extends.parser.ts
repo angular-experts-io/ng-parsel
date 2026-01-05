@@ -1,21 +1,19 @@
 import * as ts from 'typescript';
 import { tsquery } from '@phenomnomnominal/tsquery';
 
-export function parseExtends(ast: ts.SourceFile): string[] {
+export function parseExtends(ast: ts.SourceFile): string | undefined {
+  // Find identifiers used in extends heritage clauses
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const identifiers = tsquery(ast, 'HeritageClause > ExpressionWithTypeArguments > Identifier') as any[];
 
-  const result: string[] = [];
-
   for (const id of identifiers) {
-    // id.parent -> ExpressionWithTypeArguments
-    // id.parent.parent -> HeritageClause
     const heritageClause = (id.parent as any)?.parent as ts.HeritageClause | undefined;
     if (!heritageClause) continue;
 
     if (heritageClause.token === ts.SyntaxKind.ExtendsKeyword) {
-      result.push(id.getText());
+      return id.getText();
     }
   }
 
-  return result;
+  return undefined;
 }

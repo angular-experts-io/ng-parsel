@@ -8,16 +8,16 @@ describe('parseExtends', () => {
       export class MyComponent extends BaseComponent {}
     `);
 
-    expect(parseExtends(ast)).toEqual(['BaseComponent']);
+    expect(parseExtends(ast)).toEqual('BaseComponent');
   });
 
-  it('returns an empty array for a component-like class without extends', () => {
+  it('returns an undefined for a component-like class without extends', () => {
     const ast = tsquery.ast(`
       @Component({ selector: 'x' })
       export class MyComponent {}
     `);
 
-    expect(parseExtends(ast)).toEqual([]);
+    expect(parseExtends(ast)).toEqual(undefined);
   });
 
   it('parses extends for a directive-like class with extends', () => {
@@ -26,16 +26,16 @@ describe('parseExtends', () => {
       export class MyDirective extends SomeDirectiveBase {}
     `);
 
-    expect(parseExtends(ast)).toEqual(['SomeDirectiveBase']);
+    expect(parseExtends(ast)).toEqual('SomeDirectiveBase');
   });
 
-  it('returns an empty array for a directive-like class without extends', () => {
+  it('returns an undefined for a directive-like class without extends', () => {
     const ast = tsquery.ast(`
       @Directive({ selector: '[x]' })
       export class MyDirective {}
     `);
 
-    expect(parseExtends(ast)).toEqual([]);
+    expect(parseExtends(ast)).toEqual(undefined);
   });
 
   it('parses extends for a service-like class with generic extends', () => {
@@ -43,14 +43,14 @@ describe('parseExtends', () => {
       export class MyService extends BaseService<Thing> {}
     `);
 
-    expect(parseExtends(ast)).toEqual(['BaseService']);
+    expect(parseExtends(ast)).toEqual('BaseService');
   });
 
-  it('returns an empty array for a service-like class without extends', () => {
+  it('returns an undefined for a service-like class without extends', () => {
     const ast = tsquery.ast(`
       export class MyService {}
     `);
 
-    expect(parseExtends(ast)).toEqual([]);
+    expect(parseExtends(ast)).toEqual(undefined);
   });
 });
