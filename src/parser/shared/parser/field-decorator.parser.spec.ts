@@ -780,6 +780,308 @@ describe('Field Decorator', function () {
     });
   });
 
+  describe('required detection and default value extraction', () => {
+    it('should not treat property access defaults as required inputs', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                plain = input(0);
+                mode = input(Mode.DATE);
+                defaultDate = input(this.TODAY);
+                requiredValue = input.required<string>();
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'input',
+          name: 'plain',
+          type: 'inferred',
+          required: false,
+          initialValue: '0',
+          field: 'plain = input(0);',
+        },
+        {
+          decorator: 'input',
+          name: 'mode',
+          type: 'inferred',
+          required: false,
+          initialValue: 'Mode.DATE',
+          field: 'mode = input(Mode.DATE);',
+        },
+        {
+          decorator: 'input',
+          name: 'defaultDate',
+          type: 'inferred',
+          required: false,
+          initialValue: 'this.TODAY',
+          field: 'defaultDate = input(this.TODAY);',
+        },
+        {
+          decorator: 'input',
+          name: 'requiredValue',
+          type: 'string',
+          required: true,
+          field: 'requiredValue = input.required<string>();',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+
+    it('should not treat property access defaults as required models', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                mode = model(Mode.DATE);
+                defaultDate = model(this.TODAY);
+                requiredValue = model.required<string>();
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'model',
+          name: 'mode',
+          type: 'inferred',
+          required: false,
+          initialValue: 'Mode.DATE',
+          field: 'mode = model(Mode.DATE);',
+        },
+        {
+          decorator: 'model',
+          name: 'defaultDate',
+          type: 'inferred',
+          required: false,
+          initialValue: 'this.TODAY',
+          field: 'defaultDate = model(this.TODAY);',
+        },
+        {
+          decorator: 'model',
+          name: 'requiredValue',
+          type: 'string',
+          required: true,
+          field: 'requiredValue = model.required<string>();',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+
+    it('should extract a function call as the initial value', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                start = input(createDefaultDate("2024-01-01"));
+                end = model(createDefaultDate("2024-01-01"));
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'input',
+          name: 'start',
+          type: 'inferred',
+          required: false,
+          initialValue: 'createDefaultDate("2024-01-01")',
+          field: 'start = input(createDefaultDate("2024-01-01"));',
+        },
+        {
+          decorator: 'model',
+          name: 'end',
+          type: 'inferred',
+          required: false,
+          initialValue: 'createDefaultDate("2024-01-01")',
+          field: 'end = model(createDefaultDate("2024-01-01"));',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+
+    it('should extract a conditional expression as the initial value', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                mode = input(this.isReadonly ? Mode.VIEW : Mode.EDIT);
+                editableMode = model(this.isReadonly ? Mode.VIEW : Mode.EDIT);
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'input',
+          name: 'mode',
+          type: 'inferred',
+          required: false,
+          initialValue: 'this.isReadonly ? Mode.VIEW : Mode.EDIT',
+          field: 'mode = input(this.isReadonly ? Mode.VIEW : Mode.EDIT);',
+        },
+        {
+          decorator: 'model',
+          name: 'editableMode',
+          type: 'inferred',
+          required: false,
+          initialValue: 'this.isReadonly ? Mode.VIEW : Mode.EDIT',
+          field: 'editableMode = model(this.isReadonly ? Mode.VIEW : Mode.EDIT);',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+
+    it('should not be confused by property accesses inside a transform', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                disabled = input(false, { transform: (value: unknown) => value === this.config.enabled });
+                checked = model(false, { transform: (value: unknown) => value === this.config.enabled });
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'input',
+          name: 'disabled',
+          type: 'inferred',
+          required: false,
+          initialValue: 'false',
+          field: 'disabled = input(false, { transform: (value: unknown) => value === this.config.enabled });',
+        },
+        {
+          decorator: 'model',
+          name: 'checked',
+          type: 'inferred',
+          required: false,
+          initialValue: 'false',
+          field: 'checked = model(false, { transform: (value: unknown) => value === this.config.enabled });',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+
+    it('should not treat required factory options as an initial value', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                label = input.required<string>({ alias: "myLabel", transform: (value: string) => value.trim() });
+                value = model.required<string>({ alias: "myValue" });
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'input',
+          name: 'myLabel',
+          type: 'string',
+          required: true,
+          field: 'label = input.required<string>({ alias: "myLabel", transform: (value: string) => value.trim() });',
+        },
+        {
+          decorator: 'model',
+          name: 'myValue',
+          type: 'string',
+          required: true,
+          field: 'value = model.required<string>({ alias: "myValue" });',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+
+    it('should parse required factories without options', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                label = input.required<string>();
+                value = model.required<string>();
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'input',
+          name: 'label',
+          type: 'string',
+          required: true,
+          field: 'label = input.required<string>();',
+        },
+        {
+          decorator: 'model',
+          name: 'value',
+          type: 'string',
+          required: true,
+          field: 'value = model.required<string>();',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+
+    it('should parse optional factories without arguments', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                label = input<string>();
+                value = model<string>();
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'input',
+          name: 'label',
+          type: 'string',
+          required: false,
+          initialValue: '',
+          field: 'label = input<string>();',
+        },
+        {
+          decorator: 'model',
+          name: 'value',
+          type: 'string',
+          required: false,
+          initialValue: '',
+          field: 'value = model<string>();',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+
+    it('should use the top level alias and ignore an alias inside a transform', () => {
+      const ast = tsquery.ast(`
+            export class MyTestClass {
+                label = input("value", { alias: "myLabel", transform: (value: string) => ({ alias: "nested" }) });
+           }
+        `);
+
+      const expectedInputs = [
+        {
+          decorator: 'input',
+          name: 'myLabel',
+          type: 'inferred',
+          required: false,
+          initialValue: '"value"',
+          field: 'label = input("value", { alias: "myLabel", transform: (value: string) => ({ alias: "nested" }) });',
+        },
+      ];
+      expect(parseInputsAndOutputs(ast)).toEqual({
+        inputs: expectedInputs,
+        outputs: [],
+      });
+    });
+  });
+
   describe('effect', () => {
     it('should not parse effect declarations', () => {
       const ast = tsquery.ast(`

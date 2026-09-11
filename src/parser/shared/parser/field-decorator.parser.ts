@@ -108,53 +108,85 @@ function parseDecoratedPropertyDeclarations(ast: ts.SourceFile): {
   return inputsAndOutputs;
 }
 
+const SIGNAL_TYPE_ARGUMENT_KINDS = new Set<ts.SyntaxKind>([
+  ts.SyntaxKind.BooleanKeyword,
+  ts.SyntaxKind.AnyKeyword,
+  ts.SyntaxKind.TypeReference,
+  ts.SyntaxKind.StringKeyword,
+  ts.SyntaxKind.LiteralType,
+  ts.SyntaxKind.TypeLiteral,
+  ts.SyntaxKind.NullKeyword,
+  ts.SyntaxKind.UndefinedKeyword,
+  ts.SyntaxKind.ArrayType,
+  ts.SyntaxKind.UnionType,
+  ts.SyntaxKind.IntersectionType,
+]);
+
+/**
+ * Determines whether the signal factory of a property initializer is a required factory,
+ * meaning `input.required()` or `model.required()`.
+ */
+function isRequiredSignalFactory(callee: ts.LeftHandSideExpression): boolean {
+  return ts.isPropertyAccessExpression(callee) && callee.name.getText() === 'required';
+}
+
+/**
+ * Returns the name of the signal factory, meaning `input` or `model`,
+ * no matter whether the required or the optional factory is used.
+ */
+function signalFactoryName(callee: ts.LeftHandSideExpression): string {
+  return ts.isPropertyAccessExpression(callee) ? callee.expression.getText() : callee.getText();
+}
+
+/**
+ * Reads the alias from the top level of the given options object literal.
+ * Nested object literals, for example inside a transform, are ignored.
+ */
+function extractAlias(optionsArgument: ts.Expression | undefined): string | undefined {
+  if (!optionsArgument || !ts.isObjectLiteralExpression(optionsArgument)) {
+    return undefined;
+  }
+
+  const aliasProperty = optionsArgument.properties.find(
+    (property) => ts.isPropertyAssignment(property) && property.name.getText().replace(/["']/g, '') === 'alias',
+  ) as ts.PropertyAssignment | undefined;
+
+  if (!aliasProperty || !ts.isStringLiteralLike(aliasProperty.initializer)) {
+    return undefined;
+  }
+
+  return aliasProperty.initializer.text;
+}
+
 function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[] {
   const inputNodes = [
     ...tsquery(
       ast,
       'PropertyDeclaration[initializer.expression.name="model"], PropertyDeclaration[initializer.expression.name="input"], PropertyDeclaration[initializer.expression.expression.name="model"], PropertyDeclaration[initializer.expression.expression.name="input"]',
     ),
-  ];
+  ] as ts.PropertyDeclaration[];
   const signalInputs: NgParselFieldDecorator[] = [];
-
-  function isRequiredSingalInput(file: string): boolean {
-    return [...tsquery(file, 'CallExpression > PropertyAccessExpression > Identifier')].length > 1;
-  }
 
   inputNodes.forEach((input) => {
     const field = input.getText();
-    const required = isRequiredSingalInput(field);
+    const initializer = input.initializer;
 
-    const name = [...tsquery(field, 'BinaryExpression > Identifier')][0]?.getText() || '';
-    const alias = [
-      ...tsquery(field, 'CallExpression ObjectLiteralExpression PropertyAssignment[name.name="alias"] StringLiteral'),
-    ][0]
-      ?.getText()
-      .replace(/"/g, '')
-      .replace(/'/g, '');
+    if (!initializer || !ts.isCallExpression(initializer)) {
+      return;
+    }
 
-    const decorator =
-      [
-        ...tsquery(
-          field,
-          'CallExpression > Identifier:matches([name="model"], [name="input"]), CallExpression > PropertyAccessExpression > Identifier:matches([name="model"], [name="input"])',
-        ),
-      ][0]?.getText() || '';
-    const initialValue =
-      [
-        ...tsquery(
-          field,
-          'CallExpression > :matches(NullKeyword, ObjectLiteralExpression, ArrayLiteralExpression, TrueKeyword, FalseKeyword, StringLiteral, Identifier[name=undefined], NumericLiteral, TemplateExpression, NoSubstitutionTemplateLiteral)',
-        ),
-      ][0]?.getText() || '';
+    const required = isRequiredSignalFactory(initializer.expression);
+    const decorator = signalFactoryName(initializer.expression);
+
+    const name = input.name.getText();
+    // The required factory only takes options, the optional factory takes the initial value first.
+    const optionsArgument = required ? initializer.arguments[0] : initializer.arguments[1];
+    const alias = extractAlias(optionsArgument);
 
     const type =
-      [
-        ...tsquery(
-          field,
-          'CallExpression > :matches(BooleanKeyword, AnyKeyword, TypeReference, StringKeyword, LiteralType, TypeLiteral, NullKeyword, UndefinedKeyword, Identifier[name=Array], ArrayType, UnionType, IntersectionType)',
-        ),
-      ][0]?.getText() || 'inferred';
+      [...(initializer.typeArguments ?? []), ...initializer.arguments]
+        .find((node) => SIGNAL_TYPE_ARGUMENT_KINDS.has(node.kind))
+        ?.getText() || 'inferred';
 
     const jsDoc = extractJSDocComment(input);
 
@@ -171,7 +203,7 @@ function parseSignalInputsAndModels(ast: ts.SourceFile): NgParselFieldDecorator[
       signalInputs.push({
         decorator,
         required,
-        initialValue,
+        initialValue: initializer.arguments[0]?.getText() ?? '',
         name: alias || name,
         type,
         field,
