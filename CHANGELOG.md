@@ -1,3 +1,10 @@
+## [5.8.1](https://github.com/angular-experts-io/ng-parsel/compare/v5.8.0...v5.8.1) (2026-09-11)
+
+
+### Bug Fixes
+
+* parse signal input defaults correctly ([57a0d0d](https://github.com/angular-experts-io/ng-parsel/commit/57a0d0dbac46278b001c579691dbd0c442d53293))
+
 # [5.8.0](https://github.com/angular-experts-io/ng-parsel/compare/v5.7.0...v5.8.0) (2026-01-05)
 
 
